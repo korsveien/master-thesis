@@ -1,4 +1,100 @@
+\section{Overview}
+
+In topic-based pub/sub, the published events are expressed as discrete
+\emph{topics}. This variation of pub/sub benefits from the large amount
+of research in group communication, as subscribing to Topic \emph{t} can
+be viewed as joining Group \emph{t}~\cite{Eugster:2003}. This makes
+topic-based pub/sub a promising approach for efficient message
+dissemination in P2P environments, and an increasing number of such
+systems are being deployed~\cite{Triantafillou:2009}.
+
 \section{Desired System Properties}
+In order to provide correct and efficient delivery of notifications in a
+decentralised social network, a high number of system properties are
+deemed desirable~\cite{Setty:2012}. More specifically, these challenges
+include:
+
+\begin{description}
+
+\item[Correct delivery] \hfill\\
+All notifications should be delivered to the
+correct recipient. Both false positives and false negatives should be
+avoided.
+
+\item[High hit-ratio]\hfill\\
+Notifications are delivered to a very high
+percentage of subscribers in the presence of churn and all subscribers
+when no churn is present. This is similar to correct delivery except for
+not taking false positives into account.
+
+\item[Fast recovery]\hfill\\
+The overlay should quickly recover from a
+period of churn.
+
+\item[Low average node degree]\hfill\\
+The overlay nodes should have a low
+node degree as possible to achieve scalability with regards to number of
+topics.
+
+\item[Topic connectivity]\hfill\\
+The routing of an event only includes the
+subscribers who registered their interest for the topic (i.e.\
+relay-free routing).
+
+\item[Scalability]\hfill\\
+The system should scale in terms of number of
+topics, number of nodes, number of topics a node is interested in and
+number of nodes interested in a topic.
+
+\item[Efficient dissemination]\hfill\\
+Event dissemination should have a low
+delay with little duplicate delivery, and the load of routing messages
+should be distributed fairly.
+
+\item[Low overlay maintenance cost]\hfill\\
+Managing the overlay topology
+should be as inexpensive as possible. Maintenance might include mending
+dissemination structures such as multicast trees when nodes fail, but
+also how to include joining nodes in the structure and allowing nodes to
+leave gracefully.
+
+\end{description}
+
+As mentioned earlier, designing a system with all of these properties
+presents a challenge, as several of the desired characteristics are
+fundamentally at odds with each other. Maintaining a low node degree
+makes it difficult to maintain \emph{topic connectivity}, while
+avoiding duplicate message delivery conflicts with being robust in the
+presence of churn. There is also a trade-off in robustness and
+reliability depending on the approach taken to disseminating messages.
+Specialised overlays that build dissemination structures such as
+multicast trees provide fast and reliable message delivery with no
+duplication of messages. However, they are fragile and susceptible to
+churn. Epidemic dissemination on the other hand is more robust, but does
+not provide full reliability as it lacks deterministic delivery
+guarantees.
+
+There is also a trade-off between the navigability of the overlay and
+the message overhead. Stanley Milgram famously demonstrated the
+\emph{small-world phenomena} in~\cite{milgram1967small} where he showed
+that any two participants in a network was likely to be connected
+through a low number of intermediaries. Taking this phenomena into
+consideration has proved to be a useful approach when constructing
+decentralised overlays, as they provide a highly navigable network due
+to the small average shortest path length. A popular approach is to
+create one or more long jump links between nodes to provide better
+routing capabilities. More specifically, these links are usually created
+by utilising a distance function in the name space, where the
+probability of creating a link increases with the distance between them.
+The subscription interest of such nodes are usually not taken into
+consideration when creating such links. Consequently, the message
+overhead in the system is increased as more relays are introduced in the
+overlay.
+
+Many existing systems suffer from shortcomings that originate wanting
+to include a high number of desired properties described above. This
+motivates further research into these systems and how they compare in
+terms of promoting these desirable properties.
 
 \section{Handling Trade-offs}
 

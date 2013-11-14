@@ -1,0 +1,137 @@
+\section{Overview}
+
+     There are several metrics that should be considered when evaluating the
+     performance of these systems. This section will provide an overview of
+     different metrics and their relevance to event dissemination in a P2P
+     topic-based pub/sub systems. Discussing these metrics will be
+     important, as they form one of the main contributions of this
+     thesis. In general, a distinction can be made
+     between evaluating the overlay itself or evaluating the efficiency of
+     event dissemination i.e.\ the performance of message routing.
+
+\section{Overlay metrics}
+    When evaluating the overlay,
+    the following metrics are relevant:
+
+    \begin{description}
+
+    \item[Average node degree]\hfill\\
+        It is essential to understand how the system scales with regard
+        to the number of topics a node is interested in. For example, if the number of
+        edges increases linearly with the subscription size of a node,
+        scalability suffers.
+
+    \item[Maximum node degree]\hfill\\
+        Also it might be interesting to measure the maximum node
+        degree. As an example, having a relatively low average node
+        degree while still having a rather high maximum node degree
+        might reveal an unbalanced distribution of node degree in the
+        graph.
+
+    \end{description}
+
+    The two metrics above could also be separated into measuring both
+    in-degree and out-degree. A skewed distribution of directed edges
+    would reveal an imbalance in the constructed overlay, or reveal
+    vulnerable points in the system.
+
+    \begin{description}
+
+    \item[Betweenness centrality]\hfill\\
+        Betweenness centrality is the number of times a particular node
+        is found on the shortest path between two other nodes. A node
+        with a big betweenness centrality may constitute both a
+        vulnerable part of the graph as well as a bottleneck, as it
+        might take part in a high number of event disseminations.
+
+    \item[Topic diameter]\hfill\\
+        This is the maximum number of hops between any two nodes that
+        share interests, i.e.\ a measure of the diameter of a subgraph
+        consisting only of nodes who registered their interest in the
+        same topic. Having a low topic diameter is beneficial for
+        disseminating events for topics.
+
+    \item[Number of control messages]\hfill\\
+        Some systems rely on
+        control messages in order to maintain the overlay topology. For
+        example in Scribe, where the multicast tree structures are
+        maintained with periodic heartbeat messages. This constitutes an
+        overhead both in communication and in overlay maintenance.
+
+    \item[Clustering coefficient]\hfill\\
+        This is the ratio of number of edges between neighbours of a node $n$ over
+        the total number of possible edges between them. In simpler
+        terms, how
+        many of a nodes neighbours are connected to each other. A high
+        clustering coefficient would indicate that the network has a
+        higher risk of partitioning, as well as a risk of having a
+        higher number of redundant message deliveries.
+
+    \item[Partitionability]\hfill\\
+        It could be useful to measure the minimal number of edges that
+        need to be removed in order to partition the graph in order to
+        evaluate connectivity.
+
+    \item[Expander graph metrics]\hfill\\
+        Another measure of connectivity would be expander graph metrics
+        such as vertex expansion and edge expansion, which measures the
+        boundary of a subgraph $S$ that is no bigger than half the total
+        number of nodes in the system. The vertex boundary is the set of
+        vertices outside $S$ which has at least one neighbour in $S$.
+        While the edge boundary would be the set of edges with exactly
+        one endpoint in $S$.
+
+    \end{description}
+
+    Note that some of these metrics overlap with dissemination concerns
+    such as number of control messages, which could be heartbeats
+    used to maintain an overlay, or control messages that are part of
+    the routing protocol. Regardless, it is possible to evaluate these
+    two aspect of the protocols separately.
+
+\subsubsection{Routing metrics}
+    When evaluating the routing capabilities of the protocol, several
+    metrics could be considered:
+
+    \begin{description}
+    \item[Hit-ratio during churn] \hfill\\
+        It is essential to understand how the different systems respond to
+        churn when disseminating events. If an overlay is robust, it should
+        provide a high hit-ratio in the presence of realistic churn.
+        Meaning that at very high percentage of subscribers receive the
+        appropriate events.
+
+    \item[Average message delay] \hfill\\
+        Counting the average number of nodes that are traversed in the
+        overlay before an event reaches its target subscribers is
+        helpful to understand the efficiency of the event dissemination.
+
+    \item[Number of duplicate messages] \hfill\\
+        If gossiping is used, subscribers are in danger of receiving the
+        same event more than once. It would be interesting to measure
+        the number of duplicates as it provides insight into the message overhead of the
+        system.
+
+    \item[Number of messages handled by a node per time unit] \hfill\\
+        This metric would be one way to measure how load is distributed
+        over the nodes in the system, where the time unit could be both
+        seconds or cycles. Including the standard and mean deviation of
+        this metric could tell whether or not the system is balanced in
+        this regard.
+
+    \end{description}
+
+    Note that several of these metrics are irrelevant for systems such
+    as SpiderCast, StaN and ElastO who do not focus on event dissemination, but
+    rather the construction and maintenance of the overlay itself.  We
+    will look further into which set of metrics to measure, but some
+    metrics should be essential. One of these metrics is hit-ratio
+    during churn, as it provides basic information regarding both the
+    robustness and reliability of the dissemination overlay. Another
+    central issue to consider is the increase in node degree of a
+    certain node compared to the number of topics that node is
+    interested in. This would reveal any scalability issues regarding
+    this aspect of the protocol. As mentioned in section 3, different
+    systems have different approaches to maintaining a low node degree.
+    Comparing the different protocols is an interesting study in what approach
+    might be most suitable for online social networks.
