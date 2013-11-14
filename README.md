@@ -1,5 +1,4 @@
- #Implementation and Evaluation of Pub/Sub overlays for P2P Social
- Networks
+#Implementation and Evaluation of Pub/Sub overlays for P2P Social Networks
 
 Pub/Sub systems are gaining popularity due to their use in a variety of
 novel attractive applications, such as privacy-preserving decentralized
