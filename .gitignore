@@ -44,4 +44,7 @@ Session.vim
 *.maf
 *.mtc
 *.mtc0
+*.bcf
+*.fls
+*.run.xml
 
