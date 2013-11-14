@@ -1,3 +1,6 @@
+# Ignore the thesis file
+nilspk_thesis.pdf
+
 # Mac OS X
 .DS_Store
 .AppleDouble
