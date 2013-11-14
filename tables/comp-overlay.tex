@@ -1,0 +1,24 @@
+\begin{table}
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ccccccc}
+    \toprule
+    Protocol                         & Overlay      & Structures? & TCO?\    & Central nodes* & sub.\ corr.? & Node degree \\
+    \midrule
+    Scribe~\cite{Castro:2002}        & Structured   & Trees       & \xmark{} & RV             & \xmark{}     & $O(\log|\mathcal{V}|)$ \\
+    Magnet~\cite{Girdzijauskas:2010} & Structured   & Trees       & \xmark{} & Relays         & \cmark{}     & $O(1)$\\
+    Bayeux~\cite{Zhuang:2001}        & Structured   & Trees       & \xmark{} & RV             & \xmark{}     & $O(\log|\mathcal{V}|)$\\
+    Vitis~\cite{Rahimian:2011}       & Hybrid       & Trees       & \xmark{} & RV\ampers{}GW  & \xmark{}     & $O(1)$\\
+    StaN~\cite{Matos:2010}           & Unstructured & None        & prob.    & None           & \cmark{}     & $O({|\mathcal{T}_v}|)$\\
+    SpiderCast~\cite{Chockler:2007}  & Unstructured & None        & prob.    & WB             & \cmark{}     & $O(K\cdot(|\mathcal{T}_v|))$\\
+    daMulticast~\cite{Baehni:2004}   & Unstructured & None        & det.     & None           & \xmark{}     & $\Theta({|\mathcal{T}_v}|)$\\
+    Quasar~\cite{Wong:2008}          & Unstructured & None        & \xmark{} & None           & \xmark{}     & Unknown\\
+    PolderCast~\cite{Setty:2012}     & Hybrid       & Rings       & det.     & None           & \cmark{}     & $O({|\mathcal{T}_v}|)$\\
+    ElastO~\cite{Chen:2013}          & Structured   & Ring        & det.     & None           & \xmark{}     & $O({\rho \log |\mathcal{V}}| |\mathcal{T}|)$\\
+    \bottomrule
+    \multicolumn{5}{l}{*RV:\ Rendezvous GW:\ Gateway WB:\ Weak bridge}\\
+\end{tabular}
+}%
+\caption{Comparison of the different protocols and their overlay properties}
+\label{table:comp-overlay}
+\end{table}

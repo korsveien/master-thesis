@@ -1,0 +1,25 @@
+%% Identification part:
+
+\NeedsTeXFormat{LaTeX2e}[1994/12/01]
+
+\ProvidesClass{ifimasterforside}[2013/01/30 v1.1.0 Ifi document class]
+
+%% Initial code part:
+
+%% Specify "Master thesis" in the correct language:
+
+\newcommand{\IfiF@thesisname@eng}{master thesis}
+\newcommand{\IfiF@thesisname@bm}{masteroppgave}
+\newcommand{\IfiF@thesisname@nn}{masteroppg\aa ve}
+
+%% Define a suitable document kind, like "master thesis spring 2012":
+
+\newcommand{\IfiF@kind}{%
+    \csname IfiF@thesisname@\IfiF@lang\endcsname~\IfiF@term~\IfiF@year}
+
+
+%% Load generic part:
+
+\input{ifikompendium}
+
+\endinput

@@ -1,0 +1,77 @@
+\documentclass[UKenglish, a4paper]{ifimaster}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc,url}
+\urlstyle{sf}
+\usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
+\usepackage[backend=biber,style=numeric-comp]{biblatex}
+\usepackage{pifont}
+\usepackage{booktabs}
+\usepackage{verbatim}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\ampers}{\&}
+
+\title{Implementation and Evaluation of Pub/Sub overlays for P2P Social Networks}
+\subtitle{}
+\author{Nils Peder Korsveien}
+
+\addbibresource{bibliography.bib}
+
+\begin{document}
+\ififorside{}
+\frontmatter{}
+\maketitle{}
+
+\chapter*{Abstract}
+\tableofcontents{}
+\listoffigures{}
+\listoftables{}
+\chapter*{Aknowledgements}
+\mainmatter{}
+
+\part{Introduction}
+
+    \chapter{Introduction}
+        \section{Thesis Outline}
+        \section{Motivation}
+
+    \chapter{Background}
+    \input{chapters/background}
+        % \section{The P2P Network Architecture}
+        % \section{The Publish-Subscribe Communication Paradigm}
+        % \section{Pub/Sub in Social Networks}
+
+    \chapter{Existing Approaches to Topic-based Pub/Sub}
+    \input{chapters/existing-approaches}
+        % \section{Desired System Properties}
+        % \section{Handling Trade-offs}
+        % \section{Overlay Construction}
+        % \section{Event Dissemination}
+
+% End of part I
+
+\part{Implementation}
+    \chapter{Implementation Strategy}
+    \chapter{Implementation Details}
+    \chapter{Protocol Descriptions}
+    \chapter{Experimental Setup}
+        \section{Workloads and Data Sets}
+
+% End of part II
+
+\part{Evaluation}
+    \chapter{Evaluation Metrics}
+    \chapter{Results}
+
+% End of part III
+
+\part{Conclusion}
+    \chapter{Discussion}
+    \chapter{Future Work}
+
+% End of part IV
+
+\backmatter{}
+\printbibliography{}
+\end{document}

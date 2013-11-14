@@ -1,0 +1,23 @@
+\begin{table}
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ccccc}
+
+\toprule
+Protocol                         & High hit-ratio during churn & 100\% hit-ratio in absence of churn & Message Delay              & Avg.  Duplication Factor \\
+\midrule
+Scribe~\cite{Castro:2002}        & \xmark{}                    & \cmark{}                            & $O(\log|\mathcal{V}|)$     & None\\
+Magnet~\cite{Girdzijauskas:2010} & Unknown                     & Unknown                             & $O(\log|\mathcal{V}|)$     & None\\
+Bayeux~\cite{Zhuang:2001}        & Unknown                     & Unknown                             & $O(\log|\mathcal{V}|)$     & None\\
+Vitis~\cite{Rahimian:2011}       & \cmark{}                    & \cmark{}                            & $O(\log^2|\mathcal{V}|/k)$ & Scoped flooding\\
+daMulticast~\cite{Baehni:2004}   & \cmark{}                    & \xmark{}                            & $O(\log|\mathcal{V}|)$     & Gossiping\\
+Quasar~\cite{Wong:2008}          & \cmark{}                    & \xmark{}                            & Unknown                    & Random Walk \\
+PolderCast~\cite{Setty:2012}     & \cmark{}                    & \cmark{}                            & $O(\log|\mathcal{V}_t|)$   & $\leq fanout(f)$\\
+\bottomrule
+
+\multicolumn{5}{l}{*RV:\ Rendezvous. GW:\ Gateway. WB:\ Weak bridge.}\\
+\end{tabular}
+}
+\caption{Comparison of the different protocols and their routing properties}
+\label{table:comp-dissemination}
+\end{table}
