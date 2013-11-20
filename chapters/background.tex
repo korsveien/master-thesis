@@ -1,16 +1,16 @@
-\section{The P2P Network Architecture}
+\section{The Peer-to-Peer Network Architecture}
+What is P2P?\
 
 \section{The Publish-Subscribe Communication Paradigm}
 
-Publish-Subscribe (hereby referred to as ``Pub/Sub'') is a fully
-asynchronous, loosely coupled, highly scalable, event-based messaging
-pattern. There are three main system components in the pub/sub
-interaction scheme: the publishers, the subscribers and the event
-service. The publishers publish events, and the subscribers subscribe
-for events, while the event service handles managing both subscriptions
-and publications, as well as routing events to the subscribers. The
-basic architecture of a typical pub/sub system is outlined in
-Figure~\ref{fig:pubsubarch}.
+Publish-Subscribe (Pub/Sub) is a fully asynchronous, loosely coupled,
+highly scalable, event-based messaging pattern. There are three main
+system components in the Pub/Sub interaction scheme: the publishers, the
+subscribers and the event service. The publishers publish events, and
+the subscribers subscribe for events, while the event service handles
+managing both subscriptions and publications, as well as routing events
+to the subscribers. The basic architecture of a typical pub/sub system
+is outlined in Figure~\ref{fig:pubsubarch}.
 
 \begin{figure}
 \centering
@@ -32,12 +32,12 @@ their subscriptions through a \texttt{unsubscribe} service call. No
 information is forwarded from subscribers to publishers or from
 publishers to subscribers.
 
-The pub/sub paradigm provides a higher degree of decoupling than other
+The Pub/Sub paradigm provides a higher degree of decoupling than other
 traditional approaches. In general there are three types of decoupling
 pub/sub system provides us with:
 
 \begin{description}
-  \item[Space decoupling] The publishers and subscribers do not need to
+  \item[Space decoupling] The publishers and subscribers does not need to
     know about each other.
   \item[Time decoupling] Events are delivered regardless of whether or
     not publishers and subscribers are online at the same time.
@@ -46,10 +46,10 @@ pub/sub system provides us with:
 \end{description}
 
 While many other approaches can provide the first two forms of
-decoupling, the advantage of pub/sub is its fully asynchronous nature.
+decoupling, the main advantage of Pub/Sub is its fully asynchronous nature.
 Approaches such as tuple spaces or message queues cannot completely
 provide this synchronous decoupling, as messages are retrieved in a
-synchronous manner. This property is key to the suitability for pub/sub
+synchronous manner. This property is key to the suitability for Pub/Sub
 in large distributed system.~\cite{Eugster:2003}
 
 \subsection{Message Filtering in Pub/Sub}
@@ -94,4 +94,11 @@ These protocols do not guarantee full reliability, but provides a high
 quantifiable \emph{probability} that events are delivered to all
 subscribers.
 
-\section{Pub/Sub in Social Networks}
+\section{Online Social Networks}
+What is an OSN?\ Impact on networks?\ What approaches?\ Decentralised OSNs?
+\section{Social Network Analysis}
+What is SNA?\ What are the common characteristics of a Social Graph?\
+Actors, How to measure influence/power of actors (centrality?)
+\section{Pub/Sub in Online Social Networks}
+Is Pub/Sub being used in social networks?\, In Spotify? (nudge nude, wink wink) Why is it
+useful?\

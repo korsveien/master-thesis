@@ -30,48 +30,67 @@
 \chapter*{Aknowledgements}
 \mainmatter{}
 
-\part{Introduction}
+\chapter{Introduction}
+\input{chapters/introduction}
+    % \section{Motivation}
+    % \section{Problem Statement}
+    % \section{Thesis Outline}
 
-    \chapter{Introduction}
-    \input{chapters/introduction}
-        % \section{Thesis Outline}
-        % \section{Motivation}
-        % \section{Problem Statement}
+\chapter{Background}
+\label{ch:background}
+\input{chapters/background}
+    % \section{The Peer-to-Peer Network Architecture}
+    % \section{The Publish-Subscribe Communication Paradigm}
+    % \section{Online Social Networks}
+    % \section{Social Network Analysis}
+    % \section{Summary}
 
-    \chapter{Background}
-    \input{chapters/background}
-        % \section{The P2P Network Architecture}
-        % \section{The Publish-Subscribe Communication Paradigm}
-        % \section{Pub/Sub in Social Networks}
+\chapter{Protocol Descriptions}
+\label{ch:protocol-descriptions}
+\section{Scribe}
+Structured overlay, Dissemination Trees
+\section{SpiderCast}
+Unstructured overlay, Subscription correlation, Topology creation
+\section{PolderCast}
+Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
+\section{ElastO}
+Structured overlay, Rings, Combines centralized algos with distributed
 
-    \chapter{Existing Approaches to Topic-based Pub/Sub}
-    \input{chapters/existing-approaches}
-        % \section{Desired System Properties}
-        % \section{Handling Trade-offs}
-        % \section{Overlay Construction}
-        % \section{Event Dissemination}
+\chapter{Desired System Properties and Trade-Offs}
+\label{ch:desired-system-properties-and-trade-offs}
+\input{chapters/existing-approaches}
+    % \section{Desired System Properties}
+    % \section{Handling Trade-offs}
+    % \section{Overlay Construction}
+    % \section{Event Dissemination}
+    % \section{Summary}
 
-% End of part I
+\chapter{Metrics}
+\label{ch:metrics}
+\input{chapters/metrics}
 
-\part{Implementation}
-    \chapter{Implementation Strategy}
-    \chapter{Implementation Details}
-    \chapter{Protocol Descriptions}
-    \chapter{Experimental Setup}
-        \section{Workloads and Data Sets}
+\chapter{Implementation}
+\label{ch:implementation}
+    \section{Implementation Strategy}
+        \subsection{Tools and Methods}
+        PeerNet, Gephi, GEXF, gexfj, Gradle
+        \subsection{TDD}
+    \section{Implementing Protocols in PeerNet}
+        \subsection{Updating Existing Protocols}
+        \subsection{Protocols}
+        \subsection{Observers}
 
-% End of part II
+\chapter{Evaluation}
+\label{ch:evaluation}
+    \section{Experimental Setup}
+    \section{Evaluation Workloads}
+    \section{Experiments}
+    \section{Evaluation Summary}
 
-\part{Evaluation}
-    \chapter{Metrics}
-    \input{chapters/metrics}
-    \chapter{Results}
-
-% End of part III
-
-\part{Conclusion}
-    \chapter{Discussion}
-    \chapter{Future Work}
+\chapter{Conclusion and Future Work}
+\label{ch:conclusion-and-future-work}
+    \section{Conclusion}
+    \section{Future Work}
 
 % End of part IV
 

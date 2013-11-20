@@ -14,53 +14,49 @@ decentralised social network, a high number of system properties are
 deemed desirable~\cite{Setty:2012}. More specifically, these challenges
 include:
 
-\begin{description}
-
-\item[Correct delivery] \hfill\\
+\subsection{Correct delivery}
 All notifications should be delivered to the
 correct recipient. Both false positives and false negatives should be
 avoided.
 
-\item[High hit-ratio]\hfill\\
+\subsection{High hit-ratio}
 Notifications are delivered to a very high
 percentage of subscribers in the presence of churn and all subscribers
 when no churn is present. This is similar to correct delivery except for
 not taking false positives into account.
 
-\item[Fast recovery]\hfill\\
+\subsection{Fast recovery}
 The overlay should quickly recover from a
 period of churn.
 
-\item[Low average node degree]\hfill\\
+\subsection{Low average node degree}
 The overlay nodes should have a low
 node degree as possible to achieve scalability with regards to number of
 topics.
 
-\item[Topic connectivity]\hfill\\
+\subsection{Topic connectivity}
 The routing of an event only includes the
 subscribers who registered their interest for the topic (i.e.\
 relay-free routing).
 
-\item[Scalability]\hfill\\
+\subsection{Scalability}
 The system should scale in terms of number of
 topics, number of nodes, number of topics a node is interested in and
 number of nodes interested in a topic.
 
-\item[Efficient dissemination]\hfill\\
+\subsection{Efficient dissemination}
 Event dissemination should have a low
 delay with little duplicate delivery, and the load of routing messages
 should be distributed fairly.
 
-\item[Low overlay maintenance cost]\hfill\\
+\subsection{Low overlay maintenance cost}
 Managing the overlay topology
 should be as inexpensive as possible. Maintenance might include mending
 dissemination structures such as multicast trees when nodes fail, but
 also how to include joining nodes in the structure and allowing nodes to
 leave gracefully.
 
-\end{description}
-
-As mentioned earlier, designing a system with all of these properties
+Designing a system with all of these properties
 presents a challenge, as several of the desired characteristics are
 fundamentally at odds with each other. Maintaining a low node degree
 makes it difficult to maintain \emph{topic connectivity}, while
