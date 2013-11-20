@@ -1,11 +1,16 @@
 \section{The Peer-to-Peer Network Architecture}
-What is P2P?\
+In the peer-to-peer network architecture, every node in the system
+contributes with its resources, including both storage space and
+processing power.
+
+Popularised through file sharing, found its way into academia, dhts,
+distributed systems
 
 \section{The Publish-Subscribe Communication Paradigm}
 
-Publish-Subscribe (Pub/Sub) is a fully asynchronous, loosely coupled,
+Publish-Subscribe is a fully asynchronous, loosely coupled,
 highly scalable, event-based messaging pattern. There are three main
-system components in the Pub/Sub interaction scheme: the publishers, the
+system components in the pub/sub interaction scheme: the publishers, the
 subscribers and the event service. The publishers publish events, and
 the subscribers subscribe for events, while the event service handles
 managing both subscriptions and publications, as well as routing events
@@ -15,16 +20,16 @@ is outlined in Figure~\ref{fig:pubsubarch}.
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/pubsubarch}
-\caption{The basic architecture of a Pub/Sub system.}
+\caption{The basic architecture of a pub/sub system.}
 \label{fig:pubsubarch}
 \end{figure}
 
 The event service functions as an intermediary between publishers and
 subscribers. It provides a level of indirection, as well as an service
 interface. Publishers are able to generate new events through the
-\texttt{publish} service call. It is now the responsibility of the
-event service to determine which subscribers are interested in receiving
-this event, and how to route the event to them. The subscribers register
+\texttt{publish} service call. It is now the responsibility of the event
+service to determine which subscribers are interested in receiving this
+event, and how to route the event to them. The subscribers register
 their interest through a \texttt{subscribe} service call. The event
 service will then store each subscribers interest in order to
 disseminate events correctly. The publishers are then able to cancel
@@ -32,7 +37,7 @@ their subscriptions through a \texttt{unsubscribe} service call. No
 information is forwarded from subscribers to publishers or from
 publishers to subscribers.
 
-The Pub/Sub paradigm provides a higher degree of decoupling than other
+The pub/sub paradigm provides a higher degree of decoupling than other
 traditional approaches. In general there are three types of decoupling
 pub/sub system provides us with:
 
@@ -46,10 +51,10 @@ pub/sub system provides us with:
 \end{description}
 
 While many other approaches can provide the first two forms of
-decoupling, the main advantage of Pub/Sub is its fully asynchronous nature.
+decoupling, the main advantage of pub/sub is its fully asynchronous nature.
 Approaches such as tuple spaces or message queues cannot completely
 provide this synchronous decoupling, as messages are retrieved in a
-synchronous manner. This property is key to the suitability for Pub/Sub
+synchronous manner. This property is key to the suitability for pub/sub
 in large distributed system.~\cite{Eugster:2003}
 
 \subsection{Message Filtering in Pub/Sub}
