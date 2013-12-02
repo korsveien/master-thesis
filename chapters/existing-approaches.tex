@@ -1,16 +1,25 @@
-Many approaches to topic-based pub/sub have been proposed the last
+Designing decentralised topic-based pub/sub systems is a huge research
+challenge due to a number of desired system properties which are in
+conflict with eachother~\cite{Setty:2012}. For example, making the
+overlay robust is difficult without introducing too many redundant edges
+in the network graph.  Many approaches to topic-based pub/sub have been
+proposed the last
 decade~\cites{Baehni:2004}{Castro:2002}{Chockler:2007}{Rahimian:2011}{Girdzijauskas:2010}{Matos:2010}{Wong:2008}{Zhuang:2001}.
-However, there are several issues that remain in this field, as several
-of the desired system characteristics are contradicting in nature
-\cite{Setty:2012}. This chapter will discuss the desired properties of
-topic-based pub/sub in more detail, how trade-offs are made when
-designing such systems, and
+And each have made trade-offs in an attempt to balance the system
+properties against each other. In
+Chapter~\ref{ch:protocol-descriptions}, we gave an quick overview of how
+a number of differetn topic-based pub/sub systems work.  In this
+chapter, we will go more in detail, discussing the design challenges in
+topic-based pub/sub by illustrating the characteristics of these
+systems, as well as their shortcomings.
+
 
 \section{Desired System Properties}
+
 In order to provide correct and efficient delivery of notifications in a
-decentralised social network, a high number of system properties are
-deemed desirable~\cite{Setty:2012}. More specifically, these challenges
-include:
+decentralised OSN using topic-based pub/sub, a high number of system
+properties are deemed desirable~\cite{Setty:2012}. More specifically,
+these challenges include:
 
 \subsection{Correct delivery}
 All notifications should be delivered to the
