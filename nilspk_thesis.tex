@@ -49,12 +49,8 @@
 \label{ch:protocol-descriptions}
 \section{Scribe}
 Structured overlay, Dissemination Trees
-\section{SpiderCast}
-Unstructured overlay, Subscription correlation, Topology creation
 \section{PolderCast}
 Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
-\section{ElastO}
-Structured overlay, Rings, Combines centralized algos with distributed
 
 \chapter{Design Challenges in Topic-Based Pub/Sub}
 \label{ch:desired-system-properties-and-trade-offs}
@@ -72,8 +68,7 @@ Structured overlay, Rings, Combines centralized algos with distributed
 \chapter{Implementation}
 \label{ch:implementation}
     \section{Implementation Strategy}
-        \subsection{Tools and Libraries}
-        PeerNet, Gephi, GEXF, gexfj, Gradle, guava
+        \subsection{Extending PeerNet for Gephi}
         \subsection{Using Test-Driven Development}
         In~\cite{janzen2005test} they argue the use of TDD in academia.
         In~\cite{maximilien2003assessing} they show great improvements
@@ -85,6 +80,9 @@ Structured overlay, Rings, Combines centralized algos with distributed
         \subsection{Aggregating data}
             Using the coordinator as a data aggregate. Aggregated data
             stored in gexf format.
+    \section{Extending PeerNet for Gephi analysis and visualization}
+    \section{Implementation Challenges}
+    \subsection{Handling memory leaks in the Gephi Toolkit}
 
 \chapter{Evaluation}
 \label{ch:evaluation}
