@@ -112,44 +112,49 @@ emerging field.
 an open source tool for exploring and visualizing all kinds of networks,
 including dynamic and hierarchical graphs. Described by the authors as
 ``photoshop for graphs'', Gephi enables the user to interact with the
-graph structure, as well as manipulate colors and sizes of both nodes
-and edges in order to represent data in an intuitive way. Gephi aims to
-help researchers and data analyst in discovering patterns and reveal
-hidden properties of the graph in question, as well as easily
-discovering errors in the dataset. Gephi also provides a set of
-statistical tools for measuring common metrics for Social Network
-Analysis~(SNA) such as centrality, as well as metrics useful for general
-graph topology analysis such as degree, path length and clustering
-coefficient. Gephi also supports the emerging field of Dynamic Network
-Analysis~(DNA) by supporting analysis of temporal data, giving the user
-the ability to filter the graph model according to a defined time
-interval. It also support playback of the graph evolution, as well as
-visualizing changes to graph data over time through size, color and text
-labels which can be applied to both nodes and edges.
+graph structure, as well as manipulate the colors and sizes of the
+visual graph representation in order to display graph properties in an
+intuitive way. Gephi aims to help researchers and data analysts in
+discovering patterns and revealing hidden properties of the graph in
+question, as well as easily discovering errors in the dataset. Gephi
+also provides a set of statistical tools for measuring common metrics
+for Social Network Analysis~(SNA) such as centrality, as well as metrics
+useful for general graph topology analysis such as degree, path length
+and clustering coefficient. Gephi is also useful in the emerging field of
+Dynamic Network Analysis~(DNA)  as it supports temporal graphs,
+giving the user the ability to filter the graph model according to a
+defined time interval. It also support playback of the graph evolution,
+as well as visualizing changes to graph data over time through size,
+color and text labels which can be applied to both nodes and edges.
 
-The Gephi software architecture is highly modular and supports
-extensions via plugins, some of which are available in a official plugin
-marketplace found at~\cite{gephimarketplace}. New metrics, filters or
-database support may be implemented through such plugins by developers
-and published to the marketplace free of charge.
+Gephi provides a rich GUI-experience where users may interact with the
+graph representation, apply layout algorithms, filter the graph
+representation, execute metrics, apply color and size based on graph
+properties and animate the graph evolving over time through the timeline
+component.  The Gephi software architecture is highly modular and
+supports extensions via plugins, some of which are available in a
+official plugin marketplace found at~\cite{gephimarketplace}. New
+metrics, filters or database support may be implemented through such
+plugins by developers and published to the marketplace free of charge.
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{img/gephi1}
 \caption{The Gephi Tool supports
-visualization of graphs through coloring and sizing nodes and
-edges, as well as labeling them. Here Gephi is used to detect and visualize
+visualization of graphs through coloring and sizing the visual graph
+representation. It also enables adding labels to nodes and edges. In
+this screenshot, Gephi is used to detect and visualize
 communities.}
 \label{img:gephi1}
 \end{figure}
 
 We consider tools such as Gephi to be a valuable addition to the field
-of network analysis. Visual Exploration of a network graph is a valuable
-addition to more traditional approaches, as some properties of the
-system are more easily spotted visually.For example, during our
-implementation work, it was easy to spot that some edges were missing
-from the graph, leading to the discovery of a critical bug in the
-implementation code, where  which would otherwise be difficult to spot.
+of P2P protocol research. Visual Exploration of a dynamic network graph
+is a useful approach to evaluating these protocols, as some properties
+of the system are more easily spotted visually. For example, during our
+implementation work, it was trivial to visually confirm that some edges
+were missing from the graph, leading to the discovery of a critical bug
+in the implementation code which would otherwise be difficult to spot.
 
 \section{The Gephi Toolkit}
 \section{The GEXF File format}
