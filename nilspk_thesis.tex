@@ -64,6 +64,7 @@ Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
 \chapter{Metrics}
 \label{ch:metrics}
 \input{chapters/metrics}
+% FIXME: should probably be a part of the background chapter
 
 \chapter{Implementation}
 \label{ch:implementation}
@@ -85,6 +86,10 @@ Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
     \subsection{Implementing a workaround for memory leaks in the Gephi Toolkit}
     CollectorWorker -> GSON -> New JVM
     \subsection{Handling protocols with inconsistent views}
+    Protocols remove some edges between nextCycle () and processEvent ()
+    \subsection{Issues with dynamic graphs in Gephi}
+        Problems handling dynamic attributes, playback issues caused by
+        rounding errors as gephi uses double to define intervals.
 
 \chapter{Evaluation}
 \label{ch:evaluation}
