@@ -88,8 +88,8 @@ schemes, but better performance if the set of possible event properties
 is limited. Also, topic-based is more suited for dissemination and
 multicasting, as topics can be thought of as groups, where subscribing
 to topic T can be equivalent to joining the group for that topic. This
-is the approach taken by several proposed pub/sub systems which will be
-discussed later in this paper.
+is a common approach taken by several proposed pub/sub
+systems\cite{needs citation}.
 
 Traditionally, reliable multicasting of data through deterministic
 dissemination has been the common approach. However, more recent
@@ -155,9 +155,67 @@ of the system are more easily spotted visually. For example, during our
 implementation work, it was trivial to visually confirm that some edges
 were missing from the graph, leading to the discovery of a critical bug
 in the implementation code which would otherwise be difficult to spot.
+It is also worth to note that the different actors involved in the Gephi
+project has formed a legal entity in the form of The Gephi
+Consortium~\cite{gephi-consortium} in order to assure future development
+of this tool. This provides us with a certain degree of assurance that
+this project is something well worth investing in, as the risk of it
+being discontinued seems unlikely at this point in time.
 
 \section{The Gephi Toolkit}
+
+In addition to the GUI-client, the authors of Gephi also provide an API
+through the Gephi Toolkit project. The toolkit packages essential
+modules from the GUI-client into a standard Java library which can
+be used by any stand-alone Java project by including it as a dependency.
+We take advantage of this toolkit in our implementation work, where it
+is mainly used to handle and store reports collected from PeerNet
+simulations.
+
 \section{The GEXF File format}
+
+The GEXF (Graph Exchange XML Format) file format~\cite{gexf} is an
+effort by the Gephi Consortium to define a standard language describing
+complex network structures. Being developed by the same group of people,
+the Gephi Tool is naturally fully compatible with this format, and is
+able to both import and export GEXF files. This is also the case with
+the Gephi Toolkit, as the module for handling such imports and exports
+are included in this toolkit as well.
+
+The GEXF file format is able to describe a graph through its nodes and
+edges, as well as any data and dynamics associated with the graph. More
+specifically, the file format is able to describe node, edges and their
+associated attributes. Listing~\ref{lst:gexf-basic} provides an example
+of a minimal static GEXF file, describing nodes, edges and attributes of
+a graph.
+
+\begin{figure}
+\lstinputlisting[language=XML, label=lst:gexf-basic, frame=single]{listings/basic.gexf}
+\caption{A GEXF description of a minimal static graph}
+\end{figure}
+
+\subsection{Dynamics}
+
+One of the major advantages of this file format is its support for
+dynamic functionalities.  Both nodes, edges and attributes may have a
+defined time interval where they exist. These lifetime intervals are
+described as ``spells'' if applied to nodes and edges, and as ``start''
+and ``end'' XML-attributes if applied to node or edge attributes. The
+GEXF file in Listing~\ref{lst:gexf-dynamics} shows an example of a
+dynamic graph where spells are used in order to determine the lifetime
+of the nodes.  The start and end times are by default encoded as
+doubles, however, dates are also supported, as seen in this example.
+
+The
+support for dynamic graphs makes this file format an interesting option
+for storing simulation data, and in our implementation work we use this
+format extensively as part of our research effort.
+
+\begin{figure}
+\lstinputlisting[language=XML, caption={}, label=lst:gexf-dynamics,
+frame=single] {listings/dynamics.gexf}
+\caption{Example of  dynamic GEXF file using spells}
+\end{figure}
 
 \section{The PeerNet Simulator}
 \subsection{Event Engine}
