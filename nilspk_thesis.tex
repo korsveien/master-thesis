@@ -77,9 +77,58 @@ Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
 \label{ch:implementation}
     \section{Implementation Strategy}
         \subsection{Using Test-Driven Development}
-        In~\cite{janzen2005test} they argue the use of TDD in academia.
-        In~\cite{maximilien2003assessing} they show great improvements
-        in productivity using TDD at IBM.\
+
+        Software Development Methodology is an active area of research
+        which is in part driven by the business needs of the private
+        sector\cite{janzen2005test}. One popular practice is Test-Driven
+        Development (TDD). The promoters of TDD claim it increases
+        productivity and reduces the number of bugs and defects in the
+        code significantly~\cite{beck2003test}. Research
+        efforts performed at IBM~\cite{maximilien2003assessing} seems to
+        lend credibility to these claims. However, the use of TDD is not
+        prevalent in academia, and in~\cite{janzen2005test} they
+        recommend further research into the field in order to better
+        determine its effects.
+
+        Using TDD means writing test before writing any code. There are
+        different types of test. \emph{Unit Test} targets small,
+        independent pieces of code, typically methods within a single
+        module or component, while \emph{Integration Tests} aim to test
+        code across such modules and components in order to determine
+        how well they integrate with each other. In our work, we only
+        took advantage of Unit Tests where suitable using the
+        JUnit~\cite{junit} and Mockito~\cite{mockito} libraries.
+        However, as the system we develop depends on  high number of
+        IO-operations through file reads and writes, as well as network
+        communication, as suite of integration test could have been
+        helpful.
+
+        The TDD approach is best described through the
+        Red-Green-Refactor mantra, which is a central part of
+        TDD-philosophy:
+
+        \begin{description}
+            \item[Red] Write a test that fails.
+            \item[Green] Make the test pass.
+            \item[Refactor] Refactor the code while making sure the test still passes.
+        \end{description}
+
+        In our experience this has been a very helpful routine to follow
+        in our implementation work, as it enables us as developer to
+        refactor with confidence achieving more maintainable code and a
+        more thoughtful software design. Using TDD forced us to think
+        more deeply about what functionality to implement and how to
+        structure and split the problem domain into smaller function
+        points. We believe that in the end, following TDD where its
+        suitable is beneficial to both programmer productivity and
+        happiness. Also, we are confident that it decreased the level of
+        technical debt in our implementation, a problem we find to be
+        commonplace in academia. As we plan to host our implementation
+        code in a public repository, sharing it with the research
+        community, any tool or method that helps us improve the design
+        and maintainability of our implementation is of great value to
+        us.
+
         \subsection{Extending PeerNet for Gephi}
         \subsection{Aggregating data}
             Using the coordinator as a data aggregate. Aggregated data
