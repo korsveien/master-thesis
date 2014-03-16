@@ -1,19 +1,102 @@
 \section{Implementation Strategy}
-    \subsection{Extending PeerNet for use with Gephi}
-    \subsection{Using Test-Driven Development}
-    In~\cite{janzen2005test} they argue the use of TDD in academia.
-    In~\cite{maximilien2003assessing} they show great improvements
-    in productivity using TDD at IBM.\
+
+\subsection{Using Test-Driven Development}
+
+Software Development Methodology is an active area of research
+which is in part driven by the business needs of the private
+sector\cite{janzen2005test}. One popular practice is so-called Test-Driven
+Development (TDD). The promoters of TDD claims it increases
+productivity and reduces the number of bugs and defects in the
+code significantly~\cite{beck2003test}. Research
+efforts performed at IBM~\cite{maximilien2003assessing} seems to
+lend credibility to these claims. However, the use of TDD is not
+prevalent in academia, and in~\cite{janzen2005test} they
+recommend further research into the field in order to better
+determine its effects.
+
+Using TDD means writing tests before writing any code. There are
+different types of test. \emph{Unit Tests} targets small,
+independent pieces of code, typically methods within a single
+module or component, while \emph{Integration Tests} aim to test
+code across such modules and components in order to determine
+how well they integrate with each other. In our work, we only
+took advantage of Unit Tests where suitable using the
+JUnit~\cite{junit} and Mockito~\cite{mockito} libraries.
+We could also have benefited from a suite of integration tests,
+as our implementation is heavily dependent on interoperating
+components, as well as file and network IO\@. However, writing
+these sort of tests would simply be too time consuming compared
+to writing smaller unit tests.
+
+The TDD approach to software development is best described through the
+Red-Green-Refactor mantra, which is a central part of the
+TDD-philosophy. It can be described through the following steps:
+
+\begin{description}
+    \item[Step 1:] Write a test that fails. (Red)
+    \item[Step 2:] Make the test pass. (Green)
+    \item[Step 3:] Refactor the code while making sure the test
+        still passes. (Refactor)
+\end{description}
+
+In our experience this routine has been helpful when working
+with our implementation code, as it enables us as developer to
+refactor with confidence achieving more maintainable code and a
+more thoughtful software design. Since we share our
+implementation code with the research community by hosting it in
+a open repository, any tool or method that helps us improve the
+design and maintainability of our project is of great value to
+us. Using TDD forced us to think more deeply about what
+functionality to implement and how to structure and split the
+problem domain into smaller function points. We believe that in
+the end, following TDD where its suitable is beneficial to both
+programmer productivity as well as programmer happiness. Also,
+we are confident that this practice decreased the amount of
+technical debt in our project, a problem we find to be commonplace in academia.
+
+\subsection{Aggregating data}
+Using the coordinator as a data aggregate. Aggregated data
+stored in gexf format.
 
 \section{Implementing Protocols in PeerNet}
-    \subsection{Updating Existing Protocols}
-    \subsection{Protocols}
-    \subsection{Observers}
-    \subsection{Aggregating data}
-        Using the coordinator as a data aggregate. Aggregated data
-        stored in gexf format.
+\subsection{Updating Existing Protocols}
+\subsection{Protocols}
+\subsection{Observers}
 
-\section{Extending PeerNet for Gephi analysis and visualization}
+\section{Extending PeerNet}
 
 \section{Implementation Challenges}
-\subsection{Handling memory leaks in the Gephi Toolkit}
+
+\subsection{Implementing a workaround for memory leaks in the Gephi Toolkit}
+During our work we encountered a particularly nasty bug in the Gephi
+Toolkit. When processing GEXF files, it is necessary to create a Gephi
+workspace, do the file processing, and then close this workspace. Each
+time a new workspace is created, five new threads are spawned in the
+JVM\@. However, when closing the workspace, these threads are not
+terminated. This is a memory leak, as the threads allocate space on the
+Heap for every thread created. As we often have to traverse through
+folders when processing these files in a for-loop, this inevitably leads
+to a \texttt{OutOfMemoryException} and the JVM process exiting
+unsuccessfully.
+
+The snapshot version of the toolkit included a fix for this issue,
+however this version was too unstable and broke backwards compability
+which affected our implementation code. We implemented a workaround
+which involved serializing the reports received by the collector into
+JSON strings using the Google GSON~\cite{gson} library. The
+collector would then spawn a new JVM process, passing this string to it.
+This is far from an elegant solution, but works as a temporary fix
+until there is a newer stable release of the toolkit that includes the
+fix to this issue.
+
+\subsection{Handling protocols with inconsistent views}
+Protocols remove some edges between nextCycle () and processEvent ()
+\subsection{Issues with dynamic graphs in Gephi}
+Problems handling dynamic attributes, playback issues caused by
+rounding errors as gephi uses double to define intervals.
+\subsection{GEXF file sizes}
+The GEXF format may not be scalable. However, gephi accepts
+archive files. Zipping gexf files reduced file sizes up to 93%.
+\subsection{Messages too large in PolderCast}
+It is often the case that taking something that works well
+locally and transparently distributing it leads to difficulties.
