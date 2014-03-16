@@ -91,9 +91,22 @@ far from an elegant solution, but works as a temporary fix until there
 is a newer stable release of the toolkit that includes the fix to this
 issue.
 
-\subsection{Issues with dynamic graphs in Gephi}
-Problems handling dynamic attributes, playback issues caused by
-rounding errors as gephi uses double to define intervals.
+\subsection{Playback issues in Gephi}
+
+We also encountered some issues related to the playback of dynamic
+graphs in Gephi. The playback is based on time intervals, where the
+start and end bounds for the interval is encoded as a double. As you
+play back the graph evolution, these bounds suffer from rounding errors,
+which might lead to an interval that overlaps to simulation states.
+These intervals are effectively filter, stripping the graph of nodes and
+edges that do not belong in the defined interval. However, if the
+interval crosses the boundary of two different simulation states, the
+edges and nodes from both states will be included, which often leads to
+a sudden increase in number of edges during the animation, which
+abruptly disappear again. However, this issue is easily worked around by
+defining a sufficiently short interval. We usually set the interval
+bound to be of length 0.1, as this in our experience never leads to the
+issues with the time interval overlapping different states.
 
 \subsection{GEXF file sizes}
 The GEXF format may not be scalable. However, gephi accepts
