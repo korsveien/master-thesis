@@ -1,5 +1,9 @@
 \section{Implementation Strategy}
 
+\subsection{Traditional Approach to Evaluating P2P Overlays using PeerNet}
+
+\subsection{Our Approach}
+
 \subsection{Using Test-Driven Development}
 
 Software Development Methodology is an active area of research
@@ -67,8 +71,14 @@ stored in gexf format.
 
 \section{Implementation Challenges}
 
-\subsection{Handling Memory Leaks in Gephi Toolkit}
+\subsection{Refactoring for distributed simulations}
+It is often the case that taking something that works well
+locally and transparently distributing it leads to difficulties.
 
+\subsubsection{Messages too large in PolderCast}
+\subsubsection{Intializing topics}
+
+\subsection{Handling Memory Leaks in Gephi Toolkit}
 During our work we encountered a particularly nasty bug in the Gephi
 Toolkit. When processing GEXF files, it is necessary to create a Gephi
 workspace, do the file processing, and then close this workspace. Each
@@ -91,7 +101,22 @@ far from an elegant solution, but works as a temporary fix until there
 is a newer stable release of the toolkit that includes the fix to this
 issue.
 
-\subsection{Playback issues in Gephi}
+
+\subsection{GEXF file sizes}
+The GEXF format may not be scalable. However, gephi accepts
+archive files. Zipping gexf files reduced file sizes up to 93%.
+
+\section{Limitations in Gephi}
+
+As Gephi is still in the pre-1.0 stage, we encountered several
+limitations using the tool, some of which forced us to implement
+alternative or less than optimal approaches.
+
+\subsection{No auto apply in the Partition Component}
+No auto apply in the Partition Component. No Dynamic Collection data
+structure.
+
+\subsection{Playback issues in the Timeline component}
 
 We also encountered some issues related to the playback of dynamic
 graphs in Gephi. The playback is based on time intervals, where the
@@ -106,12 +131,27 @@ a sudden increase in number of edges during the animation, which
 abruptly disappear again. However, this issue is easily worked around by
 defining a sufficiently short interval. We usually set the interval
 bound to be of length 0.1, as this in our experience never leads to the
-issues with the time interval overlapping different states.
+issues with the time interval overlapping different states. We confirmed
+this by playing back the graph and controlling the start and end bounds
+output on the Filter component, as well as visually confirming the
+absence of any edge animation irregularities. Testing with the Cyclon
+protocol, we were also able to visually confirm that the number of edges
+remain consistent for each cycle in the context pane on the top right
+side of the Gephi GUI\@.
 
-\subsection{GEXF file sizes}
-The GEXF format may not be scalable. However, gephi accepts
-archive files. Zipping gexf files reduced file sizes up to 93%.
 
-\subsection{Messages too large in PolderCast}
-It is often the case that taking something that works well
-locally and transparently distributing it leads to difficulties.
+\subsection{Dynamic Data Structures}
+
+Gephi comes with its own set of data structures for representing
+dynamic attributes on
+
+Missing a DynamicCollection data structure Currently, only single value
+data structures are represented.
+
+\subsection{No support for graph or workspace metadata}
+Would be helpful to be able to list all topics on the graph and sort
+then according to number of subscribers.
+
+\subsection{Saving a Gephi session}
+filters are not preserved.
+
