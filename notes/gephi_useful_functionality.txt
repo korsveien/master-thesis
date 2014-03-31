@@ -79,7 +79,7 @@ Timeline Component
     properties by changing the upper and lower bound of the Time
     Interval.
 
-Metric Component
+Statistics Component
 
     The metric component enables graph topology analysis by executing
     metrics on the graph. There are two types of metric algorithms in Gephi:
@@ -105,6 +105,9 @@ Metric Component
         - Number of nodes
         - Avg. Degree
         - Clustering Coefficient
+
+    TODO: describe exactly what sort of averages/data are calculated by
+    each metric
 
 Ranking Component
 
