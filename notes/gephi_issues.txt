@@ -1,0 +1,2 @@
+- Not being able to visualize last reporter interval in gephi
+    - look at AttributeUtils#addGossipAverage for code comment
