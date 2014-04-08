@@ -1,0 +1,25 @@
+\begin{table}[]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll}
+\toprule
+Method Name                                       & Returns\\
+\midrule
+\tt long reportId()                      & The unique id of this node\\
+\tt long[] reportNeighborIds()           & The unique ids of this node's neighbors\\
+\tt long[] reportTopics()                & List of topic ids this node subscribes to\\
+\tt long reportControlMsgsReceived()     & Number of overlay control messages received\\
+\tt long reportControlMsgsSent()         & Number of overlay control messages sent\\
+\tt long reportControlBytesReceived()    & Number of overlay control bytes received\\
+\tt long reportControlBytesSent()        & Number of overlay control bytes sent\\
+\tt PubMessage[] reportPubMsgsReceived() & Reports list of publication messages received\\
+\tt PubMessage[] reportPubMsgsSent()     & Reports list of publication messages was sent\\
+
+% \emph{reportDuplicatePubMessages(int topic, int messageId)} :  The number of duplicates received for a specific publication\\
+% \hline
+\end{tabular}
+}%
+\caption{Reporter Interface Methods}
+\label{tab:repinterface}
+\end{table}
+

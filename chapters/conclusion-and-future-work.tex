@@ -1,0 +1,60 @@
+\section{Limitations in Gephi}
+
+As Gephi is still in the pre-1.0 stage, we encountered several
+limitations using the tool, some of which forced us to implement
+alternative or less than optimal approaches.
+
+\subsection{No auto apply in the Partition Component}
+No auto apply in the Partition Component. No Dynamic Collection data
+structure.
+
+\subsection{Playback issues in the Timeline component}
+
+We also encountered some issues related to the playback of dynamic
+graphs in Gephi. The playback is based on time intervals, where the
+start and end bounds for the interval is encoded as a double. As you
+play back the graph evolution, these bounds suffer from rounding errors,
+which might lead to an interval that overlaps to simulation states.
+These intervals are effectively filter, stripping the graph of nodes and
+edges that do not belong in the defined interval. However, if the
+interval crosses the boundary of two different simulation states, the
+edges and nodes from both states will be included, which often leads to
+a sudden increase in number of edges during the animation, which
+abruptly disappear again. However, this issue is easily worked around by
+defining a sufficiently short interval. We usually set the interval
+bound to be of length 0.1, as this in our experience never leads to the
+issues with the time interval overlapping different states. We confirmed
+this by playing back the graph and controlling the start and end bounds
+output on the Filter component, as well as visually confirming the
+absence of any edge animation irregularities. Testing with the Cyclon
+protocol, we were also able to visually confirm that the number of edges
+remain consistent for each cycle in the context pane on the top right
+side of the Gephi GUI\@.
+
+\subsection{Dynamic Data Structures}
+
+Gephi comes with its own set of data structures for representing
+dynamic attributes on
+
+Missing a DynamicCollection data structure Currently, only single value
+data structures are represented.
+
+\subsection{No Map Data Structure}
+It would be useful to be able to store a map data structure on each
+graph. If maps were supported, you could derive information such as how
+many duplicate messages a particular node received on a specific topic
+or single dissemination session. Also, it would enable us to see how
+many publication messages a particular node sent or received for a
+specific topic.
+
+\subsection{No support for graph or workspace metadata}
+Would be helpful to be able to list all topics on the graph and sort
+then according to number of subscribers.
+
+\subsection{Saving a Gephi session}
+filters are not preserved.
+
+\section{Conclusion}
+\section{Future Work}
+\subsection{Implementing a pub/sub plugin for Gephi}
+\subsection{Improvements to existing solution}

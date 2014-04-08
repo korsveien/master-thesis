@@ -1,0 +1,19 @@
+\begin{table}[]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll}
+\toprule
+Message item           & Description\\
+\midrule
+\tt long  MsgId            & Unique id of the this message\\
+\tt long  TopicId          & Topic id for which this message was generated\\
+\tt long  SourceId         & Id of the previous hop node\\
+\tt long  DestinationIds   & Ids of the next hop nodes\\
+\tt long  OriginalSenderId & Node id of the message source\\
+\tt long  TimeStamp        & Timestamp of the message sent/received\\
+\end{tabular}
+}%
+\caption{Data Structure of a Publication Message}
+\label{tab:structure}
+\end{table}
+

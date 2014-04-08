@@ -18,8 +18,9 @@
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 \newcommand{\ampers}{\&}
+\newcommand{\demo}{{\sc VizPub}\xspace}
 
-\title{Implementation and Evaluation of Pub/Sub overlays for P2P Social Networks}
+\title{Visualizing the Performance of Overlay-Based Pub/Sub Systems}
 \subtitle{}
 \author{Nils Peder Korsveien}
 
@@ -44,45 +45,25 @@
 \label{ch:background}
 \input{chapters/background}
 
-\chapter{Protocol Descriptions}
-\label{ch:protocol-descriptions}
-\section{Scribe}
-Structured overlay, Dissemination Trees
-\section{PolderCast}
-Hybrid overlay, RINGS, CYCLON, VICINITY, Random links (small-world)
-
 \chapter{Design Challenges in Topic-Based Pub/Sub}
-\label{ch:desired-system-properties-and-trade-offs}
-\input{chapters/existing-approaches}
+\label{ch:design-challenges}
+\input{chapters/design-challenges}
 
-\chapter{Metrics}
+\chapter{Visualized Performance Metrics}
 \label{ch:metrics}
 \input{chapters/metrics}
-% FIXME: should probably be a part of the background chapter
 
-\chapter{Implementation}
-\label{ch:implementation}
-\input{chapters/implementation}
+\chapter{Solution}
+\label{ch:solution}
+\input{chapters/solution}
 
-\chapter{Evaluation}
+\chapter{Testing The Solution}
 \label{ch:evaluation}
-    \section{Experimental Setup}
-    \section{Evaluation Workloads}
-    \section{Experiments}
-    \section{Evaluation Summary}
+\input{chapters/testing-the-solution}
 
 \chapter{Conclusion and Future Work}
 \label{ch:conclusion-and-future-work}
-    \section{Conclusion}
-    \section{Future Work}
-    \subsection{Implementing a pub/sub plugin for Gephi}
-        Limitations in gephi
-    \subsection{Improvements to existing solution}
-        Instead of imposing its type system on the wire, the different
-        PeerNet JVM instances could create the gexf file and send it for
-        appending on the collector end. Or use a graph db
-
-% End of part IV
+\input{chapters/conclusion-and-future-work}
 
 \backmatter{}
 \printbibliography{}
