@@ -100,45 +100,246 @@ subscribers.
 
 \section{Overlays}
 
-\section{The Gephi Open Graph Viz Platform} Gephi~\cite{ICWSM09154} is
-an open source tool for exploring and visualizing all kinds of networks,
-including dynamic and hierarchical graphs. Described by the authors as
-``photoshop for graphs'', Gephi enables the user to interact with the
-graph structure, as well as manipulate the colors and sizes of the
-visual graph representation in order to display graph properties in an
-intuitive way. Gephi aims to help researchers and data analysts in
-discovering patterns and revealing hidden properties of the graph in
-question, as well as easily discovering errors in the dataset. Gephi
-also provides a set of statistical tools for measuring common metrics
-for Social Network Analysis~(SNA) such as centrality, as well as metrics
-useful for general graph topology analysis such as degree, path length
-and clustering coefficient. Gephi is also useful in the emerging field of
-Dynamic Network Analysis~(DNA)  as it supports temporal graphs,
-giving the user the ability to filter the graph model according to a
-defined time interval. It also support playback of the graph evolution,
-as well as visualizing changes to graph data over time through size,
-color and text labels which can be applied to both nodes and edges.
+\section{The Gephi Open Graph Viz Platform}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{img/gephi1}
+    \caption{The Gephi Tool supports
+        visualization of graphs through coloring and sizing the visual
+        graph
+        representation. It also enables adding labels to nodes and
+        edges. In
+        this screenshot, Gephi is used to detect and visualize
+    communities.}
+\label{img:gephi1}
+\end{figure}
+
+Gephi~\cite{ICWSM09154} is an open source tool for exploring and
+visualizing all kinds of networks, including dynamic and hierarchical
+graphs. Described by the authors as ``photoshop for graphs'', Gephi
+enables the user to interact with the graph structure, as well as
+manipulate the colors and sizes of the visual graph representation in
+order to display graph properties in an intuitive way. Gephi aims to
+help researchers and data analysts in discovering patterns and revealing
+hidden properties of the graph in question, as well as easily
+discovering errors in the dataset. Gephi also provides a set of
+statistical tools for measuring common metrics for Social Network
+Analysis~(SNA) such as centrality, as well as metrics useful for general
+graph topology analysis such as degree, path length and clustering
+coefficient. Gephi is also useful in the emerging field of Dynamic
+Network Analysis~(DNA)  as it supports temporal graphs, giving the user
+the ability to filter the graph model according to a defined time
+interval. It also support playback of the graph evolution, as well as
+visualizing changes to graph data over time through size, color and text
+labels which can be applied to both nodes and edges.
 
 Gephi provides a rich GUI-experience where users may interact with the
 graph representation, apply layout algorithms, filter the graph
 representation, execute metrics, apply color and size based on graph
 properties and animate the graph evolving over time through the timeline
-component.  The Gephi software architecture is highly modular and
+component. The Gephi software architecture is highly modular and
 supports extensions via plugins, some of which are available in a
 official plugin marketplace found at~\cite{gephimarketplace}. New
 metrics, filters or database support may be implemented through such
 plugins by developers and published to the marketplace free of charge.
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{img/gephi1}
-\caption{The Gephi Tool supports
-visualization of graphs through coloring and sizing the visual graph
-representation. It also enables adding labels to nodes and edges. In
-this screenshot, Gephi is used to detect and visualize
-communities.}
-\label{img:gephi1}
-\end{figure}
+Gephi provides many tools and components which are useful in the context
+of researching and analysing pub/sub overlays.
+
+\subsection{Useful functionality in Gephi}
+
+\begin{description}
+
+\item[Node and Edge pencil tools] \hfill \\
+
+    These two tools enable the user to create nodes and edges by
+    clicking in the graph view. Edges can be undirected or directed,
+    where direction is indicated with an arrow. These two tools combined
+    enables building a graph by hand.
+
+    Building such graphs can be useful in order to reason, analyse or
+    learn network algorithms, such as event dissemination algorithms. In
+    this case, the user can start with a single node which can act as
+    the event source, and build the topology as the event disseminates,
+    carefully following the particular algorithm in question when doing
+    so. The user can also add attributes to the nodes and edges either
+    through the node query tool or in the Data Laboratory component
+    which also aids in visualising and understanding properties,
+    drawbacks and advantages of such algorithms.
+
+\item[Node Query Tool] \hfill \\
+
+    With the node query tool the user is able to click on a node on the
+    graph model, and a panel which will display a panel with information
+    regarding the properties and attributes of this node. Properties include
+    data describing the visual properties of the node such as size, position
+    and color. Attributes include the Id and Label and Time Interval
+    attributes and any additional user defined attributes. In our case, such
+    user defined attributes would include Topics, Subscription Size and
+    Gossips Sent/Received.
+
+    Both the properties and attributes of the node are editable through this
+    panel view. The user can select a property to change the visual
+    representation of the node, or the attributes to change their value. The
+    Time Interval attribute is interesting to edit in particular as it
+    represents the points in time in which a node exists in the graph model.
+    On example scenario is editing the Time Interval attribute for a certain
+    nodes in order to see how it affects a particular metric as well as the
+    overlay topology.
+
+\item[Shortest Path Tool] \hfill \\
+
+    With the Shortest Path Tool selected, the user may click on two nodes on
+    the graph model, and if there is a shortest path between them, this path
+    will be highlighted with a color. It might be useful to reason about the
+    relationship between key nodes in the graph, or to compare shortest path
+    between several pairs of nodes. (more use cases?)
+
+\item[Heat Map Tool] \hfill \\
+
+    The heat map tool enables the user to click on a node in the graph model
+    and color its neighborhood based on the edge weight distance between
+    them. More specifically, it sets the node color intensity lower for more
+    distant nodes and stronger for nodes that are closer. Edge weight is a
+    standard edge attribute that are by default set to 1. This means that in
+    the default case, the visualization will represent the hop count
+    distance from the particular node selected by the user. However, the
+    edge weight can be edited by the user in order to represent other
+    properties of a system. As an example, imagine setting the edge weight
+    to represent network latency between two nodes. In this case, a
+    neighboring node which is adjacent to the selected node would have a
+    lower color intensity if the latency between them is higher than another
+    neighboring node which is further away in terms of hop count.
+
+\item[Timeline Component] \hfill \\
+
+    The timeline component introduces an animation scheme for dynamic
+    graphs. The user may choose playback parameters such as time
+    interval size, step size and playback speed. The time interval will
+    filter out a subgraph defined by the upper and lower bound of the
+    interval. The evolution of the dynamic graph will then be animated
+    by moving these bounds by the distance defined by the step
+    parameter. The delay between each step is decided by the playback
+    speed.
+
+    The timeline enables the user to visually inspect the change in
+    graph topology over time, as well as visualize and inspect node and
+    edge attributes of the graph through both color, size and text
+    labels which is able to change dynamically as part of the graph
+    model animation. The timeline also enables jumping to a specific
+    point in time and investigating the corresponding subgraph and its
+    properties by changing the upper and lower bound of the Time
+    Interval.
+
+\item[Statistics Component] \hfill \\
+
+    The metric component enables graph topology analysis by executing
+    metrics on the graph. There are two types of metric algorithms in Gephi:
+    static and dynamic. Static metrics are only able to execute on graph
+    model representing a single point in time, while dynamic will traverse
+    the time line by executing the metric iteratively across a set of time
+    intervals. When executing a dynamic metric, the user is able to choose
+    window size and time step. The window size is a time interval which will
+    be moved by the step size defined by the user. Metrics are divided
+    into \emph{static} and \emph{dynamic} metrics, where the former
+    calculates a single value based on the currently defined time
+    window, while the latter calculates a time series of values. When
+    executing a dynamic metric, the user must define the time window
+    size, and tick. The have the same functionality as step parameter
+    when using the \emph{Timeline Component}. When the metric executes,
+    the time window will iterate through the entire time range of the
+    simulation, calculating a static metric at each step. When finished,
+    a time series is plotted and displayed for the user.
+
+    The Statistics component include several metrics which are relevant
+    to pub/sub overlays. Useful static metrics include, but are not
+    limited to:
+
+    \begin{itemize}
+        \item{Degree (In/Out/Avg./Max/Min/Distr.)}
+        \item{Avg. Cluster Coefficient}
+        \item{Centrality (Beetweeness/Closeness/Eccentricity)}
+        \item{Average Path length}
+        \item{Radius}
+        \item{Network Diameter}
+        \item{Number of Shortest Paths}
+    \end{itemize}
+
+    Of these, only degree and the clustering coefficient metrics have dynamic
+    versions, where both calculates the average value over time. The
+    average for dynamic metrics are calculated by dividing the sum of
+    all node attribute values with the total number of nodes in both
+    cases.
+
+    %TODO: describe exactly what sort of averages/data are calculated by
+    each metric
+
+\item[Ranking Component] \hfill \\
+
+    The ranking component is a key feature of Gephi which enables
+    visualization based on node or edge attributes in form of color
+    and size. When coloring nodes or edges, the ranking component
+    will apply a gradient over the range of attribute values. The
+    ranking component also include a Result list, where the user may
+    sort nodes based on the specified attribute value, which is
+    useful for quickly finding the nodes with maximum value and
+    minimum value, which might help in identifying bottlenecks in
+    the system or potential load balancing issues.
+
+    The Ranking component also includes an Auto Apply feature, which
+    supports vizualising attributes dynamically while playing back the
+    graph via the Timeline Component.
+
+\item[Layout Component] \hfill \\
+
+    The Layout component enables the user to execute algorithms that
+    calculates the position of the nodes. The user is able to adjust the
+    parameters of these algorithms in order to manipulate the visual
+    layout. The different algorithms emphasize different aspects of the
+    topology. One example is the Force Atlas layout algortihm which
+    simulates the effect of gravity on the nodes where linked nodes
+    attract each other, and non-linked nodes are pushed apart. This
+    particular algorithm is useful for visually detect clusters and
+    communities. Another useful algorithm is the Circular Layout
+    algorithm, where nodes are positioned in a circle ordered on a
+    specific attributes selectable by the user. This is useful in order
+    to visualize node rankings on particular attributes.
+
+\item[Filter Component] \hfill \\
+
+    Filter may be applied to the graph in order to strip away nodes or
+    edges on the basis of their attributes which also includes any
+    calculated metrics. Filters may strip away based on a value range if
+    the attribute type is a number, or a regex match if the attribute is
+    a string. Filters can be combined through special operator filters
+    representing set operations such as union and intersect.
+
+    Filters are an essential mechanism in order to analyze subgraphs.
+    One use example is the case of calculating topic diameters in pub/sub systems,
+    where a subgraph can be filtered on a topic attribute. This
+    allows executing the diameter metric on the resulting subgraph
+    on the selected topic.
+
+\item[Data Laboratory Component] \hfill \\
+
+    The Data laboratory component enables the user to work with the node
+    and edge attributes of the graph. This component provides the user
+    with separate table views of node and edge attributes. Each row in
+    these table represent a node or edge, and columns may be added or
+    removed by the user. The Data Laboratory also provides functionality
+    for manipulating columns such as merging two columns or creating new
+    columns based on data from the existing columns. Attribute data
+    in columns that are static (i.e.\ has no lower or upper time
+    interval bound associated with them) can be converted to dynamic
+    through this component. Also, resizing or coloring all edges or
+    nodes is possible through the laboratory by selecting all rows
+    and right-clicking.
+
+    The laboratory also enables the user to export the data to file
+    for further statistical analysis.
+\end{description}
+
 
 We consider tools such as Gephi to be a valuable addition to the field
 of P2P protocol research. Visual Exploration of a dynamic network graph
