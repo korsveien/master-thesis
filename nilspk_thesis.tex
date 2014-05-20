@@ -42,22 +42,56 @@
 \input{chapters/introduction}
 
 \chapter{Background}
+%Provide background of
+- pub/sub systems
+- p2p
+- overlay
+- social networks
+- metrics?
+- visualizations
+- gephi
+- peernet
+- briefly describe poldercast and scribe
+
 \label{ch:background}
 \input{chapters/background}
 
 \chapter{Design Challenges in Topic-Based Pub/Sub}
+% Provide a mini survey of existing pub/sub system. Might have to go
+% through some rewrites.
 \label{ch:design-challenges}
 \input{chapters/design-challenges}
 
 \chapter{Visualizing Performance in Overlay-based Pub/Sub Systems}
+% Model this chapter after the demo paper. Go through supported metrics
+% and explain the system architecture. Also, give examples of
+% visualizations and use cases for vizpub, arguing its usefullness when
+% analysing and testing pub/sub systems.
+ Also, it should emphasize how vizpub/gephi
+% include some of these metrics for free, and how the plugin ecosystem
+% of gephi is more beneficial to sharing tools between researchers. If a
+% developer or researcher develop a plugin for a specific metric in
+% Gephi, this can be used by anyone who leverages VizPub when running
+% experiments or evaluating the performance of a pub/sub system in the
+% wild
 \label{ch:metrics}
 \input{chapters/metrics}
 
-\chapter{Experiments}
-\label{ch:evaluation}
+\chapter{Testing and Evaluation}
+% This chapter should include expanding the experiments done in
+% poldercast paper using peernet implementations of poldercast and using
+% vizpub as a tool for evaluating the experiments in order to test it as
+% a tool. Emphasis should be
+% put on what metrics are evaluated which is not included in the
+% original poldercast paper.
+\label{evaluation}
 \input{chapters/testing-the-solution}
 
 \chapter{Conclusion and Future Work}
+% What have we shown? We propose a tool for visualizing metrics, we
+% demonstrate its usefulness, we use this tool to evaluate two pub/sub
+% systems, expanding the evaluation done in the poldercast paper. Then
+% this chapter should include future work, implementing plugins etc.
 \label{ch:conclusion-and-future-work}
 \input{chapters/conclusion-and-future-work}
 
