@@ -32,22 +32,40 @@ the research community.
 
 \section{Problem Statement}
 
-
 \section{Chapter Overview}
 
 \begin{description}
     \item[Chapter~\ref{ch:background}] \hfill \\
-        Background.
-    \item[Chapter~\ref{ch:protocol-descriptions}] \hfill \\
-        Protocol Descriptions.
-    \item[Chapter~\ref{ch:desired-system-properties-and-trade-offs}] \hfill \\
-        Desired System Properties and Trade-offs.
-    \item[Chapter~\ref{ch:metrics}] \hfill \\
-        Metrics.
-    \item[Chapter~\ref{ch:implementation}] \hfill \\
-        Implementation.
+        Provides background for pub/sub systems, p2p, overlays, social
+        networks, gephi, peernet, poldercast and scribe
+    \item[Chapter~\ref{ch:design-challenges}] \hfill \\
+        Desired System Properties and Trade-offs. Taken from essay.
+    \item[Chapter~\ref{ch:vizpub}] \hfill \\
+        Describe vizpub, expand what is written in the demo paper.
+        Provide use case examples and experiences using vizpub as a tool
+        when updating poldercast. Emphasize uses in both developing,
+        analyzing pub/sub systems as well as a tool for educational
+        purposes. Also provide examples of visualizations, in particular
+        attempt to visualize some of the evaluations performed in the
+        poldercast paper, and see what additional information we can
+        learn from it.
     \item[Chapter~\ref{ch:evaluation}] \hfill \\
-        Evaluation.
+        Use vizpub as a tool for evaluating experiments. We update both
+        poldercast and scribe, in order to expand the evaluation
+        performed in the poldercast paper. Emphasize how the vizpub tool
+        along with the gephi framework enable us to easily expand the
+        evaluation on particular metrics, as these are inlcuded in
+        gephi. These metrics include, in-degree, out-degree, clustering
+        coefficient and centralities.
     \item[Chapter~\ref{ch:conclusion-and-future-work}] \hfill \\
-        Conclusion and Future Work.
+        Emphasize how future evaluations could be expanded by
+        implementing statistics plugins in gephi, as well as extending
+        the reporter interface. This enables researcher to more easily
+        share their work, no more one-off code! Also, a vizpub plugin
+        for gephi might be a good idea. This could provide a panel in
+        gephi which could display global metrics such as hit-ratio,
+        instead of displaying them as a label on every node. Also, this
+        plugin could display the current reporter interval being
+        visualized, as this is hard to derive from the timeline with
+        several hundred intervals.
 \end{description}
