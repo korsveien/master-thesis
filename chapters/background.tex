@@ -13,6 +13,20 @@ self-organization is one of the main characteristics of the P2P network
 architecture.
 
 \section{Overlays}
+The logical connections between participants in a P2P
+system lies on top of the physical connections on the network. This
+means that a one-hop connection between two peers might in reality
+consist of several hops between separate machines at the physical layer.
+The higher level connections between peers forms what is called an
+\emph{overlay}, as they form a logical network at a higher abstraction
+level that facilitates routing, search and key-value storage. Typically,
+overlays are separated into two different types of networks: structured
+and unstructured. The former organizes nodes into structures such as
+trees or rings, while the latter aims to form an overlay which resembles
+a random graph. Structural overlays introduce overhead in terms of
+structural maintenance but is able to provide higher guarantees of
+proper message delivery as random graph dissemination algorithms is
+usually routed in a probabilistic manner~\cite{Wong:2008}.
 
 \section{The Publish-Subscribe Communication Paradigm}
 
@@ -418,13 +432,7 @@ frame=single] {listings/dynamics.gexf}
 
 \section{The PeerNet Simulator}
 
-\subsection{Event Engine}
-
-\subsection{Protocols}
-
-\subsection{Observers}
-
-\section{PolderCast}
-
-\section{Scribe}
+\section{Pub/Sub Protocols}
+\subsection{PolderCast}
+\subsection{Scribe}
 
