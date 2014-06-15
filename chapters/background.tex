@@ -25,11 +25,9 @@ and unstructured. The former organizes nodes into structures such as
 trees or rings, while the latter aims to form an overlay which resembles
 a random graph. Structural overlays introduce overhead in terms of
 structural maintenance but is able to provide higher guarantees of
-proper message delivery as random graph dissemination algorithms is
-usually routed in a probabilistic manner~\cite{Wong:2008}.
+proper message delivery than random overlays.
 
 \section{The Publish-Subscribe Communication Paradigm}
-
 Publish-Subscribe is a fully asynchronous, loosely coupled,
 highly scalable, event-based messaging pattern. There are three main
 system components in the pub/sub interaction scheme: the publishers, the
@@ -120,7 +118,6 @@ which are more suited to the nature of decentralized systems and P2P.
 These protocols do not guarantee full reliability, but provides a high
 quantifiable \emph{probability} that events are delivered to all
 subscribers.
-
 
 \section{The Gephi Open Graph Viz Platform}
 
