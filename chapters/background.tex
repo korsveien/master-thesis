@@ -25,7 +25,7 @@ and unstructured. The former organizes nodes into structures such as
 trees or rings, while the latter aims to form an overlay which resembles
 a random graph. Structural overlays introduce overhead in terms of
 structural maintenance but are able to provide higher guarantees of
-proper message delivery than random overlays.
+correct message delivery than random overlays.
 
 \section{The Publish-Subscribe Communication Paradigm}
 Publish-Subscribe is a fully asynchronous, loosely coupled,
@@ -429,7 +429,45 @@ frame=single] {listings/dynamics.gexf}
 
 
 \section{Pub/Sub Protocols}
+We use two different pub/sub protocols for creating visualizations and
+evaluating performance. Both protocols provide a message dissemination
+scheme, where nodes are organized in a structured overlay. We briefly
+describe the relevant details regarding each protocol, as we later will
+provide visualizations of both the structure of these systems as well as
+their dissemination scheme.
+
 \subsection{PolderCast}
+
+PolderCast~\cite{Setty:2012} is a topic-based P2P pub/sub system which
+organizes nodes in a ring structure. The system architecture of
+PolderCast is highly modular, and includes three separate layers of
+overlays. The Cyclon peer sampling service~\cite{} is used in order to
+maintain connectivity across the whole set of subscribers, as well as
+providing the rings layer with uniform random links. The Vicinity module
+consist of the generic VICINITY protocol, which let nodes find neighbors
+based on a \emph{proximity function}. This enables the ring layer to
+determine its ring neighbors based on the unique id of nodes. All the
+protocol modules rely on gossiping for structural maintenance. At
+periodic intervals, node $p$ will pair up with a neighbor $q$
+and exchange information about its view of node neighbors.
+
+PolderCast include a hybrid publication scheme using both
+ring neighbors and random links in order to boost
+dissemination, as well as increase resistance to ring
+partitions and churn. The dissemination algorithm is based
+on a configurable fanout $f$, and can be summarized in the
+following steps for each node:
+
+\begin{enumerate}
+    \item If message has already been received, discard it.
+    \item If message was received from a ring neighbor, forward it
+        to the remaining ring neighbors, as well as $f-1$ random
+        neighbors.
+    \item if a message was received from a random neighbor,
+        forward it to all ring neighbors as well as $f-2$ random
+        neighbors
+\end{enumerate}
+
 \subsection{Scribe}
 
 \section{The PeerNet Simulator}
@@ -448,12 +486,13 @@ regard to scalability in terms of number of nodes included in the
 simulation, as the memory and computational resources required to run
 the simulation can be distributed across several machines. This is an
 important factor as PeerNet is implemented in Java, which is a fairly
-memory intense language when dealing with large-scale systems. While
-PeerNet is able to extend PeerSim with a distributed mode, it also
+memory intense language when dealing with large-scale systems.
+
+While PeerNet is able to extend PeerSim with a distributed mode, it also
 provides a simulation mode which behaves exactly like simulations in
 PeerSim, where experiments are run locally in one single process. In our
 evaluation, we take advantage of both simulation modes in PeerNet. We
-update existing PeerSim implementations of PolderCast and Scribe
-for use with PeerNet, as well as implement a \emph{reporter interface}
-for these protocols in order to make them compatible with our tool for
-visualizing and evaluating such systems.
+update existing PeerSim implementations of PolderCast and Scribe for use
+with PeerNet, as well as implement a \emph{reporter interface} for these
+protocols in order to make them compatible with our tool for visualizing
+and evaluating such systems.
