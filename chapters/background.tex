@@ -24,7 +24,7 @@ overlays are separated into two different types of networks: structured
 and unstructured. The former organizes nodes into structures such as
 trees or rings, while the latter aims to form an overlay which resembles
 a random graph. Structural overlays introduce overhead in terms of
-structural maintenance but is able to provide higher guarantees of
+structural maintenance but are able to provide higher guarantees of
 proper message delivery than random overlays.
 
 \section{The Publish-Subscribe Communication Paradigm}
@@ -427,9 +427,33 @@ frame=single] {listings/dynamics.gexf}
 \caption{Example of  dynamic GEXF file using spells}
 \end{figure}
 
-\section{The PeerNet Simulator}
 
 \section{Pub/Sub Protocols}
 \subsection{PolderCast}
 \subsection{Scribe}
 
+\section{The PeerNet Simulator}
+PeerNet is an extended version of the
+popular \emph{PeerSim simulator}~\cite{p2p09-peersim}. More
+specifically, PeerNet adds a distributed simulation mode, where each
+node, or a subset of nodes, can be executed in separate processes. This
+means that unlike PeerSim, where execution of the protocols are
+performed sequentially, each node in PeerNet is able to execute
+concurrently. Also, in contrast with PeerSim, the execution of the
+system happens in real-time. The higher degree of parallelism and
+the real-time execution are two important factors which enable PeerNet to
+provide a more realistic environment for running experiments. It is also
+worth to mention that running in distributed mode is beneficial with
+regard to scalability in terms of number of nodes included in the
+simulation, as the memory and computational resources required to run
+the simulation can be distributed across several machines. This is an
+important factor as PeerNet is implemented in Java, which is a fairly
+memory intense language when dealing with large-scale systems. While
+PeerNet is able to extend PeerSim with a distributed mode, it also
+provides a simulation mode which behaves exactly like simulations in
+PeerSim, where experiments are run locally in one single process. In our
+evaluation, we take advantage of both simulation modes in PeerNet. We
+update existing PeerSim implementations of PolderCast and Scribe
+for use with PeerNet, as well as implement a \emph{reporter interface}
+for these protocols in order to make them compatible with our tool for
+visualizing and evaluating such systems.
