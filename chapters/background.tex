@@ -437,19 +437,26 @@ provide visualizations of both the structure of these systems as well as
 their dissemination scheme.
 
 \subsection{PolderCast}
-
 PolderCast~\cite{Setty:2012} is a topic-based P2P pub/sub system which
 organizes nodes in a ring structure. The system architecture of
 PolderCast is highly modular, and includes three separate layers of
-overlays. The Cyclon peer sampling service~\cite{} is used in order to
-maintain connectivity across the whole set of subscribers, as well as
-providing the rings layer with uniform random links. The Vicinity module
-consist of the generic VICINITY protocol, which let nodes find neighbors
-based on a \emph{proximity function}. This enables the ring layer to
-determine its ring neighbors based on the unique id of nodes. All the
-protocol modules rely on gossiping for structural maintenance. At
-periodic intervals, node $p$ will pair up with a neighbor $q$
-and exchange information about its view of node neighbors.
+overlay-based protocols. The CYCLON peer sampling service~\cite{Voulgaris:2005} is used
+in order to maintain connectivity across the whole set of subscribers,
+as well as providing the rings layer with uniform random links. The
+Vicinity module consist of the generic VICINITY protocol, which let
+nodes find neighbors based on a \emph{proximity function}. This enables
+the ring layer to determine its ring neighbors based on the unique id of
+nodes. All the protocol modules rely on gossiping for structural
+maintenance. This means that at periodic intervals, a node $p$ will pair up with a
+neighbor $q$ and exchange information regarding neighbors and
+subscriptions.
+
+\begin{figure*}
+\includegraphics{img/hybrid_dissemination.pdf}
+\includegraphics{img/hybrid_dissemination.pdf}
+\caption{PolderCast utilizes a hybrid dissemination scheme when
+    publishing messages}
+\end{figure*}
 
 PolderCast include a hybrid publication scheme using both
 ring neighbors and random links in order to boost
@@ -459,16 +466,55 @@ on a configurable fanout $f$, and can be summarized in the
 following steps for each node:
 
 \begin{enumerate}
-    \item If message has already been received, discard it.
-    \item If message was received from a ring neighbor, forward it
-        to the remaining ring neighbors, as well as $f-1$ random
+    \item If the message has already been received, discard it.
+    \item If the message was received from a ring neighbor, forward it
+        to the other ring neighbor, as well as $f-1$ random
         neighbors.
-    \item if a message was received from a random neighbor,
-        forward it to all ring neighbors as well as $f-2$ random
+    \item if the message was received from a random neighbor,
+        forward it to both ring neighbors as well as $f-2$ random
         neighbors
 \end{enumerate}
 
 \subsection{Scribe}
+
+\begin{figure*}
+    \includegraphics[scale=0.19]{img/pastry_table.png}
+    \includegraphics[scale=0.19]{img/pastry_routing.png}
+    \caption{From
+        left to right, the structure of a routing table in Pastry and an
+        example of the Pastry routing scheme, where a message from node
+        \emph{65a1fc} with key \emph{d46a1c} is delivered to the rendezvous
+        node (figures borrowed from~\cite{Castro:2002})}
+\end{figure*}
+
+Scribe~\cite{Castro:2002} builds a dissemination overlay on top of
+Pastry~\cite{Rowstron:2001}, a distributed hash table (DHT) which provides other
+protocols with routing capabilities through an API\@. Scribe leverages
+these capabilities in order to provide group and membership management
+as well as message dissemination.
+
+In Scribe, a tree structure is constructed for each group (i.e.\ topic).
+When a node wants to publish a message, it sends the message to the root
+node of the dissemination tree for the particular topic. This node is
+referred to as a \emph{rendezvous node}, and is responsible for
+disseminating the publication to its children. The initial phase of the
+dissemination, where the message is routed to the rendezvous node, is
+handled by Pastry. Pastry uses a routing scheme based on unique node ids
+living in a circular namespace. Each node maintains a routing table of
+such ids, where each row $n$ contains a sequence that match the id of
+the current node in the $n$ first digits. When a node performs a lookup
+in the routing table, it will traverse the table like a tree. It will
+start by iterating through the entries in the first row until it finds a
+id sequence which matches the key on the very first digit, then it will
+lookup the row where the node ids all start with this digit, and iterate
+through the entries until it finds the sequence which is a match on both
+the first and the second digit. This will continue until an entry is
+found which shares a prefix with the lookup key which is longer than the
+current node id. If no such id is found, it will find an entry with
+a prefix with the same size as the current node id, but where the following
+digit is closer to the key. When the publication reaches the rendezvous
+node, this node will continue the dissemination by forwarding the
+publication to its children.
 
 \section{The PeerNet Simulator}
 PeerNet is an extended version of the
