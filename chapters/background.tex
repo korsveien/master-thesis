@@ -1,3 +1,9 @@
+In this chapter, we describe some of the key concepts as well as
+important tools and technologies we use in the work presented in this
+thesis. The following sections are meant to serve as an brief overview of
+the different topics relevant to this thesis, which should be helpful in order
+to fully appreciate and understand the following chapters.
+
 \section{The Peer-to-Peer Network Architecture}
 In a Peer-to-Peer (P2P) network every node acts as both client and
 server. Every node contributes with its resources, including both
@@ -18,7 +24,7 @@ system lies on top of the physical connections on the network. This
 means that a one-hop connection between two peers might in reality
 consist of several hops between separate machines at the physical layer.
 The higher level connections between peers forms what is called an
-\emph{overlay}, as they form a logical network at a higher abstraction
+\emph{overlay}, as they constitute a logical network at a higher abstraction
 level that facilitates routing, search and key-value storage. Typically,
 overlays are separated into two different types of networks: structured
 and unstructured. The former organizes nodes into structures such as
@@ -45,7 +51,7 @@ is outlined in Figure~\ref{fig:pubsubarch}.
 \end{figure}
 
 The event service functions as an intermediary between publishers and
-subscribers. It provides a level of indirection, as well as an service
+subscribers. It provides a level of indirection, as well as a service
 interface. Publishers are able to generate new events through the
 \texttt{publish} service call. It is now the responsibility of the event
 service to determine which subscribers are interested in receiving this
@@ -58,19 +64,22 @@ information is forwarded from subscribers to publishers or from
 publishers to subscribers.
 
 The pub/sub paradigm provides a higher degree of decoupling than other
-traditional approaches. In general there are three types of decoupling
-pub/sub system provides us with:
+traditional approaches, in general, there are three types of decoupling
+such a system provides:
 
-\begin{description}
-  \item[Space decoupling] The publishers and subscribers does not need to
-    know about each other.
-  \item[Time decoupling] Events are delivered regardless of whether or
-    not publishers and subscribers are online at the same time.
-  \item[Synchronization decoupling] Neither publishers nor subscribers
-    are blocked when attempting to perform their operations.
-\end{description}
+\begin{enumerate}
+    \item Space decoupling
+    \item Time decoupling
+    \item Synchronization decoupling
+\end{enumerate}
 
-While many other approaches can provide the first two forms of
+Space decoupling means there are no need for the publisher and
+subscribers to be know about each other. Subscriptions are handled by a
+third party. Time decoupling assures that events are delivered
+regardless of whether or not publishers and subscribers are online at
+the same time, while synchronization decoupling refers to the fact that
+neither publishers or subscribers are blocked when attempting to perform
+their operations. While many other approaches can provide the first two forms of
 decoupling, the main advantage of pub/sub is its fully asynchronous nature.
 Approaches such as tuple spaces or message queues cannot completely
 provide this synchronous decoupling, as messages are retrieved in a
@@ -84,24 +93,27 @@ role in the performance and flexibility of the system as event messages
 are routed and managed based on topic or content. There are three
 distinct types of subscription schemes:
 
-\begin{description}
-  \item[Topic-based] Events are split into topics, usually represented by
-      a string.
-  \item[Type-based] Filters events based on the structure of the data.
-      Provides type safety at compile time.
-  \item[Content-based] Events are filtered based on a global
-      list of universal event attributes.
-\end{description}
+\begin{enumerate}
+    \item Topic-based
+    \item Type-based
+    \item Content-based
+\end{enumerate}
 
-Content-based provides better expressiveness in terms of filtering out
-the relevant events. However, this comes at the cost of higher overhead
-with regards to handling subscriptions. The complex filtering algorithms
-limit the scalability of such systems with regards to the number of
-subscriptions. Type based is similar to content-based in the sense that
-the public members of the types together form a description of the
-content of the event. Although this ties the implementation of the
-pub/sub system closer to the programming language, it still suffers from
-the same drawbacks as content-based.
+In Topic-based systems, events are split into topics which are usually
+represented as a string. In Type-based systems, events are filtered
+according to the structure of the data, which provides type safety at
+compile time. The  Content-based approach filters events based on a
+global list of universal event attributes. This approach provides better
+expressiveness in terms of filtering out the relevant events, however,
+it also introduces more overhead with regards to handling
+subscriptions. The complex filtering algorithms in content-based
+approaches limit the scalability of
+such systems with regards to the number of subscriptions. Type-based
+share some similarities with content-based in the sense that the public members of the
+types together form a description of the content of the event. Although
+this ties the implementation of the pub/sub system closer to the
+programming language, it still suffers from the same drawbacks as
+content-based.
 
 Topic-based offer less expressiveness than the other two subscription
 schemes, but better performance if the set of possible event properties
@@ -109,13 +121,14 @@ is limited. Also, topic-based is more suited for dissemination and
 multicasting, as topics can be thought of as groups, where subscribing
 to topic T can be equivalent to joining the group for that topic. This
 is a common approach taken by several proposed pub/sub
-systems\cite{needs citation}.
+systems~\cite{Setty:2012, Castro:2002, Rahimian:2011, Wong:2008,
+    Girdzijauskas:2010}
 
 Traditionally, reliable multicasting of data through deterministic
 dissemination has been the common approach. However, more recent
 implementations investigate the potentials of probabilistic protocols,
 which are more suited to the nature of decentralized systems and P2P.
-These protocols do not guarantee full reliability, but provides a high
+These protocols do not guarantee full reliability of delivery, but provides a high
 quantifiable \emph{probability} that events are delivered to all
 subscribers.
 
@@ -153,8 +166,8 @@ interval. It also support playback of the graph evolution, as well as
 visualizing changes to graph data over time through size, color and text
 labels which can be applied to both nodes and edges.
 
-Gephi provides a rich GUI-experience where the user may interact with the
-graph representation, apply layout algorithms, filter the graph
+Gephi provides a rich GUI-experience where the user may interact with
+the graph representation, apply layout algorithms, filter the graph
 representation, execute metrics, apply color and size based on graph
 properties and animate the graph evolving over time through the timeline
 component. The Gephi software architecture is highly modular and
@@ -164,9 +177,7 @@ metrics, filters or database support may be implemented through such
 plugins by developers and published to the marketplace free of charge.
 
 Gephi provides many tools and components which are useful in the context
-of researching and analysing pub/sub overlays.
-
-\subsection{Useful functionality in Gephi}
+of researching and analysing pub/sub overlays:
 
 \begin{description}
 
@@ -177,9 +188,9 @@ of researching and analysing pub/sub overlays.
     where direction is indicated with an arrow. These two tools combined
     enables building a graph by hand.
 
-    Building such graphs can be useful in order to reason, analyse or
-    learn network algorithms, such as event dissemination algorithms. In
-    this case, the user can start with a single node which can act as
+    Building such graphs can be useful in order to reason, analyze or
+    learn network algorithms such as event dissemination algorithms.
+    For example, the user can start with a single node which can act as
     the event source, and build the topology as the event disseminates,
     carefully following the particular algorithm in question when doing
     so. The user can also add attributes to the nodes and edges either
@@ -190,30 +201,30 @@ of researching and analysing pub/sub overlays.
 \item[Node Query Tool] \hfill \\
 
     With the node query tool the user is able to click on a node on the
-    graph model, and a panel which will display a panel with information
+    graph model, and a panel will appear to the top right with information
     regarding the properties and attributes of this node. Properties include
     data describing the visual properties of the node such as size, position
-    and color. Attributes include the Id and Label and Time Interval
+    and color, while attributes include the id and label and time Interval
     attributes and any additional user defined attributes. In our case, such
-    user defined attributes would include Topics, Subscription Size and
-    Gossips Sent/Received.
+    user defined attributes would include topics, subscription size and
+    number of control messages sent and received.
 
     Both the properties and attributes of the node are editable through this
     panel view. The user can select a property to change the visual
     representation of the node, or the attributes to change their value. The
-    Time Interval attribute is interesting to edit in particular as it
+    time interval attribute is interesting to edit in particular as it
     represents the points in time in which a node exists in the graph model.
-    On example scenario is editing the Time Interval attribute for a certain
+    One example scenario is editing the time interval attribute for a certain
     nodes in order to see how it affects a particular metric as well as the
     overlay topology.
 
 \item[Shortest Path Tool] \hfill \\
 
-    With the Shortest Path Tool selected, the user may click on two nodes on
+    With the shortest path tool selected, the user may click on two nodes on
     the graph model, and if there is a shortest path between them, this path
-    will be highlighted with a color. It might be useful to reason about the
+    will be highlighted with a color. This is useful in order reason about the
     relationship between key nodes in the graph, or to compare shortest path
-    between several pairs of nodes. (more use cases?)
+    between several pairs of nodes.
 
 \item[Heat Map Tool] \hfill \\
 
@@ -248,8 +259,8 @@ of researching and analysing pub/sub overlays.
     labels which is able to change dynamically as part of the graph
     model animation. The timeline also enables jumping to a specific
     point in time and investigating the corresponding subgraph and its
-    properties by changing the upper and lower bound of the Time
-    Interval.
+    properties by changing the upper and lower bound of the time
+    interval.
 
 \item[Statistics Component] \hfill \\
 
@@ -266,7 +277,7 @@ of researching and analysing pub/sub overlays.
     window, while the latter calculates a time series of values. When
     executing a dynamic metric, the user must define the time window
     size, and tick. The have the same functionality as step parameter
-    when using the \emph{Timeline Component}. When the metric executes,
+    when using the timeline component. When the metric executes,
     the time window will iterate through the entire time range of the
     simulation, calculating a static metric at each step. When finished,
     a time series is plotted and displayed for the user.
@@ -285,14 +296,11 @@ of researching and analysing pub/sub overlays.
         \item{Number of Shortest Paths}
     \end{itemize}
 
-    Of these, only degree and the clustering coefficient metrics have dynamic
+    Out of these, only degree and the clustering coefficient metrics have dynamic
     versions, where both calculates the average value over time. The
     average for dynamic metrics are calculated by dividing the sum of
     all node attribute values with the total number of nodes in both
     cases.
-
-    %TODO: describe exactly what sort of averages/data are calculated by
-    each metric
 
 \item[Ranking Component] \hfill \\
 
@@ -300,26 +308,26 @@ of researching and analysing pub/sub overlays.
     visualization based on node or edge attributes in form of color
     and size. When coloring nodes or edges, the ranking component
     will apply a gradient over the range of attribute values. The
-    ranking component also include a Result list, where the user may
+    ranking component also include a result list, where the user may
     sort nodes based on the specified attribute value, which is
     useful for quickly finding the nodes with maximum value and
-    minimum value, which might help in identifying bottlenecks in
+    minimum value. This is helpful for identifying bottlenecks in
     the system or potential load balancing issues.
 
-    The Ranking component also includes an Auto Apply feature, which
-    supports vizualising attributes dynamically while playing back the
-    graph via the Timeline Component.
+    The ranking component also includes an auto apply feature, which
+    supports visualising attributes dynamically while playing back the
+    graph via the timeline component.
 
 \item[Layout Component] \hfill \\
 
-    The Layout component enables the user to execute algorithms that
+    The layout component enables the user to execute algorithms that
     calculates the position of the nodes. The user is able to adjust the
     parameters of these algorithms in order to manipulate the visual
     layout. The different algorithms emphasize different aspects of the
-    topology. One example is the Force Atlas layout algortihm which
-    simulates the effect of gravity on the nodes where linked nodes
-    attract each other, and non-linked nodes are pushed apart. This
-    particular algorithm is useful for visually detect clusters and
+    topology. One example is the Force Atlas layout algorithm which
+    simulates the effect of gravity on the nodes, where linked nodes
+    attract each other and non-linked nodes are pushed apart. This
+    particular algorithm is useful for visually detecting clusters and
     communities. Another useful algorithm is the Circular Layout
     algorithm, where nodes are positioned in a circle ordered on a
     specific attributes selectable by the user. This is useful in order
@@ -327,11 +335,11 @@ of researching and analysing pub/sub overlays.
 
 \item[Filter Component] \hfill \\
 
-    Filter may be applied to the graph in order to strip away nodes or
+    Filters may be applied to the graph in order to strip away nodes or
     edges on the basis of their attributes which also includes any
-    calculated metrics. Filters may strip away based on a value range if
+    calculated metrics. Filters may strip away nodes based on a value range if
     the attribute type is a number, or a regex match if the attribute is
-    a string. Filters can be combined through special operator filters
+    a string. Filters can also be combined through special operator filters
     representing set operations such as union and intersect.
 
     Filters are an essential mechanism in order to analyze subgraphs.
@@ -345,33 +353,34 @@ of researching and analysing pub/sub overlays.
     The Data laboratory component enables the user to work with the node
     and edge attributes of the graph. This component provides the user
     with separate table views of node and edge attributes. Each row in
-    these table represent a node or edge, and columns may be added or
-    removed by the user. The Data Laboratory also provides functionality
-    for manipulating columns such as merging two columns or creating new
-    columns based on data from the existing columns. Attribute data
-    in columns that are static (i.e.\ has no lower or upper time
-    interval bound associated with them) can be converted to dynamic
-    through this component. Also, resizing or coloring all edges or
-    nodes is possible through the laboratory by selecting all rows
-    and right-clicking.
+    these table represent a node or edge, and each column an attribute
+    for that particular node or edge. Columns may be added or removed by
+    the user. The data laboratory also provides functionality for
+    manipulating columns such as merging two columns or creating new
+    columns based on data from selected columns. Attribute data in
+    columns that are static (i.e.\ has no lower or upper time interval
+    bound associated with them) can be converted to dynamic through this
+    component. Also, resizing or coloring all edges or nodes is possible
+    through the laboratory by selecting all rows and right-clicking. In
+    addition to this, the data laboratory also enables the user to export the
+    data to file for further statistical analysis.
 
-    The laboratory also enables the user to export the data to file
-    for further statistical analysis.
 \end{description}
 
 We consider tools such as Gephi to be a valuable addition to the field
-of P2P protocol research. Visual Exploration of a dynamic network graph
-is a useful approach to evaluating these protocols, as some properties
-of the system are more easily spotted visually. For example, during our
+of distributed systems research. Visual exploration of a dynamic network graph
+is a useful approach to evaluation and development of such systems, as
+some bugs are more easily spotted visually. For example, during our
 implementation work, it was trivial to visually confirm that some edges
-were missing from the graph, leading to the discovery of a critical bug
+were missing from the graph visualization, leading to the discovery of a critical bug
 in the implementation code which would otherwise be difficult to spot.
 It is also worth to note that the different actors involved in the Gephi
 project has formed a legal entity in the form of The Gephi
 Consortium~\cite{gephi-consortium} in order to assure future development
-of this tool. This provides us with a certain degree of assurance that
+of this tool. This, along with the fact that there seems to be a growing
+community around this tool, provides us with a certain degree of assurance that
 this project is something well worth investing in, as the risk of it
-being discontinued seems unlikely at this point in time.
+being discontinued or abandoned seems unlikely at this point in time.
 
 \section{The Gephi Toolkit}
 
@@ -380,18 +389,21 @@ through the Gephi Toolkit project. The toolkit packages essential
 modules from the GUI-client into a standard Java library which can
 be used by any stand-alone Java project by including it as a dependency.
 We take advantage of this toolkit in our implementation work, where it
-is mainly used to handle and store reports collected from PeerNet
+is mainly used to handle and store information collected from PeerNet
 simulations.
 
 \section{The GEXF File format}
-
+\begin{figure}[h]
+\lstinputlisting[language=XML, label=lst:gexf-basic, frame=single]{listings/basic.gexf}
+\caption{A GEXF description of a minimal static graph}
+\end{figure}
 The GEXF (Graph Exchange XML Format) file format~\cite{gexf} is an
 effort by the Gephi Consortium to define a standard language describing
-complex network structures. Being developed by the same group of people,
+complex network structures. Being developed by the same authors,
 the Gephi Tool is naturally fully compatible with this format, and is
 able to both import and export GEXF files. This is also the case with
 the Gephi Toolkit, as the module for handling such imports and exports
-are included in this toolkit as well.
+are included in this toolkit.
 
 The GEXF file format is able to describe a graph through its nodes and
 edges, as well as any data and dynamics associated with the graph. More
@@ -400,18 +412,13 @@ associated attributes. Listing~\ref{lst:gexf-basic} provides an example
 of a minimal static GEXF file, describing nodes, edges and attributes of
 a graph.
 
-\begin{figure}
-\lstinputlisting[language=XML, label=lst:gexf-basic, frame=single]{listings/basic.gexf}
-\caption{A GEXF description of a minimal static graph}
-\end{figure}
-
 \subsection{Dynamics}
 
 One of the major advantages of this file format is its support for
 dynamic functionalities.  Both nodes, edges and attributes may have a
 defined time interval where they exist. These lifetime intervals are
-described as ``spells'' if applied to nodes and edges, and as ``start''
-and ``end'' XML-attributes if applied to node or edge attributes. The
+described as \emph{spells} if applied to nodes and edges, and as start
+and end XML-attributes if applied to node or edge attributes. The
 GEXF file in Listing~\ref{lst:gexf-dynamics} shows an example of a
 dynamic graph where spells are used in order to determine the lifetime
 of the nodes. The start and end times are by default encoded as
@@ -421,20 +428,20 @@ The support for dynamic graphs makes this file format an interesting
 option for storing simulation data, and in our implementation work we
 use this format extensively as part of our research effort.
 
-\begin{figure}
+\begin{figure}[h]
 \lstinputlisting[language=XML, caption={}, label=lst:gexf-dynamics,
 frame=single] {listings/dynamics.gexf}
 \caption{Example of  dynamic GEXF file using spells}
 \end{figure}
 
-
-\section{Pub/Sub Protocols}
-We use two different pub/sub protocols for creating visualizations and
-evaluating performance. Both protocols provide a message dissemination
-scheme, where nodes are organized in a structured overlay. We briefly
-describe the relevant details regarding each protocol, as we later will
-provide visualizations of both the structure of these systems as well as
-their dissemination scheme.
+\section{Pub/Sub Protocols} We create visualizations and evaluate the
+performance for two different pub/sub protocols, namely
+PolderCast~\cite{Setty:2012} and Scribe~\cite{Voulgaris:2005}. Both
+protocols provide a message dissemination scheme, where nodes are
+organized in a structured overlay. We briefly describe the relevant
+details regarding each protocol, as we later will provide visualizations
+of both the structure of these systems as well as their dissemination
+scheme.
 
 \subsection{PolderCast}
 PolderCast~\cite{Setty:2012} is a topic-based P2P pub/sub system which
@@ -451,12 +458,20 @@ maintenance. This means that at periodic intervals, a node $p$ will pair up with
 neighbor $q$ and exchange information regarding neighbors and
 subscriptions.
 
-\begin{figure*}
-\includegraphics{img/hybrid_dissemination.pdf}
+\begin{figure}[h]
+    \centering
 \includegraphics{img/hybrid_dissemination.pdf}
 \caption{PolderCast utilizes a hybrid dissemination scheme when
-    publishing messages}
-\end{figure*}
+    publishing messages, relying both on ring links as well as random
+    links}
+\end{figure}
+
+% \begin{figure}
+% \includegraphics[width=\textwidth]{img/poldercast_arch.png}
+% \caption{The system architecture of PolderCast is highly modular, each
+%     layer has separate responsibilities and gossiping happens at every
+%     layer}
+% \end{figure}
 
 PolderCast include a hybrid publication scheme using both
 ring neighbors and random links in order to boost
@@ -468,10 +483,10 @@ following steps for each node:
 \begin{enumerate}
     \item If the message has already been received, discard it.
     \item If the message was received from a ring neighbor, forward it
-        to the other ring neighbor, as well as $f-1$ random
+        to the other ring neighbor, as well as to $f-1$ random
         neighbors.
     \item if the message was received from a random neighbor,
-        forward it to both ring neighbors as well as $f-2$ random
+        forward it to both ring neighbors as well as to $f-2$ random
         neighbors
 \end{enumerate}
 
@@ -494,27 +509,30 @@ these capabilities in order to provide group and membership management
 as well as message dissemination.
 
 In Scribe, a tree structure is constructed for each group (i.e.\ topic).
-When a node wants to publish a message, it sends the message to the root
-node of the dissemination tree for the particular topic. This node is
-referred to as a \emph{rendezvous node}, and is responsible for
-disseminating the publication to its children. The initial phase of the
-dissemination, where the message is routed to the rendezvous node, is
-handled by Pastry. Pastry uses a routing scheme based on unique node ids
-living in a circular namespace. Each node maintains a routing table of
-such ids, where each row $n$ contains a sequence that match the id of
-the current node in the $n$ first digits. When a node performs a lookup
-in the routing table, it will traverse the table like a tree. It will
-start by iterating through the entries in the first row until it finds a
-id sequence which matches the key on the very first digit, then it will
+These structures are maintained by having nodes send heartbeat
+messages to its parent periodically. If a node suspects its parent is
+dead, it will use Pastry to find a new parent.  When a node wants to
+publish a message, it sends the publication to the root node of the
+dissemination tree for that particular topic. This node is referred to as
+a \emph{rendezvous node}, and is responsible for disseminating the
+publication to its children. The initial phase of the dissemination,
+where the message is routed to the rendezvous node, is handled by
+Pastry. Pastry uses a routing scheme based on unique node ids living in
+a circular namespace. Each node maintains a routing table of such ids,
+where each row $n$ contains a sequence that match the id of the current
+node in the $n$ first digits. When a node performs a lookup in the
+routing table, it will traverse the table like a tree. It will start by
+iterating through the entries in the first row until it finds a id
+sequence which matches the key on the very first digit, then it will
 lookup the row where the node ids all start with this digit, and iterate
 through the entries until it finds the sequence which is a match on both
 the first and the second digit. This will continue until an entry is
 found which shares a prefix with the lookup key which is longer than the
-current node id. If no such id is found, it will find an entry with
-a prefix with the same size as the current node id, but where the following
-digit is closer to the key. When the publication reaches the rendezvous
-node, this node will continue the dissemination by forwarding the
-publication to its children.
+current node id. If no such id is found, it will find an entry with a
+prefix with the same size as the current node id, but where the
+following digit is closer to the key. When the publication reaches the
+rendezvous node, this node will continue the dissemination by forwarding
+the publication to its children.
 
 \section{The PeerNet Simulator}
 PeerNet is an extended version of the
@@ -523,7 +541,7 @@ specifically, PeerNet adds a distributed simulation mode, where each
 node, or a subset of nodes, can be executed in separate processes. This
 means that unlike PeerSim, where execution of the protocols are
 performed sequentially, each node in PeerNet is able to execute
-concurrently. Also, in contrast with PeerSim, the execution of the
+in parallel. Also, in contrast with PeerSim, the execution of the
 system happens in real-time. The higher degree of parallelism and
 the real-time execution are two important factors which enable PeerNet to
 provide a more realistic environment for running experiments. It is also
