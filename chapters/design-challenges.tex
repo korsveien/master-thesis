@@ -1,67 +1,73 @@
-Designing decentralised topic-based pub/sub systems is a big research
+Designing decentralized topic-based pub/sub systems is a big research
 challenge due to a number of desired system properties which are in
-conflict with eachother~\cite{Setty:2012}. For example, making the
+conflict with eachother. For example, making the
 overlay robust is difficult without introducing too many redundant edges
 in the network graph.  Many approaches to topic-based pub/sub have been
 proposed the last
 decade~\cites{Baehni:2004}{Castro:2002}{Chockler:2007}{Rahimian:2011}{Girdzijauskas:2010}{Matos:2010}{Wong:2008}{Zhuang:2001}.
 And each have made trade-offs in an attempt to balance the system
-properties against each other. In
-Chapter~\ref{ch:protocol-descriptions}, we gave an quick overview of how
-a number of differetn topic-based pub/sub systems work.  In this
-chapter, we will go more in detail, discussing the design challenges in
-topic-based pub/sub by illustrating the characteristics of these
-systems, as well as their shortcomings.
-
+properties against each other. In this chapter, we extend the
+mini-survey found in~\cite{Setty:2012}, were we include a number of
+additional protocols. Also, we will go more into detail regarding the
+design challenges found in topic-based pub/sub system by illustrating
+the charachteristics of these systems, as well as their shortcomings.
 
 \section{Desired System Properties}
 
 In order to provide correct and efficient delivery of notifications in a
-decentralised OSN using topic-based pub/sub, a high number of system
+decentralized OSN using topic-based pub/sub, a high number of system
 properties are deemed desirable~\cite{Setty:2012}. More specifically,
 these challenges include:
 
-\subsection{Correct delivery}
-All notifications should be delivered to the
-correct recipient. Both false positives and false negatives should be
-avoided.
+\begin{description}
 
-\subsection{High hit-ratio}
-Notifications are delivered to a very high
-percentage of subscribers in the presence of churn and all subscribers
-when no churn is present. This is similar to correct delivery except for
-not taking false positives into account.
+    \item[Correct delivery]\hfill\\
+        All notifications should be delivered to the
+        correct recipient. Both false positives and false negatives should be
+        avoided.
 
-\subsection{Fast recovery}
-The overlay should quickly recover from a
-period of churn.
+    \item[High hit-ratio during churn]\hfill\\
+        Notifications are delivered to a very high
+        percentage of subscribers in the presence of churn. In the
+        absence of churn, notifications should be delivered to all
+        subscribers. This is similar to correct delivery except for
+        not taking false positives into account.
 
-\subsection{Low average node degree}
-The overlay nodes should have a low
-node degree as possible to achieve scalability with regards to number of
-topics.
+    \item[Fast recovery]\hfill\\
+        The overlay should quickly recover from a
+        period of churn. Nodes should be able to both leave and join the
+        network gracefully, and nodes who are dead should be properly
+        handled by the system.
 
-\subsection{Topic connectivity}
-The routing of an event only includes the
-subscribers who registered their interest for the topic (i.e.\
-relay-free routing).
+    \item[Low average node degree]\hfill\\
+        The overlay nodes should have a low
+        node degree as possible to achieve scalability with regards to number of
+        topics. The degree distribution should be as even as possible,
+        in order to achieve load balancing.
 
-\subsection{Scalability}
-The system should scale in terms of number of
-topics, number of nodes, number of topics a node is interested in and
-number of nodes interested in a topic.
+    \item[Topic connectivity]\hfill\\
+        The routing of an event only includes the
+        subscribers who registered their interest for the topic. This is
+        also known as \emph{relay-free routing}.
 
-\subsection{Efficient dissemination}
-Event dissemination should have a low
-delay with little duplicate delivery, and the load of routing messages
-should be distributed fairly.
+    \item[Scalability]\hfill\\
+        The system should scale in terms of number of
+        topics, number of nodes, number of topics a node is interested in and
+        number of nodes interested in a topic.
 
-\subsection{Low overlay maintenance cost}
-Managing the overlay topology
-should be as inexpensive as possible. Maintenance might include mending
-dissemination structures such as multicast trees when nodes fail, but
-also how to include joining nodes in the structure and allowing nodes to
-leave gracefully.
+    \item[Efficient dissemination]\hfill\\
+        Event dissemination should have a low
+        delay with little duplicate delivery, and the load of routing messages
+        should be distributed fairly.
+
+    \item[Low overlay maintenance cost]\hfill\\
+        Managing the overlay topology
+        should be as inexpensive as possible. Maintenance might include mending
+        dissemination structures such as multicast trees when nodes fail, but
+        also how to include joining nodes in the structure and allowing nodes to
+        leave gracefully.
+
+\end{description}
 
 Designing a system with all of these properties
 presents a challenge, as several of the desired characteristics are
@@ -70,7 +76,7 @@ makes it difficult to maintain \emph{topic connectivity}, while
 avoiding duplicate message delivery conflicts with being robust in the
 presence of churn. There is also a trade-off in robustness and
 reliability depending on the approach taken to disseminating messages.
-Specialised overlays that build dissemination structures such as
+Specialized overlays that build dissemination structures such as
 multicast trees provide fast and reliable message delivery with no
 duplication of messages. However, they are fragile and susceptible to
 churn. Epidemic dissemination on the other hand is more robust, but does
@@ -87,14 +93,14 @@ decentralised overlays, as they provide a highly navigable network due
 to the small average shortest path length. A popular approach is to
 create one or more long jump links between nodes to provide better
 routing capabilities. More specifically, these links are usually created
-by utilising a distance function in the name space, where the
+by utilizing a distance function in the name space, where the
 probability of creating a link increases with the distance between them.
 The subscription interest of such nodes are usually not taken into
 consideration when creating such links. Consequently, the message
 overhead in the system is increased as more relays are introduced in the
 overlay.
 
-Many existing systems suffer from shortcomings that originate wanting
+Many existing systems suffer from shortcomings that originate from wanting
 to include a high number of desired properties described above. This
 motivates further research into these systems and how they compare in
 terms of promoting these desirable properties.
@@ -117,17 +123,17 @@ single point of failure as well as a bottleneck in the system. This is
 especially true for popular topics where all events must travel through
 the root node. In Scribe, the root node is used as a \emph{rendezvous}
 point for topics by using the routing capabilities of the underlying
-Pastry~\cite{Rowstron:2001} DHT\. Such dedicated nodes represent a
+Pastry DHT~\cite{Rowstron:2001}. Such dedicated nodes represent a
 single point of failure in addition to being detrimental to load
 balancing and scalability.
 
-Minimising the average node degree while simultaneously achieving a
-\emph{topic-connected} overlay is another difficult trade-off to
-consider. \emph{Topic-connectivity} is achieved when no other than the
+Minimizing the average node degree while simultaneously achieving a
+\emph{topic-connected overlay} (TCO) is another difficult trade-off to
+consider. Topic-connectivity is achieved when no other than the
 nodes who registered their interest in a topic takes part in routing
 events for that topic. The desired goal with regards to
 topic-connectivity is not only to avoid routing events through
-uninterested nodes, but also to minimise the node degree by reusing
+uninterested nodes, but also to minimize the node degree by reusing
 links for several topics. This approach achieves better scalability with
 regards to the number of topics in the system.  Also, it decreases the
 message overhead incurred by both event dissemination and overlay
@@ -136,27 +142,25 @@ keeping an overlay topic-connected simplifies the message routing
 mechanism as no designated relay or gateway node needs to be implemented
 in the protocol such as in Scribe and Vitis.
 
-ElastO~\cite{Chen:2013} propose an interesting approach to overlay construction,
-that aims at constructing a topic-connected overlay (hereby referred to
-as a TCO) while maintaining a
-low node degree. The construction of the overlay is performed by a centralised
-component which requires global knowledge, and by using any existing static or
-decentralised algorithm. However, the maintenance of the overlay is
-performed in a distributed manner in response to churn events. By using
-a centralised algorithm for overlay construction, ElastO can provide a
-more optimal TCO than decentralised solutions, while still maintaining
-the high performance of a decentralised repair mechanism to handle node
-departure or arrival.
+ElastO~\cite{Chen:2013} propose an interesting approach to overlay
+construction, where the goal is to construct a TCO while maintaining a low
+node degree. The construction of the overlay is performed by a
+centralized component which requires global knowledge, while the
+maintenance of the overlay is performed in a distributed manner in
+response to churn events. By using a centralized algorithm for overlay
+construction, ElastO is able to provide a more optimal TCO than decentralized
+solutions, while still maintaining the high performance of a
+decentralized repair mechanism to handle node departure or arrival.
 
 With regards to the reuse of links for several topics, an observed
 correlation~\cite{Liu:2005} between subscription sets in practical
 workloads is useful to consider when constructing overlays. This
-observation is exploited in Poldercast in order to lower the number of
+observation is exploited in Poldercast in order to decrease the number of
 links to maintain. Also, it is used as a basis for overlay construction
 in both StaN~\cite{Matos:2010} and SpiderCast~\cite{Chockler:2007}.
 However, these two protocols only provide a probabilistic guarantee that
 the resulting overlay will be fully topic-connected. In contrast,
-PolderCast claim deterministic guarantees of providing a TCO\. However,
+PolderCast claim deterministic guarantees of providing a TCO. However,
 this relies on two factors: (1) that there is no churn in the system,
 and (2) that the underlying Cyclon~\cite{Voulgaris:2005} protocol, which
 is used for peer sampling in PolderCast, can guarantee a connected
@@ -170,10 +174,10 @@ through gossiping each level of this hierarchy in a bottom-up approach.
 As mentioned in section 2, several protocols attempts to create an overlay that
 exhibits \emph{small-world properties}. In Vitis, the subcluster
 together with the relay paths form an overlay similar to a small-world
-networks, which benefits the routing delay but includes
+networks, which decreases the routing delay, but includes
 uninterested gateway and relay nodes. In Magnet, small-world properties
 are provided by the underlying Oscar DHT~\cite{girdzijauskas2007oscar}
-which also cluster similar nodes together.
+which cluster similar nodes together.
 
 \subsection{Overlay construction}
 
@@ -184,64 +188,74 @@ mentioned, but there are also unstructured approaches. In Quasar
 walks removes the need for a structured overlay.  There are also hybrid
 approaches to structuring overlays such as in ElastO~\cite{Chen:2013}
 and Vitis~\cite{Rahimian:2011}. In ElastO, the bootstrapping of the
-graph is performed by a centralised entity, while in Vitis nodes with
+graph is performed by a centralized entity, while in Vitis nodes with
 similar interests are clustered together. A topic in Vitis might consist
-of several subclusters in Vitis, which are connected to each other
-through relay paths. This creates an overlay that is similar to
-dissemination trees, but where single nodes have been replaced with
-clusters of nodes. However, the drawbacks are still similar to the ones
-found in systems relying on multicast trees, as it relies on designated
-gateway nodes within subclusters communicating with rendezvous nodes
-along the relay path. In Poldercast~\cite{Setty:2012}, a structured ring
-per topic is used in combination with a form of epidemic dissemination
-that resembles gossiping. Publishers are themselves part of the ring of
-the topic they publish, and the structures are combined into a single
-overlay through random links. Such an hybrid approach is an attempt at
-balancing the reliability of a structured overlay with the robustness of
-epidemic dissemination. When it comes to node degree however, Poldercast
-might introduce hotspots in the system as the distribution of random
-links might be skewed.
+of several subclusters which are connected to each other through relay
+paths. This creates an overlay that is similar to dissemination trees,
+but where single nodes have been replaced with clusters of nodes.
+However, the drawbacks are still similar to the ones found in systems
+relying on multicast trees, as it relies on designated gateway nodes
+within subclusters communicating with rendezvous nodes along the relay
+path. In Poldercast~\cite{Setty:2012}, a structured ring per topic is
+used in combination with a form of epidemic dissemination that resembles
+gossiping. Publishers are themselves part of the ring of the topic they
+publish, and the structures attempt to combined into themselves into a
+single overlay through random links. Such an hybrid approach is an
+attempt at balancing the reliability of a structured overlay with the
+robustness of epidemic dissemination. When it comes to node degree
+however, Poldercast might introduce hotspots in the system as the
+distribution of random links might be skewed.
 
 In Magnet, the aforementioned subscription correlation is used to build
 dissemination trees such as the ones seen in Scribe and Bayeux. As
 mentioned these structures are not ideal in dynamic systems as they
 require maintenance. However, tree structures do have an advantage when
-it comes to the case of communication overhead, as they naturally avoid
-any duplicate messages. This is not the case for dissemination protocols
-who rely on epidemic dissemination such as in daMulticast and
-PolderCast.  However, the duplicate message delivery is also the reason
-why such epidemic dissemination techniques are so robust during churn.
-Furthermore, there is usually an adjustable fanout parameter in such
-systems which can be manipulated in order to control the number of
-messages that are forwarded by a node. Thus, there is some control over
-the amount of communication overhead in the system. Both PolderCast and
-daMulticast include such a fanout parameter. Also, it bears mentioning
-that structured overlays are not immune to communication overhead, as
-the structures usually requires both maintenance and mending in case of
-failure. Control messages such as heartbeats are commonplace in such
-protocols e.g.\ in Scribe where the each non-leaf node in the multicast
-sends heartbeats to its children periodically.  This increases bandwidth
-consumption and adds a higher communication overhead compared to
-unstructured overlays where such maintenance is not required.
+it comes communication overhead, as they in theory avoid any duplicate
+messages. In practice however, duplicate messages might occur if a node
+that is part of a tree is part of an underlying routing path to the root
+node. For example, in Scribe, notifications are routed to the root node
+of a topic tree using an underlying DHT. If a child node belonging to
+this tree is part of the routing path, it will receive the same message
+twice. Once while routing to the root, and once again from its parent
+after the publication message has reached the root node. However, the
+number of duplicates should still be lower than what is seen in systems
+relying on epidemic dissemination schemes, such as daMulticast and
+PolderCast. In such systems, the number of duplicate messages are indeed
+higher, however, the increased number of control messages also has the
+benefit of making these systems more resilient to churn. Furthermore,
+there is usually an adjustable \emph{fanout parameter} in such systems
+which can be manipulated in order to control the number of messages that
+are forwarded by a node. Thus, there is some control over the amount of
+communication overhead in these systems. Both PolderCast and daMulticast
+include such a fanout parameter. Also, it bears mentioning that
+structured overlays include communication overhead in the form of
+structure maintenance and structure mending in the case of both node
+failure as well as nodes leaving and joining the network. Control
+messages such as heartbeats are commonplace in such protocols e.g.\ in
+Scribe where the each non-leaf node in the multicast tree periodically
+sends heartbeats to its children. This increases bandwidth consumption
+and adds a higher communication overhead compared to unstructured
+overlays where such maintenance usually is not required.
 
 Node degree is another important issue to consider when designing
 overlays. A low average node degree increases scalability as topics and
 number of nodes in the system increases. In protocols who rely on an
-underlying DHT, node degree is usually either constant or a logarithmic function of the
-total number of nodes in the graph. Such is the case in Bayeux which
-relies on Tapestry~\cite{tapestry}, or Scribe which relies on
-Pastry~\cite{Rowstron:2001}. Other implementations might have a constant
-node degree, which is the case in Vitis which might result in the
-separation of a topic into subclusters. Some extreme examples include
-TERA~\cite{Baldoni:2007} and daMulticast who have a node degree that
-grows in the order of the number of topics the node has subscribed to.
-In the worst
-case scenario, this is also the case in PolderCast, as maintaining a low node
-degree depends on the degree of correlation in the subscription sets.
-Indeed, when using workloads from Facebook, the node degree in
-PolderCast grows almost linearly with subscription size, as shown in
-\cite{Setty:2012}. This suggests a scalability issue in a scenario where the
-subscription correlation is weak.
+underlying DHT, node degree is usually either constant or a logarithmic
+function of the total number of nodes in the graph. Such is the case in
+Bayeux which relies on the Tapestry DHT~\cite{tapestry}, or Scribe which
+relies on the Pastry DTH~\cite{Rowstron:2001}. Other implementations
+might have a constant node degree, which is the case in Vitis which
+might result in the separation of a topic into subclusters. Some extreme
+examples include TERA~\cite{Baldoni:2007} and
+daMulticast~\cite{voulgaris:2007} which
+has a node degree that grows in the order of the number of topics the
+node has subscribed to.  In the worst case scenario, this is also the
+case in PolderCast, as maintaining a low node degree depends on the
+degree of correlation in the subscription sets.  Indeed, when using
+workloads from Facebook, the node degree in PolderCast grows almost
+linearly with subscription size, as shown in \cite{Setty:2012}. This
+suggests a scalability issue in a scenario where the subscription
+correlation is weak.
 
 %{../tables/comp-overlay} <- vim gf
 \input{tables/comp-overlay}
@@ -249,8 +263,8 @@ subscription correlation is weak.
 Table~\ref{table:comp-overlay} provides an overview over several
 different state-of-the-art protocols, comparing their different system
 properties such as topic connectivity and whether or not it takes
-advantage of the observed subscription correlation.  Note that
-PolderCast has received benefit of the doubt in this table, and have
+advantage of subscription correlation.  Note that
+PolderCast has received the benefit of doubt in this table, and have
 been marked as providing a deterministic guarantee of
 topic-connectivity. Magnet has a different approach to the spanning tree
 structures, where messages are disseminated bottom-up. This means that
@@ -272,22 +286,24 @@ that is independent of both subscription size and number of topics
 the table, as it is dependent on the implementation of the bloom filters
 used to represent the neighbours. In ElastO, $\rho$ is a system parameter
 which balances between average and maximum node degrees when choosing
-new edges to recover from churn. Note that even though ElastO has a
-higher node degree than the centralised solutions, it provides a more
-optimal TCO.\
+new edges to recover from churn.
+
+% Note that even though ElastO has a
+% higher node degree than the centralized solutions, it provides a more
+% optimal TCO.\
 
 \section{Event dissemination}
 
 In terms of event dissemination, it should be mentioned that some of
 the systems described earlier do not concern themselves with this aspect, and
-focus instead of the construction and maintenance of the overlay
-itself. In specific, this includes SpiderCast, StaN and ElastO. Thus, any
+focus only on the construction and maintenance of the overlay
+itself. More specifically, this includes SpiderCast, StaN and ElastO. Thus, any
 discussion regarding dissemination technique or routing performance
 will be irrelevant for these systems. For other systems however, a
 comparison of techniques is in order.
 
 As mentioned, the dissemination in systems relying on multicast trees
-removes any message duplication and usually offers on average
+removes much of the message duplication and usually offers on average
 dissemination of events in logarithmic time as is the case in Scribe,
 Magnet and Bayeux. In Vitis, event dissemination is performed by
 flooding inside the subcluster, while simultaneously forwarding the
@@ -297,7 +313,7 @@ implies an exponential dissemination speed, however, there might be
 other implementation specific factors in play which inhibits this
 property of gossiping. As an example, in PolderCast, skewed random link
 distribution might be detrimental to the speed of the gossiping
-protocol. Quasar~\cite{Wong:2008} proposes quite a different approach
+protocol. The authors of Quasar~\cite{Wong:2008} propose quite a different approach
 to event dissemination, as routing is performed by having nodes install
 routing vectors in nearby overlay neighbours. Messages are disseminated
 through random walks, which are directed towards the subscribers when
@@ -306,31 +322,31 @@ approach is likely to be highly robust against churn. However, as
 observed in~\cite{Wong:2008} the hit ratio stagnates at 97\% in a
 static system. This is due to a phenomenon where some group members
 might be obscured by other members who absorb messages
-from all directions. It could be interesting to see how this phenomenon
-could affect the system during churn.
+from all directions. The authors suggest a solution by having node
+periodically pull information from other nodes, but this introduces more
+overhead in terms of network traffic and data processing.
 
 %{../tables/comp-dissemination} <- vim gf
 \input{tables/comp-dissemination}
 
 Table~\ref{table:comp-dissemination} describes the routing properties of
-different protocol being discussed. Note that protocols relying on a DHT
-usually have an expected delay which is logarithmic or squared
+the protocols discussed in this section. Note that protocols relying on
+a DHT usually have an expected delay which is logarithmic or squared
 logarithmic with the total number of nodes in the system. In Vitis, the
 underlying DHT provide squared logarithmic routing complexity with the
 total number of nodes divided by $k$, the number of long-range
 neighbours. To the best of our knowledge, there is no evaluation of the
 hit-ratio of Magnet or Bayeux, which is the reason of these being marked
-as unknown. The message delay of the system is a description of the
-expected path length of a event before it reaches a subscriber in number
-of hops. Systems relying on an underlying DHT usually provides routing
-performance which is logarithmic to the number of nodes in the system.
-Magnet differs in its approach to routing, as it relies on random walks
-with associated TTL values. However, as described in
-\cite{Girdzijauskas:2010} this value is usually set to the logarithm of the
-total number of nodes in the system. The average duplication factor
-describes the message overhead of the system, where gossiping is usually
-dependent on a fanout system parameter. The novel approach in Quasar
-means message overhead is dependent on the number of parallel random
-walks initiated by a node. As described earlier, protocols who create
-specialised dissemination structures, in these cases spanning trees,
-have no message duplication.
+as unknown. Message delay is defined as the expected path length of a
+dissemination message in terms of number of hops. Systems relying on an
+underlying DHT usually provides routing performance which is logarithmic
+to the number of nodes in the system.  Magnet differs in its approach to
+routing, as it relies on random walks with associated \emph{time-to-live} values.
+However, as described in \cite{Girdzijauskas:2010} this value is usually
+set to the logarithm of the total number of nodes in the system. The
+average duplication factor describes the message overhead of the system,
+where gossiping is usually dependent on a fanout system parameter. The
+novel approach in Quasar means message overhead is dependent on the
+number of parallel random walks initiated by a node. As described
+earlier, protocols which create specialized dissemination structures, in
+these cases spanning trees, have in theory no message duplication.
