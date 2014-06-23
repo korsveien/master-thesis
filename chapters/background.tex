@@ -568,12 +568,123 @@ with PeerNet, as well as implement a \emph{reporter interface} for these
 protocols in order to make them compatible with our tool for visualizing
 and evaluating such systems.
 
-\section{Description of evaluation metrics}
+\section{Description of important metrics}
 
-Preamble here.
+In the following section, we describe some of the metrics visualized and
+analyzed in the following chapters. In general, the most common metrics
+important for performance in pub/sub can be divided in three categories:
+(1) structural overlay properties, (2) dissemination properties and (3)
+communication overhead due to overlay maintenance.
+
+\subsection{Structural overlay properties}
+\begin{description}
+\item[Node Degree]\hfill\\
+
+The degree of a node is determined by the number of connection to its
+neighbors. Degree can both be undirected and directed. Directed degree
+separates between in-degree and out-degree, where the former is a
+measure of the number of connection to this nodes from neighbors, while
+the latter is the number of outgoing connections from the particular
+node. A skewed distribution of directed edges would reveal an imbalance
+in the constructed overlay, or reveal vulnerable points in the system.
+Also, it is essential to understand how the system scales with regard to
+the number of topics a node is interested in. For example, if the number
+of edges increases linearly with the subscription size of a node,
+scalability suffers. A poor degree distribution affects load balancing,
+high degree nodes have an increased likelihood of being overloaded, and
+might introduce bottlenecks in the system.
+
+\item[Topic diameter]\hfill\\
+
+This metric is a measure of the maximum number of hops between any two nodes that
+share interests, i.e.\ a measure of the diameter of a subgraph
+consisting only of nodes who registered their interest in the
+same topic. Having a low topic diameter is beneficial for
+disseminating events on a topic.
+
+\item[Clustering coefficient]\hfill\\
+
+This is the ratio of number of edges between neighbours of a node $n$
+over the total number of possible edges between them. In simpler terms,
+how many of a nodes neighbours are connected to each other. A high
+clustering coefficient would indicate that the network has a higher risk
+of partitioning, as well as a risk of having a higher number of
+redundant message deliveries.
+
+\item[Betweenness centrality]\hfill\\
+
+Betweenness is the number of times a particular node is found on the
+shortest path between two other nodes. A node with a big betweenness
+centrality may constitute both a vulnerable part of the graph as well as
+a bottleneck, as it might take part in a high number of event
+disseminations.
+
+\item[Closeness centrality]\hfill\\
+
+Closeness is a measure of how close the particular node is from
+every other node in the network. More specifically, it is the
+average distance in terms of shortest path length to every other
+node in the graph. Closeness is typically regarded as a measure of
+how long it will take to disseminate data from a node $n$ to every
+other node in the network sequentially~\cite{newman2005measure}.
+
+\item[Eccentricity centrality]\hfill\\
+
+Eccentricity measures how far away a node $n$ is from the node most
+distant from it in terms of path length. The maximum eccentricity is is
+the Graph Diameter, i.e.\ the longest path between any two nodes in the
+graph.
+
+\end{description}
+
+\subsection{Dissemination properties}
 
 \begin{description}
-    \item[Betweenness centrality]\hfill\\
-    \item[Closeness centrality]\hfill\\
-    \item[Eccentricity centrality]\hfill\\
+
+\item[Hit-ratio during churn]\hfill\\
+
+Hit-ratio is the fraction of subscribers that received a publication message, over
+the total number of subscribers for that topic. It is essential to
+understand how the different systems respond to churn when disseminating
+events i.e.\ how the system deals with nodes both leaving and joining
+the network. If an overlay is robust, it should provide a high hit-ratio in
+the presence of realistic churn. Meaning that at very high percentage
+of subscribers receive the appropriate events.
+
+\item[Path Lengths]\hfill\\
+
+Dissemination path lengths is the number of nodes a publication message
+traverses before reaching its target subscriber i.e.\ the \emph{number
+of hops} the publication messages makes from node to node. This
+metric is helpful in order to understand the efficiency of the
+dissemination algorithm.
+
+\item[Number of duplicate messages]\hfill\\
+
+Subscribers might receive the same publication message several times,
+depending on the method of dissemination being used. Epidemic
+dissemination schemes usually infer a higher number of duplicate
+messages. Redundant messaging incurs a overhead cost in terms of
+bandwidth as well as processing power at the receiving node.
+
+\end{description}
+
+\subsection{Maintenance overhead}
+
+\begin{description}
+\item[Number of control messages]\hfill\\
+
+Some systems rely on control messages in order to maintain the overlay
+topology. For example in Scribe, where the multicast tree structures are
+maintained with periodic heartbeat messages. The number of control
+messages a node sends and receives serve as an indicator of this
+overhead.
+
+\item[Control message bandwidth consumption]\hfill\\
+
+Control messages also constitute overhead in terms of bandwidth usage.
+Measuring the control message overhead in terms of number of bits sent
+and received from each node reveals the bandwidth cost, revealing any
+potential bottlenecks or overloaded nodes.
+
 \end{description}
