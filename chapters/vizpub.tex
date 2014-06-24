@@ -1,13 +1,59 @@
-Preamble here.
+In this chapter we describe \demo~\cite{korsveien2014vizpub}, a tool we
+propose for visualizing the performance of overlay-based Pub/Sub
+Systems. We presented poster and held a live demonstration of our system
+at the ACM International Conference of Distributed Event Based Systems
+(DEBS), held in Mumbai in May 2014, where it was awarded the price for
+best poster/demo!
 
-\section{Visualized Performance Metrics}
+\section{System Overview}
 
-\section{Structural Overlay Properties}
+To the best of our knowledge, \demo~is the first tool of its kind. The
+tool is able to visualize the execution of any given distributed pub/sub
+system step by step with respect to a set of performance metrics. Each
+node in the system records records relevant data at selected
+\emph{reporter intervals}. Our tool is then able to pull this data to a
+single site, and compute various metrics at a system-wide scale. The
+collected data from each interval is then collated into a single
+gexf-file, which is interpreted by Gephi, which enable replay of system
+execution.
+
+Our tool supports two types of visualizations visualizations, the first is a
+visualization of the overlay structure, and how it evolves over time.
+The second type of animation is a hop-by-hop visualization of a single
+publication message dissemination, where directed edges represent the
+message dissemination path. We provide examples of both types of
+visualizations later in this chapter.
+
+There are several benefits to using a tool such as \demo. It enables
+researchers and developers to gain a deeper insight into the overlay
+structure as well as the publication process. It also has major benefits
+as an educational tool, as it provides students with an visual
+representation of both the structural evolution of the system, as well
+as step-by-step animations of publication message disseminations. This
+is useful in order to engage students, and facilitate deeper insight
+into different pub/sub systems and their dissemination schemes. Such an
+insight is also useful in order to identify potential weaknesses or
+deployment anomalies of a given pub/sub systems. When developing the
+tool, we encountered many scenarios where \demo~demonstrated its
+usefulness. For example, when experimenting with PolderCast, we could
+immediately verify that tree nodes were disconnected at the RINGS layer,
+as seen in Figure~\ref{fig:pold_disc}.  Using our tool, we were able to
+verify that this was caused by an artefact in the input workload where
+the three nodes had no overlapping interest with any other node in the
+system. We were then able to verify that the nodes were connected at the
+CYCLON layer. We are not aware of any other tool or framework that would
+allow such easy detection and validation of system behaviour.
+
+\begin{figure}[h]
+\includegraphics[width=\linewidth]{figures/disconnected-component-poldercast.pdf}
+\caption{Visualization of disconnected component in PolderCast}
+\label{fig:pold_disc}
+\end{figure}
 
 
 \section{System Architecture}
+\section{Main Benefits}
 \input{tables/interface}
-
 % ../tables/pubmessage.tex
 \input{tables/pubmessage}
 
@@ -16,9 +62,9 @@ Preamble here.
 \caption{Architecture diagram of \demo}
 \label{fig:arch}
 \end{figure}
-\section{Examples of visualizations for PolderCast and Scribe}
+
+\section{Examples of visualizations}
 \section{VizPub as a tool for evaluating pub/sub systems }
-\subsection{Benefits to our approach}
 
 \section{Using Test-Driven Development}
 
