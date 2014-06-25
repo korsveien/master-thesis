@@ -185,8 +185,8 @@ derived by the \texttt{reportControlBytesSent()} and
 \input{tables/pubmessage}
 
 The structure of the publication messages outlined in
-Table~\ref{table:structure} also allows for visualizing the
-paths of publication messages. As, mentioned, this is one of the two types of
+Table~\ref{table:structure} also allows for visualizing the paths of
+publication messages. As, mentioned, this is one of the two types of
 visualizations the Collector can output as a GEXF-file (where the other
 type is the overlay structure). In such a visualization the Collector
 will look at the topic id of the message, and only include the nodes
@@ -197,9 +197,16 @@ directed edges between the nodes which represent the path of the
 publication message. The edges are dynamic, i.e.\ they include a Time
 Interval attribute, enabling a step-by-step animation, where edges
 appear as the animation is played back in the Visualization Unit,
-tracing the path of the publication. This enables researchers, developers
-as well as students to analyze publication dissemination schemes hop-by-hop.
+tracing the path of the publication. This enables researchers,
+developers as well as students to analyze publication dissemination
+schemes hop-by-hop.
 
+In addition to being able to configure at a chosen reporter interval,
+users of this tool may choose to only report partial information. For
+example users may choose to only report structural information such as
+node ids, or only dissemination specific data such as publication
+messages sent and received. This flexibility is useful if only a few
+aspects of system performance need analysis.
 
 \subsection{Collector}
 
