@@ -58,6 +58,9 @@ selected points in time. We include such comparisons in this chapter,
 were we compare PolderCast and Scribe on a set of specific performance
 metrics.
 
+\section{Supported Metrics}
+\label{sec:metrics}
+
 \section{System Architecture}
 
 \begin{figure}[h]
@@ -90,9 +93,9 @@ The design of \demo~supports pub/sub systems that are deployed as
 real distributed systems, as well as systems that are deployed in
 simulation mode. This is due to the highly modular system architecture,
 with strict separation of concerns, where the operation of both the
-Collector and the Visualization Unit is separate from the reporting
-. \demo~is designed to be a generic tool, where the only system specific
-part of the architecture is the \emph{Reporter Interface} outlined in
+Collector and the Visualization Unit is separate from the reporting.
+\demo~is designed to be a generic tool, where the only system specific
+part of the architecture is the \emph{reporter interface} outlined in
 Table~\ref{table:interface}. Any researcher or developer
 who wants to use our framework only needs to provide an implementation
 of this interface, which enables the Collector to retrieve the relevant
@@ -100,30 +103,108 @@ data from each individual node at the specified time points. These time
 points are configurable, and all the information collected from the
 reporter will in effect be the change of the system state from the last
 time point with regards to the various performance metrics. We call
-these time points \emph{reporter intervals}. The length of the intervals
+these time points \emph{reporting intervals}. The length of the intervals
 is configurable, which provides the user with control over the
 granularity of data collection, and thus the granularity of the
 step-by-step replay of system execution performed in the Visualisation Unit. For example, if
 running simulation using PeerNet, the user may determine whether or not
-the Reporter Intervals should encompass several simulation cycles. Or,
+the reporting intervals should encompass several simulation cycles. Or,
 in a real distributed pub/sub deployment scenario, the user can
-determine the time delay between every reporter interval.
+determine the time delay between every reporting interval.
+
+
+\subsection{Reporter}
+
+The Reporter is responsible of providing the relevant data necessary in
+order to calculate the desired performance metrics. In order to do so,
+we specify a \emph{reporter interface} which is implemented at each
+individual node participating in the pub/sub overlay. This interface
+enables each nodes to log certain system parameters using its local
+knowledge at each reporting interval. This local information is then pulled
+by the Collector at the end of each reporting interval by invoking the
+reporter interface. The available method calls and what data each method
+returns is described in Table~\ref{table:interface}.
 
 % ../tables/interface.tex
 \input{tables/interface}
 
-\subsection{Reporter}
+It is easy to see how the metrics mentioned in Section~\ref{sec:metrics}
+can be derived from the methods listed in Table~\ref{table:interface}.
+The structural properties of the overlay such as \emph{degree},
+\emph{diameter} and \emph{clustering coefficient} can be derived by
+reconstructing the overlay topology. This reconstruction can be achieved
+through the two very first methods listed in
+Table~\ref{table:interface}, namely \texttt{reportId()} and \texttt{reportNeighborIds()}.
+For example, in our reporter interface
+implementation for the RINGS layer in PolderCast, each node returns its
+own id as well as the ids of both ring neighbors and random neighbors.
+After this information is pulled, the Collector is able to derive a
+graph structure where it first builds every node reported, and then draw
+directed edges between these nodes based on the reported neighbor id
+information. What topics each node subscribe to is also useful in order
+to derive and visualize metrics such as \emph{Topic Diameter} and \emph{Subscription
+    Size}. The Collector is able to pull information regarding topic
+subscriptions through the \texttt{reportTopics()} interface method call.
+Each node will return a set of topic ids, and the Collector is able to
+use this information to attribute topics to each node, as well as edges.
+In order to add topics to edges, the Collector simply iterates through
+the topic id list of each node, and looks for a neighbor who share a
+subscription to the same particular topic. A \emph{topic neighbor}. If a
+topic neighbor of a node is found, the topic id is added as an attribute
+to the edge connecting them. Applying topic attributes to nodes and
+edges, provides the Visualization Unit with the ability to strip away
+nodes and edges that does not belong to a particular topic, thereby
+enabling calculation of topic diameter.
 
-The Reporter is responsible of capturing the relevant data
+The dissemination properties of a given pub/sub system such as
+\emph{hit ratio}, \emph{path lengths}, and number of duplicate publication
+messages received can be derived by having each node provide a list of
+publication messages sent and received. In order to calculate these
+dissemination metrics, the publication needs to have a particular
+structure. This structure is described in Table~\ref{table:structure}.
+For example, in order to calculate hit-ratio for a specific topic, we
+need to divide the number of subscribers of that topic who actually
+received the message with the total number of topic subscribers. We
+already know the which nodes subscribe to a particular topic through the
+\texttt{reportTopics()} method call, and the list of publication
+messages received by a node received can be retrieved through the
+\texttt{reportPubMsgsReceived()} method call. Path lengths of a
+message being published on a particular topic from a particular node may
+be calculated in a similar fashion, as publication messages reported from
+different nodes with the same id can be ordered based on their timestamp
+values.
+
+The number of duplicate publication messages received and sent by each
+node is available through the \texttt{reportControlMsgsReceived()}  and
+\texttt{reportControlMsgsReceived()} respectively, while the communication
+overhead incurred by control messages in terms of bandwidth consumption can be
+derived by the \texttt{reportControlBytesSent()} and
+\texttt{reportControlBytesSent()} method calls.
 
 % ../tables/pubmessage.tex
 \input{tables/pubmessage}
+
+The structure of the publication messages outlined in
+Table~\ref{table:structure} also allows for visualizing the
+paths of publication messages. As, mentioned, this is one of the two types of
+visualizations the Collector can output as a GEXF-file (where the other
+type is the overlay structure). In such a visualization the Collector
+will look at the topic id of the message, and only include the nodes
+interested in the particular topic in the visualization. The Collector
+will then iterate through the messages sent and received by each node.
+By analyzing the message further, the Collector is able to create
+directed edges between the nodes which represent the path of the
+publication message. The edges are dynamic, i.e.\ they include a Time
+Interval attribute, enabling a step-by-step animation, where edges
+appear as the animation is played back in the Visualization Unit,
+tracing the path of the publication. This enables researchers, developers
+as well as students to analyze publication dissemination schemes hop-by-hop.
+
 
 \subsection{Collector}
 
 \subsection{Visualization Unit}
 
-\section{Supported Metrics}
 
 \section{Visualizations}
 We implement a reporter interface both for PolderCast as well as Scribe.
