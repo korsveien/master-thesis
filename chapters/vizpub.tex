@@ -58,8 +58,10 @@ selected points in time. We include such comparisons in this chapter,
 were we compare PolderCast and Scribe on a set of specific performance
 metrics.
 
-\section{Supported Metrics}
+\section{Supported Performance Metrics}
 \label{sec:metrics}
+
+
 
 \section{System Architecture}
 
@@ -471,6 +473,25 @@ provide examples of visualizations for both protocols, and compare them
 visually on various performance metrics.
 
 \subsection{Overlay Evolution During Churn}
+
+In Figure~\ref{fig:churn0},~\ref{fig:churn250} and~\ref{fig:churn500} we
+visualize the overlay topology of PolderCast during churn, using the
+real-world churn traces from the Skype super-peer network
+from~\cite{Guha:2006}.
+
+\begin{figure*}[H]
+    \centering
+    \includegraphics[scale=0.35]{figures/churn_0}
+    \caption{Overlay structure of PolderCast at interval 0}
+    \label{fig:churn0}
+    \includegraphics[scale=0.85]{figures/churn_250}
+    \caption{Overlay structure  of PolderCast at interval 250}
+    \label{fig:churn250}
+    \includegraphics[scale=0.85]{figures/churn_500}
+    \caption{Overlay structure of PolderCast at interval 500}
+    \label{fig:churn500}
+\end{figure*}
+
 \subsection{Publication Message Dissemination}
 \subsection{Visualizing Performance Metrics}
 \subsection{Comparing Pub/Sub Systems Visually}
@@ -502,9 +523,9 @@ recommend further research into the field in order to better
 determine its effects.
 
 Using TDD means writing tests before writing any code. There are
-different types of test. \emph{Unit Tests} targets small,
+different types of test. \emph{unit tests} targets small,
 independent pieces of code, typically methods within a single
-module or component, while \emph{Integration Tests} aim to test
+module or component, while \emph{integration tests} aim to test
 code across such modules and components in order to determine
 how well they integrate with each other. In our work, we only
 took advantage of Unit Tests where suitable using the
@@ -541,4 +562,4 @@ programmer productivity as well as programmer happiness. Also,
 we are confident that this practice decreased the amount of
 technical debt in our project, a problem we find to be commonplace in academia.
 
-\subsection{Sharing Code}
+\subsection{Sharing Code with the Community}
