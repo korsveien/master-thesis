@@ -462,13 +462,32 @@ of researching and analysing pub/sub overlays:
 \end{description}
 
 \section{Visualizations}
-We implement a reporter interface both for PolderCast as well as Scribe.
 
-\subsection{Overlay Structural}
+In this section, we present a number of visualization produced by \demo.
+The examples we provide in this section include both visualizations of
+overlay structure as well as hop-by-hop message dissemination.  We
+implement a reporter interface both for PolderCast as well as Scribe and
+provide examples of visualizations for both protocols, and compare them
+visually on various performance metrics.
 
-\section{VizPub as a tool for evaluating pub/sub systems }
+\subsection{Overlay Evolution During Churn}
+\subsection{Publication Message Dissemination}
+\subsection{Visualizing Performance Metrics}
+\subsection{Comparing Pub/Sub Systems Visually}
 
-\section{Using Test-Driven Development}
+\section{Evaluating Pub/Sub Systems}
+
+\section{Useful Implementation Work Experiences}
+During our implementation work, we encountered several scenarios were
+\demo proved its utility as a tool for both developing and debugging
+pub/sub protocols. In this section, we will describe some of these
+experiences, as well as experiences with other aspects of software
+development and distributed systems research such as using test-driven development and
+sharing code with the research community.
+
+\subsection{Debugging Pub/Sub Systems Visually}
+
+\subsection{Using Test-Driven Development}
 
 Software Development Methodology is an active area of research
 which is in part driven by the business needs of the private
@@ -521,3 +540,5 @@ the end, following TDD where its suitable is beneficial to both
 programmer productivity as well as programmer happiness. Also,
 we are confident that this practice decreased the amount of
 technical debt in our project, a problem we find to be commonplace in academia.
+
+\subsection{Sharing Code}
