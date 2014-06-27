@@ -210,6 +210,44 @@ aspects of system performance need analysis.
 
 \subsection{Collector}
 
+The Collector is the component responsible for pulling information from
+the nodes at every reporting interval. It is also responsible for
+aggregating and calculating certain custom metrics. By custom, we mean
+any metric that is not included in the Gephi statistics component. These
+metrics are usually related to dissemination and include hit-ratio,
+duplicate publication messages received and path lengths. Metrics
+related to overlay structure can be calculated in Gephi. These metrics
+include degree, clustering coefficient, diameter and centralities. Topic
+Diameter however, is a special case. In order to calculate topic
+diameter, the graph needs to be filtered down to a subgraph which only
+includes nodes and edges for a given topic and calculate the metrics for
+every such subgraph. To do this manually using
+the Gephi GUI-client would be an time consuming and error-prone task.
+Therefore, the Collector  leverages the Gephi Toolkit in order to
+automate this task. The collector supports what the Gephi community
+refers to as \emph{static} and \emph{dynamic} metrics. This is also
+referred to in literature and in~\cite{korsveien2014vizpub} as
+\emph{instantaneous} and \emph{aggregated} metrics. In this thesis, we
+will refer to them as static and dynamic, in order to be consistent
+with the terminology used by the Gephi community. In short, static
+metrics pertains to a specific point in time, while dynamic metrics is
+based on historical values. The statistics component in Gephi includes
+both type of metrics, but dynamic metrics only include degree and
+clustering coefficient, while the Collector is able to compute dynamic
+metrics for all properties such as centralities, hit-ratio and number of
+control messages sent and received.
+
+Aggregation of data is performed by serializing each individual report received
+from the reporters into temporary files which are stored on disk. The
+collector will then iterate through these files and output a final
+report using the GEXF file format. While collection is done in online
+mode, aggregation is performed in offline mode. The offline aggregation
+of data prevents the collector from acting as a bottleneck. Indeed, the
+collection and aggregation of data is highly decoupled from the
+execution of the pub/sub protocol itself. As an alternative,
+the Reporters are also able to log reports locally, and push them to
+the collector at the end of pub/sub execution.
+
 \subsection{Visualization Unit}
 
 
