@@ -469,15 +469,39 @@ In this section, we present a number of visualization produced by \demo.
 The examples we provide in this section include both visualizations of
 overlay structure as well as hop-by-hop message dissemination.  We
 implement a reporter interface both for PolderCast as well as Scribe and
-provide examples of visualizations for both protocols, and compare them
-visually on various performance metrics.
+provide examples of visualizations for both protocols and compare them
+visually on various performance metrics. Both protocols are implemented
+using the PeerNet P2P simulator by updating existing PeerSim implementations of
+these systems.
+
+\subsection{Data Traces Used in Simulations}
+
+We use subscription workloads from Facebook~\cite{facebook-eurosys09},
+consisting of 10,000 users and their relationships.  The users are
+modelled as topics, where subscriptions are based on friend relations.
+Every directional relation between two users forms a subscription. As
+relations in Facebook are bidirectional, two topics who are friends in
+the Facebook social graph will subscribe to each other.
+
+Churn is based on the Skype super-peer network data
+trace~\cite{Guha:2006}, where 4000 nodes are tracked for joining and
+leaving timestamps for one month staring on September 12, 2005. Finally,
+we use the King dataset~\cite{king} in order to model latency between
+nodes.
 
 \subsection{Overlay Evolution During Churn}
 
 In Figure~\ref{fig:churn0},~\ref{fig:churn250} and~\ref{fig:churn500} we
-visualize the overlay topology of PolderCast during churn, using the
-real-world churn traces from the Skype super-peer network
-from~\cite{Guha:2006}.
+visualize the overlay topology of 2000 PolderCast nodes during churn.
+Each figure corresponds to a reporter interval.  Figure~\ref{fig:churn0}
+depicts the overlay at interval 0, where 132 nodes are up while the
+remaining 1868 are down due to churn. The snapshot in
+Figure~\ref{churn250} depicts the overlay at interval 250, after a
+considerable number of nodes have joined the network. More specifically,
+interval 250 consists of 1028 nodes, which means 896 nodes joined in the
+interrim. The edges are also evolving. While the first interval
+consisted of 108 edges, interval 250 consists of 1028 edges. It is
+interesting to see the edges evolve over time.
 
 \begin{figure*}[H]
     \centering
