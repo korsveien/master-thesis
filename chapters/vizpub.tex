@@ -567,38 +567,58 @@ visualization includes 189 edges in total, which indicates how many
 publication messages was sent by all nodes during the simulation.
 
 Figure~\ref{fig:diss_1}, Figure~\ref{fig:diss_2} and
-Figure~\ref{fig:diss_3}
-are snapshots of the dissemination visualization after hop 1, 4 and 7
-respectively. The nodes have been arranged in a ring using the Layout
-component in Gephi. Also they are ordered by node id, making it easier
-to see whether an edge represent a ring link or a random link. The
-labels indicate the hop number of the message received by that node. To
-the left there is a node with the label ``0'',
-which means this is the publishing node. A node with the label ``1'',
-means this node received a message after the first hop, a node with a
-label ``2'' that it received a message at the second hop, and so on. In
+Figure~\ref{fig:diss_3} are snapshots of the dissemination visualization
+after hop 1, 4 and 7 respectively. The nodes have been arranged in a
+ring using the Layout component in Gephi. Also they are ordered by node
+id, making it easier to see whether an edge represent a ring link or a
+random link. The labels indicate the hop number of the message received
+by that node. To the left there is a node with the label ``0'', which
+means this is the publishing node. A node with the label ``1'', means
+this node received a message after the first hop, a node with a label
+``2'' that it received a message at the second hop, and so on. In
 addition to numeric labels, the nodes are color coded on a gradient. The
 deeper the color of the node is, the higher the hop count is, which
 means it is further away from the publisher. In figure~\ref{fig:diss_3}
-the node furthest away is easily spotted on the left by its deep
-red color. This is the last node to received the publication.
+the node furthest away is easily spotted on the left by its deep red
+color. This is the last node to received the publication.
 
 It might seem strange that the last node to receive the message is an
 immediate ring neighbor of a node who received the message on the first
-hop.
+hop. However, in Figure~\ref{fig:diss_1} this neighboring node does
+indeed send a message to the node in question. However, in
+~\ref{fig:diss_2}, no numeric label is applied to the node, indicating
+that it did not received the message. The explanation behind this is
+latency. The latency between these two nodes are such that the message
+was received from somewhere else first from a node with a higher hop
+count label. We visualize this by drawing an edge to the node and then refrain
+from applying a numeric label.
 
-When visualizing the dissemination in this manner, implementation
-details which could easily be overlooked become clear. For example,
-in Figure~\ref{fig:diss_1} it can be observed that the publisher node
-sends a message to 4 nodes. This is a implementation detail which aims
-to boost initial dissemination that is not mentioned in the original
-paper~\cite{Setty:2012}. Learning such implementation details is useful
-to both researchers and developers, and it is especially useful for
-students. \demo can be used as an educational tool, as its grant
-students with the capability of controlling the dissemination by using
-the Timeline component in Gephi. Students can pause the visualization at
-any time or jump to any hop in order to study and fully understand the
-benefits and drawbacks of the particular dissemination scheme.
+When observing the dissemination in this visual manner, implementation
+details which could easily be overlooked become clear. For example, in
+Figure~\ref{fig:diss_1} it can be observed that the publisher node sends
+a message to 4 nodes, even though the fanout is set to $f=2$.  This
+fanout should indicate that the node should send to 3 neighbors.
+However, there is a implementation detail which aims to boost initial
+dissemination that is not mentioned in the original
+paper~\cite{Setty:2012}, which sends a message to one additional random node.
+Learning such implementation details is useful to both researchers and
+developers, and it is especially useful for students. \demo can be used
+as an educational tool, as its grant students with the capability of
+controlling the dissemination by using the Timeline component in Gephi.
+Students can pause the visualization at any time or jump to any hop in
+order to study and fully understand the benefits and drawbacks of the
+particular dissemination scheme.
+
+It is also useful to create such visualizations in order to discover
+issues or bugs with the dissemination algorithm. As observed
+in Figure~\ref{fig:diss_1}, the publisher disseminates to four nodes,
+where two of these should be random neighbors. However, the publisher
+seemingly sends the message to three of its ring closest ring neighbors.
+This means a neighbor close to it might have been chosen as a random
+neighbor. This might indicate a bug in the distance function used to
+select random neighbors. In this case however, it is most likely due to
+the dissemination happening at an early stage in the experiment, when
+the overlay has not yet converged.
 
 One of the trade-offs we mention in Chapter~\ref{ch:design-challenges} is the one between duplicate
 messages received and the robustness of message delivery. In
@@ -613,7 +633,12 @@ bandwidth suffers.
 Deriving the exact number of duplicate messages received by each node is
 trivial. As each directed edge represent  a message being sent, all we
 need to do is calculate the in-degree of each node using the Statistics
-component. The result can be seen in Figure~\ref{dups}
+component in Gephi. The result can be seen in Figure~\ref{fig:dups}.
+This visualization indicate that PolderCast does indeed induce a high
+number of duplicate messages. However, it is only an indication and
+nothing more as this visualization traces a single publication message
+on a single topic. However, such indication can be useful in order to
+guide researchers towards potential issues or bugs.
 
 \begin{figure*}[h]
     \centering
