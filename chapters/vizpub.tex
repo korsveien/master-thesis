@@ -497,6 +497,7 @@ nodes.
 
 \subsection{Overlay Evolution During Churn}
 \label{sec:churn}
+
 \begin{figure*}[h]
     \centering
     \includegraphics[scale=0.35]{figures/churn_0}
@@ -537,18 +538,64 @@ such a high number of nodes is not appropriate for print due to space
 restrictions.
 
 \subsection{Visualizing Performance Metrics}
+
 \subsection{Publication Message Dissemination}
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.68]{figures/diss_1}
+    \caption{Visualization of the first message dissemination hop}
+    \label{fig:diss_1}
+    \includegraphics[scale=0.68]{figures/diss_2}
+    \caption{Visualization after 4 hops}
+    \label{fig:diss_2}
+    \includegraphics[scale=0.68]{figures/diss_3}
+    \caption{Visualization after the end of dissemination}
+    \label{fig:diss_3}
+\end{figure*}
+
+In subsection~\ref{sec:churn} we illustrate on of the two types of
+visualizations produced by \demo. Here we will describe the second:
+visualizing publication message dissemination.
+
+We run a PeerNet simulation in distributed mode with 100 nodes running
+the PolderCast protocol with a dissemination fanout set to 2. The experiment
+includes 100 machines which each is simulating 100 PeerNet nodes each in
+order to scale the experiment.  We publish a single message on the most
+popular topic which includes 63 subscribers. By analysing copies of the
+message received on each node, the Collector is able to create a
+step-by-step visualization where directed edges are drawn as the message
+is disseminated through the overlay.The visualization includes 168
+edges, which indicates how many publication messages was sent by all
+nodes during the simulation.
+
+Figure~\ref{fig:diss_1}, Figure~\ref{fig:diss_2} and
+Figure~\ref{fig:diss_3}
+are snapshots of the dissemination visualization after hop 1, 4 and 7
+respectively. The nodes have been arranged in a ring using the Layout
+component in Gephi. Also they are ordered by node id, making it easier
+to see whether an edge represent a ring link or a random link. The
+labels indicate the hop number of the message received by that node. To
+the top right of all the figures, there is a node with the label ``0'',
+which means this is the publishing node.
+
+Figure~\ref{fig:diss_1} depicts the very first hop. Already the
+usefulness of such visualizations is demonstrated, as it reveals an
+implementation detail of PolderCast that is not described in
+\cite{Setty:2012}.
+
 \subsection{Comparing Pub/Sub Systems Visually}
 
-\section{Evaluating Pub/Sub Systems}
+\section{\demo as a tool for evaluating Pub/Sub Systems}
 
 \section{Useful Implementation Work Experiences}
+
 During our implementation work, we encountered several scenarios were
 \demo proved its utility as a tool for both developing and debugging
 pub/sub protocols. In this section, we will describe some of these
 experiences, as well as experiences with other aspects of software
-development and distributed systems research such as using test-driven development and
-sharing code with the research community.
+development and distributed systems research such as using test-driven
+development and sharing code with the research community.
 
 \subsection{Debugging Pub/Sub Systems Visually}
 
