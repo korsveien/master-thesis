@@ -543,31 +543,28 @@ restrictions.
 
 \begin{figure*}[h]
     \centering
-    \includegraphics[scale=0.68]{figures/diss_1}
+    \includegraphics[scale=0.5]{figures/diss_1}
     \caption{Visualization of the first message dissemination hop}
     \label{fig:diss_1}
-    \includegraphics[scale=0.68]{figures/diss_2}
+    \includegraphics[scale=0.5]{figures/diss_2}
     \caption{Visualization after 4 hops}
     \label{fig:diss_2}
-    \includegraphics[scale=0.68]{figures/diss_3}
-    \caption{Visualization after the end of dissemination}
-    \label{fig:diss_3}
 \end{figure*}
 
-In subsection~\ref{sec:churn} we illustrate on of the two types of
-visualizations produced by \demo. Here we will describe the second:
+In subsection~\ref{sec:churn} we illustrate one of the two types of
+visualizations it is possible to produce by leveraging \demo. Here we will describe the second:
 visualizing publication message dissemination.
 
 We run a PeerNet simulation in distributed mode with 100 nodes running
-the PolderCast protocol with a dissemination fanout set to 2. The experiment
-includes 100 machines which each is simulating 100 PeerNet nodes each in
-order to scale the experiment.  We publish a single message on the most
-popular topic which includes 63 subscribers. By analysing copies of the
-message received on each node, the Collector is able to create a
-step-by-step visualization where directed edges are drawn as the message
-is disseminated through the overlay.The visualization includes 168
-edges, which indicates how many publication messages was sent by all
-nodes during the simulation.
+the PolderCast protocol with a dissemination fanout set to 2. The
+experiment includes 100 machines, where each machine is simulating 100
+PeerNet nodes in order to scale the experiment.  We publish a single
+message on the most popular topic which includes 63 subscribers. By
+analysing copies of the publication message received on each node, the
+Collector is able to create a step-by-step visualization where directed
+edges are drawn as the message is disseminated through the overlay. The
+visualization includes 189 edges in total, which indicates how many
+publication messages was sent by all nodes during the simulation.
 
 Figure~\ref{fig:diss_1}, Figure~\ref{fig:diss_2} and
 Figure~\ref{fig:diss_3}
@@ -576,13 +573,58 @@ respectively. The nodes have been arranged in a ring using the Layout
 component in Gephi. Also they are ordered by node id, making it easier
 to see whether an edge represent a ring link or a random link. The
 labels indicate the hop number of the message received by that node. To
-the top right of all the figures, there is a node with the label ``0'',
-which means this is the publishing node.
+the left there is a node with the label ``0'',
+which means this is the publishing node. A node with the label ``1'',
+means this node received a message after the first hop, a node with a
+label ``2'' that it received a message at the second hop, and so on. In
+addition to numeric labels, the nodes are color coded on a gradient. The
+deeper the color of the node is, the higher the hop count is, which
+means it is further away from the publisher. In figure~\ref{fig:diss_3}
+the node furthest away is easily spotted on the left by its deep
+red color. This is the last node to received the publication.
 
-Figure~\ref{fig:diss_1} depicts the very first hop. Already the
-usefulness of such visualizations is demonstrated, as it reveals an
-implementation detail of PolderCast that is not described in
-\cite{Setty:2012}.
+It might seem strange that the last node to receive the message is an
+immediate ring neighbor of a node who received the message on the first
+hop.
+
+When visualizing the dissemination in this manner, implementation
+details which could easily be overlooked become clear. For example,
+in Figure~\ref{fig:diss_1} it can be observed that the publisher node
+sends a message to 4 nodes. This is a implementation detail which aims
+to boost initial dissemination that is not mentioned in the original
+paper~\cite{Setty:2012}. Learning such implementation details is useful
+to both researchers and developers, and it is especially useful for
+students. \demo can be used as an educational tool, as its grant
+students with the capability of controlling the dissemination by using
+the Timeline component in Gephi. Students can pause the visualization at
+any time or jump to any hop in order to study and fully understand the
+benefits and drawbacks of the particular dissemination scheme.
+
+One of the trade-offs we mention in Chapter~\ref{ch:design-challenges} is the one between duplicate
+messages received and the robustness of message delivery. In
+Figure~\ref{fig:diss_3} we can quickly confirm visually that some of the
+nodes have a high degree. This suggest that the number of duplicate
+messages might be high. A certain number of duplicate messages in
+epidemic dissemination is to be expected, but a certain balance should
+be struck between duplicate messages and reliable delivery. If there are
+too many unnecessary messages being sent, scalability in terms of
+bandwidth suffers.
+
+Deriving the exact number of duplicate messages received by each node is
+trivial. As each directed edge represent  a message being sent, all we
+need to do is calculate the in-degree of each node using the Statistics
+component. The result can be seen in Figure~\ref{dups}
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.5]{figures/diss_3}
+    \caption{Visualization of PolderCast after the end of dissemination}
+    \label{fig:diss_3}
+    \includegraphics[scale=0.5]{figures/diss_dup_msg}
+    \label{fig:dups}
+    \caption{Visualization of duplicate publication messages received by
+    each node in PolderCast}
+\end{figure*}
 
 \subsection{Comparing Pub/Sub Systems Visually}
 
