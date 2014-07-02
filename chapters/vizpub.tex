@@ -541,6 +541,7 @@ restrictions.
 \subsection{Visualizing Performance Metrics}
 
 \subsection{Publication Message Dissemination}
+\label{sec:dissviz}
 
 \begin{figure*}[h]
     \centering
@@ -723,13 +724,55 @@ order to evaluate PolderCast and Scribe on a set of topology metrics.
 \section{Useful Implementation Work Experiences}
 
 During our implementation work, we encountered several scenarios were
-\demo proved its utility as a tool for both developing and debugging
+\demo proved its usefulness as a tool for both developing and debugging
 pub/sub protocols. In this section, we will describe some of these
 experiences, as well as experiences with other aspects of software
 development and distributed systems research such as using test-driven
 development and sharing code with the research community.
 
+\subsection{Disconnected Component in PolderCast}
+
 \subsection{Debugging Pub/Sub Systems Visually}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{figures/hitratiobug}
+    \caption{Visualization of publication message dissemination in
+        PolderCast, which revealed a bug in the implementation of hit-ratio
+        calculation}
+    \label{fig:hitratiobug}
+\end{figure}
+
+When implementing hit-ratio calculation in the Collector, producing a
+visualization of the publication message dissemination revealed a bug in the implementation code.
+In PolderCast, the hit-ratio in the absence of churn should be 100\%.
+However, the Collector would consistently calculate the hit-ratio to
+97\%. Usually, the first step in debugging such issues is to isolate the
+problem. In this case, there could be a software bug in the
+implementation of the pub/sub protocol itself, or the bug might be in
+the implementation of the hit-ratio calculation. Using \demo, we were
+able to quickly isolate the problem. By producing a visualization of the
+publication message dissemination, seen in Figure~\ref{fig:hitratiobug},
+we were able to visually confirm that all nodes that took part in the dissemination
+received the message. Furthermore, we could confirm this observation by
+using the Statistics component in Gephi, which enables calculation of
+the number of connected components in the graph.  The calculation
+revealed that the graph is a single strongly connected component, i.e.
+from any node in the graph there is a directed path to any other node.
+This means that every node received the publication.  However, the
+Collector still calculated the hit-ratio to 97\%. This indicates that
+the problem is not with the implementation of the protocol, but with the
+implementation of the hit-ratio calculation. And indeed, by inspecting
+the hit-ratio calculation in the Collector, we revealed a
+\emph{off-by-one} software bug, leading to incorrect hit-ratio result.
+
+Debugging is a major part of developing software, and arguably the most
+time consuming. And debugging distributed systems is especially hard.
+Any tool that aids in debugging is highly valuable to any developer. As
+a tool for debugging, \demo can aid in both discovering and resolving
+bugs, as it provides the developer with instant visual feedback of the
+protocol behaviour.
+
 
 \subsection{Using Test-Driven Development}
 
