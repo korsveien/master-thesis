@@ -1,9 +1,19 @@
 In this chapter we describe \demo~\cite{korsveien2014vizpub}, a tool we
 propose for visualizing the performance of overlay-based Pub/Sub
-Systems. We presented poster and held a live demonstration of our system
-at the ACM International Conference of Distributed Event Based Systems
-(DEBS), held in Mumbai in May 2014, where it was awarded the price for
-best poster/demo!
+Systems.  In addition to describing the tool and its system
+architecture, we present several visualizations created by the tool. We
+also discuss the benefits of using visualizations when studying and
+analyzing pub/sub systems, where we share several experiences using the
+tool.
+
+We presented a poster and held a live demonstration of \demo at the
+ACM International Conference of Distributed Event Based Systems (DEBS),
+held in Mumbai in May 2014, where it was awarded the price for best
+poster and demo. The implementation code of \demo is open source, and is
+available in a public repository~\footnote{\demo is open source and
+    hosted at \url{http://github.com/vizpub/vizpub}}. It is our hope that our tool will be
+of benefit to the community, and aid in further development and research
+of distributed systems.
 
 \section{System Overview}
 \label{sec:overview}
@@ -477,7 +487,7 @@ using the PeerNet P2P simulator by updating existing PeerSim
 implementations of Scribe and PolderCast.
 
 Many of these visualizations were part of our demonstration at
-DEBS 2014~\cite{}, and should provide some insight the benefits of using
+DEBS 2014, and should provide some insight the benefits of using
 our tool, and what sort of possibilities there are in terms of
 visualizing overlays.
 
@@ -569,7 +579,7 @@ path of the message being disseminated. The visualization includes 189
 edges in total, which indicates how many publication messages was sent
 by all nodes during the simulation.
 
-Figure~\ref{fig:diss_1},~\ref{fig:diss_2} and ~\ref{fig:diss_3} are
+Figure~\ref{fig:diss_1},~\ref{fig:diss_2} and~\ref{fig:diss_3} are
 snapshots of the dissemination visualization after hop 1, 4 and 7
 respectively. The nodes have been arranged in a ring using the Layout
 component in Gephi. Also they are ordered by node id, making it easier
@@ -685,7 +695,7 @@ this aspect.
 
 \subsection{Comparing Pub/Sub Systems Visually}
 
-\section{\demo as a framework for evaluating Pub/Sub Systems}
+\section{\demo as a Framework for Evaluating Pub/Sub Systems}
 
 In addition to outputting a .gexf file which can be used to produce
 visualizations in Gephi, The collector is also able to generate .csv
@@ -717,11 +727,11 @@ metrics that can be exported to .csv files by the Collector include:
 This grants researchers and developers of pub/sub protocols who wish to evaluate
 the system in question immediate access to several metrics. They do not need to
 reimplement algorithms for the metric calculations themselves. All that is
-required is to implement the \emph{Reporter Interface} described in
+required is to implement the \emph{reporter interface} described in
 Section~\ref{sec:arch}. In Chapter~\ref{ch:evaluation} we use this capability of \demo in
 order to evaluate PolderCast and Scribe on a set of topology metrics.
 
-\section{Useful Implementation Work Experiences}
+\section{Implementation Work}
 
 During our implementation work, we encountered several scenarios were
 \demo proved its usefulness as a tool for both developing and debugging
@@ -730,11 +740,29 @@ experiences, as well as experiences with other aspects of software
 development and distributed systems research such as using test-driven
 development and sharing code with the research community.
 
-\subsection{Disconnected Component in PolderCast}
+\subsection{Using Visualizations to Analyze Datasets}
+
+In section~\ref{sec:overview} we mention how we were able to observe a
+disconnected component in the RINGS layer of PolderCast, as seen in
+Figure~\ref{fig:pold_disc}, and later confirm this was an artefact of
+the workload being used. More specifically, we used the \emph{Node Query
+    Tool} in Gephi to ensure these nodes had zero overlapping interest
+with any other node in the overlay by inspecting the Topics-attribute of
+the visualized nodes. This was the first experience we had with the tool, were it
+usability was clearly demonstrated. It speaks to how visualizations are
+also able to provide information of the datasets being used. In the
+scenario we describe, we used a real-world trace from Twitter~\cite{Kwak10www},
+which included 1000 user accounts and their subscriptions. However, the
+PeerNet simulation only included 100 nodes for testing purposes. This
+leads a biased sample of the trace, which in this case lead to a
+disconnected component. Being able to run simulations with fixed
+parameters but different datasets, and then inspect the resulting
+overlay visually is another aspect of using \demo which should prove
+useful for researcher of topic-based pub/sub systems.
 
 \subsection{Debugging Pub/Sub Systems Visually}
 
-\begin{figure}[h]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=\linewidth]{figures/hitratiobug}
     \caption{Visualization of publication message dissemination in
