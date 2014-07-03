@@ -493,12 +493,20 @@ visualizing overlays.
 
 \subsection{Data Traces Used in Simulations}
 
-We use subscription workloads from Facebook~\cite{facebook-eurosys09},
-consisting of 10,000 users and their relationships.  The users are
-modelled as topics, where subscriptions are based on friend relations.
-Every directional relation between two users forms a subscription. As
-relations in Facebook are bidirectional, two topics who are friends in
-the Facebook social graph will subscribe to each other.
+We use publicly available datasets from
+Facebook\cite{facebook-eurosys09} and Twitter\cite{Kwak10www}. The Facebook
+dataset consists of 3 million user profiles along with 28.3 million
+social relations between these users. The Twitter dataset consists of
+41.7 million distinct user profiles and 1.47 billion follow/followed
+relations. In both datasets users are modeled as topics. In the Facebook
+dataset, subscriptions are modeled after the friend list of that user.
+As relationships are bidirectional, two topics will subscribe to each
+other. In Twitter, relationships are unidirectional, as users may choose
+to follow other users, and no user who is followed need to reciprocate.
+As a user is modeled as a topic, its list of followers are modeled as
+the subscribers of that topic. The simulations we run in this chapter
+consists of 2000 nodes, where the extracted datasets are
+from~\cite{Setty:2012}.
 
 Churn is based on the Skype super-peer network data
 trace~\cite{Guha:2006}, where 4000 nodes are tracked for joining and
@@ -549,6 +557,12 @@ such a high number of nodes is not appropriate for print due to space
 restrictions.
 
 \subsection{Visualizing Performance Metrics}
+
+\demo supports visualizing a number of performance metrics. These
+metrics are applied as attributes both to nodes and to labels. Here we
+will take advantage of these capabilities and present a range of
+visualizations for PolderCast, in order to determine what we can learn
+from them.
 
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
@@ -785,7 +799,7 @@ we were able to visually confirm that all nodes that took part in the disseminat
 received the message. Furthermore, we could confirm this observation by
 using the Statistics component in Gephi, which enables calculation of
 the number of connected components in the graph.  The calculation
-revealed that the graph is a single strongly connected component, i.e.
+revealed that the graph is a single strongly connected component, i.e.\
 from any node in the graph there is a directed path to any other node.
 This means that every node received the publication.  However, the
 Collector still calculated the hit-ratio to 97\%. This indicates that
