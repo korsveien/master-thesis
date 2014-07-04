@@ -366,14 +366,26 @@ of researching and analysing pub/sub overlays:
 
 \item[Node Query Tool] \hfill \\
 
-    With the node query tool the user is able to click on a node on the
-    graph model, and a panel will appear to the top right with information
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{figures/gui_node_query}
+        \caption{The Node Query Tool opens a panel (to the left) that can be used to inspect the
+            attributes of a node, here it is used to inspect the
+            subscription size of a high-degree node}
+        \label{fig:gui_node_query}
+    \end{figure}
+
+    With the Node Query Tool the user is able to click on a node on the
+    graph model, and a panel will appear to the left with information
     regarding the properties and attributes of this node. Properties include
     data describing the visual properties of the node such as size, position
-    and color, while attributes include the id and label and time Interval
+    and color, while attributes include the id and label and Time Interval
     attributes and any additional user defined attributes. In our case, such
     user defined attributes would include topics, subscription size and
-    number of control messages sent and received.
+    number of control messages sent and received. In
+    Figure~\ref{fig:gui_node_query}, the Node Query tool is used to
+    inspect the subscription size (i.e.\ number of topics the node
+    subscribe to) of a high-degree node.
 
     Both the properties and attributes of the node are editable through this
     panel view. The user can select a property to change the visual
