@@ -9,7 +9,7 @@ tool.
 We presented a poster and held a live demonstration of \demo at the
 ACM International Conference of Distributed Event Based Systems (DEBS),
 held in Mumbai in May 2014, where it was awarded the price for best
-poster and demo. The implementation code of \demo is open source, and is
+poster and demo. The implementation code of \demo{} is open source, and is
 available in a public repository~\footnote{\demo is open source and
     hosted at \url{http://github.com/vizpub/vizpub}}. It is our hope that our tool will be
 of benefit to the community, and aid in further development and research
@@ -261,6 +261,64 @@ collection and aggregation of data is highly decoupled from the
 execution of the pub/sub protocol itself. As an alternative,
 the Reporters are also able to log reports locally, and push them to
 the collector at the end of pub/sub execution.
+
+The Collector will use the information pulled from the reporters in
+order to apply attributes to nodes and edges. These attributes form the
+basis of node labels and colors in Gephi. For example, number of
+control messages sent is a node attribute which can be represented as a
+numeric label on nodes. Also Gephi will inspect all nodes for their
+``control messages sent'' attribute value, and determine the maximum and
+minimum value. These value form a value range which can be used to color
+the nodes on a gradient. For example, the closer a nodes value is to the
+maximum, the deeper the color of the node.
+
+Some of the attributes are derived from the reported information, such
+as \emph{subscription size}, which is derived from the length of the
+collection returned by \texttt{reportTopics()}. What attributes to apply
+is configurable. The only edge attributes supported by the Collector is
+the topics attribute. This is derived by determining the set of
+subscribers of a topic and analyzing the edges between them. If two
+nodes have an edge between them, they are topic neighbors. The list of
+node attributes supported is far more extensive and includes:
+
+\begin{itemize}
+    \item Control messages sent
+    \item Control messages received
+    \item Control messages sent in kilobytes
+    \item Control messages received in kilobytes
+    \item List of topics subscribed to
+    \item Number of topics subscribed to (i.e.\ \emph{Subscription Size})
+    \item Number of duplicate publication messages received
+\end{itemize}
+
+These attributes describe data pertaining to individual nodes. However,
+the Collector will also calculate data which is global to the entire
+graph. For example, the collector is able to calculate the average value
+for numeric attributes, such as control messages sent for each interval.
+The collector iterates through the interval range, and sums the numeric
+attribute value of each node that exists in this interval and divide
+this number with the number of existing nodes. The resulting averages
+are applied to all nodes as labels, even though they represent a global
+value, i.e.\ it is not a value specific to the particular node. This is a
+workaround, as Gephi does not support displaying graph attributes.
+Currently, the global values calculated by the Collector includes:
+
+\begin{itemize}
+    \item Hit-Ratio
+    \item Average Number of Control Messages Sent
+    \item Average Number of Control Messages Received
+    \item Average Number of Control Messages Received in kilobytes
+    \item Average Number of Control Messages Received in kilobytes
+\end{itemize}
+
+The Collector is also able to calculate average intended for
+plotting time series using a tool such as gnuplot, rather than be
+applied as a node label. Adding support for
+these averages as node attributes is not a priority at this point, but
+will be implemented in the near future. We describe the supported
+calculations in
+Section~\ref{sec:viz_eval}, where we further describe the use case
+intended for this feature of \demo.
 
 \subsection{Visualization Unit}
 
@@ -709,6 +767,7 @@ this aspect.
 \subsection{Comparing Pub/Sub Systems Visually}
 
 \section{\demo as a Framework for Evaluating Pub/Sub Systems}
+\label{sec:viz_eval}
 
 In addition to outputting a \gexf file which can be used to produce
 visualizations in Gephi, The collector is also able to generate \csv
