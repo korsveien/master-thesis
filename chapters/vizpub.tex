@@ -442,6 +442,15 @@ of researching and analysing pub/sub overlays:
 
 \item[Statistics Component] \hfill \\
 
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{figures/gui_statistics}
+        \caption{The Statistics component is able to produce a HTML
+            report which includes plots describing the distribution of
+            values across the nodes}
+        \label{fig:gui_statistics}
+    \end{figure}
+
     The metric component enables graph topology analysis by executing
     metrics on the graph. There are two types of metric algorithms in Gephi:
     static and dynamic. Static metrics are only able to execute on graph
@@ -482,19 +491,31 @@ of researching and analysing pub/sub overlays:
 
 \item[Ranking Component] \hfill \\
 
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{figures/gui_ranking_table}
+        \caption{The \emph{Ranking Table} (to the left) in the Ranking Component may
+            be used to sort nodes by attribute value. In this
+            screenshot it is used to rank nodes by degree in descending
+            order.}
+        \label{fig:ranking_table}
+    \end{figure}
+
     The ranking component is a key feature of Gephi which enables
     visualization based on node or edge attributes in form of color
     and size. When coloring nodes or edges, the ranking component
     will apply a gradient over the range of attribute values. The
-    ranking component also include a result list, where the user may
+    ranking component also include a ranking table, as seen in
+    Figure~\ref{fig:ranking_table}, where the user may
     sort nodes based on the specified attribute value, which is
-    useful for quickly finding the nodes with maximum value and
+    useful for quickly finding the nodes with maximum and
     minimum value. This is helpful for identifying bottlenecks in
     the system or potential load balancing issues.
 
     The ranking component also includes an auto apply feature, which
     supports visualising attributes dynamically while playing back the
-    graph via the timeline component.
+    graph via the timeline component, i.e.\ the node labels and color
+    will update with every step.
 
 \item[Layout Component] \hfill \\
 
@@ -509,9 +530,20 @@ of researching and analysing pub/sub overlays:
     communities. Another useful algorithm is the Circular Layout
     algorithm, where nodes are positioned in a circle ordered on a
     specific attributes selectable by the user. This is useful in order
-    to visualize node rankings on particular attributes.
+    to visualize node rankings on particular attributes. We use the
+    circular layout extensively, as nodes in PolderCast are organized
+    into a ring structure.
 
 \item[Filter Component] \hfill \\
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{figures/gui_filter}
+        \caption{The Filter Component (to the right) enables users to strip away
+            unwanted nodes and edges, in this screenshot it is used to
+            display the sub-overlay for a specific topic}
+        \label{fig:ranking_table}
+    \end{figure}
 
     Filters may be applied to the graph in order to strip away nodes or
     edges on the basis of their attributes which also includes any
@@ -528,20 +560,31 @@ of researching and analysing pub/sub overlays:
 
 \item[Data Laboratory Component] \hfill \\
 
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=\linewidth]{figures/gui_data_lab}
+        \caption{The Data Laboratory Component provides a table overview
+        of metrics as well as the capability of exporting data for
+        further statistical analysis}
+        \label{fig:data_lab}
+    \end{figure}
+
     The Data laboratory component enables the user to work with the node
     and edge attributes of the graph. This component provides the user
     with separate table views of node and edge attributes. Each row in
     these table represent a node or edge, and each column an attribute
-    for that particular node or edge. Columns may be added or removed by
-    the user. The data laboratory also provides functionality for
-    manipulating columns such as merging two columns or creating new
-    columns based on data from selected columns. Attribute data in
-    columns that are static (i.e.\ has no lower or upper time interval
-    bound associated with them) can be converted to dynamic through this
-    component. Also, resizing or coloring all edges or nodes is possible
-    through the laboratory by selecting all rows and right-clicking. In
-    addition to this, the data laboratory also enables the user to export the
-    data to file for further statistical analysis.
+    for that particular node or edge. In Figure~\ref{fig:data_lab}, the
+    data lab is used to inspect the duplicate message received attribute
+    for nodes. Columns may be added or removed by the user. The data
+    laboratory also provides functionality for manipulating columns such
+    as merging two columns or creating new columns based on data from
+    selected columns. Attribute data in columns that are static (i.e.\
+    has no lower or upper time interval bound associated with them) can
+    be converted to dynamic through this component. Also, resizing or
+    coloring all edges or nodes is possible through the laboratory by
+    selecting all rows and right-clicking. In addition to this, the data
+    laboratory also enables the user to export the data to file for
+    further statistical analysis.
 
 \end{description}
 
