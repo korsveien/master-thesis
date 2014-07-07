@@ -824,6 +824,57 @@ this aspect.
 
 \subsection{Comparing Pub/Sub Systems Visually}
 
+In Figure~\ref{fig:struct_poldercast} and Figure~\ref{fig:struct_scribe}
+we visualize the structure of PolderCast and Scribe respectively. We run
+PeerNet experiments in simulation mode, consisting of 1000 nodes, 1000
+reporter intervals and 1000 PeerNet cycles. Subscriptions are modeled
+after the Twitter dataset found in~\ref{}. The resulting \gexf{} files
+are imported into Gephi in order to analyse the overlay structure both
+visually as well by calculating certain metrics using the
+\emph{Statistics Component}, which we lay out in
+Table~\ref{tab:struct_metrics}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|l | l | l |}
+        \hline
+        & PolderCast & Scribe \\ \hline
+        \hline
+        No.\ of Nodes & 771 & 771 \\ \hline
+        No.\ of Edges & 24152 & 2700 \\ \hline
+        Avg. Degree & 31.33 & 3.50 \\ \hline
+        Graph Diameter & 5 & 15 \\ \hline
+        Avg. Path Length & 2.43 & 5.26 \\ \hline
+        Graph Density & 0.041 & 0.005 \\ \hline
+        Weakly Connected Components & 7 & 84 \\ \hline
+        Strongly Connected Components & 20 & 307 \\ \hline
+        Avg. Clustering Coefficient & 0.249 & 0.035 \\ \hline
+
+    \end{tabular}
+    \caption{Metric values for PolderCast and Scribe, calculated using
+        the \emph{Statistics Component} in Gephi.}
+    \label{tab:struct_metrics}
+\end{table}
+
+\begin{figure*}[h!]
+    \centering
+    \includegraphics[scale=0.4]{figures/struct_poldercast}
+    \caption{Overlay structure of PolderCast after 1000 reporter
+        intervals and 1000 PeerNet cycles.}
+    \includegraphics[scale=0.4]{figures/struct_scribe}
+    \caption{Overlay structure of Scribe after 1000 reporter
+        intervals and 1000 PeerNet cycles.}
+    \label{fig:struct_poldercast}
+\end{figure*}
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/struct_scribe}
+%     \caption{Overlay structure of Scribe after 1000 reporter
+%         intervals and 1000 PeerNet cycles.}
+%     \label{fig:struct_poldercast}
+% \end{figure}
+
 \section{\demo as a Framework for Evaluating Pub/Sub Systems}
 \label{sec:viz_eval}
 
