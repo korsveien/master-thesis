@@ -829,10 +829,41 @@ we visualize the structure of PolderCast and Scribe respectively. We run
 PeerNet experiments in simulation mode, consisting of 1000 nodes, 1000
 reporter intervals and 1000 PeerNet cycles. Subscriptions are modeled
 after the Twitter dataset found in~\ref{}. The resulting \gexf{} files
-are imported into Gephi in order to analyse the overlay structure both
+are imported into Gephi in order to analyze the overlay structure both
 visually as well by calculating certain metrics using the
-\emph{Statistics Component}, which we lay out in
+\emph{Statistics Component}. The calculated values are described in
 Table~\ref{tab:struct_metrics}.
+
+Inspecting the overlay structure visually enables us to derive certain
+information which can guide us in further investigations. For example,
+by comparing the overlays, we can observe that the overlay of PolderCast
+in Figure~\ref{fig:struct_poldercast} seem to include a lot more edges,
+as well as being more dense than the overlay in Scribe, seen in
+Figure~\ref{fig:struct_scribe}. Both overlays consist of the same number of nodes, as
+described in Table~\ref{tab:struct_metrics}, however, PolderCast has
+almost 10 times the number of edges. This should mean PolderCast also
+has a much higher average degree as well as a higher graph density.
+Running these metrics reveal that PolderCast indeed have a much higher
+degree, almost ten times higher than Scribe. The density is also much
+higher in PolderCast. Density is measured as how far away the graph is
+complete, where 1 is a complete graph. The low density of Scribe might
+be due several nodes being connected at the underlying DHT.\ These edges
+are not included in the visualization, but neither are the edges in the
+CYCLON or VICINITY modules of PolderCast. Therefore, it is unlikely
+that the differences we see in terms of number of edges would be much
+different if these were included.
+
+The fact that the number of edges in PolderCast is much higher, also
+means the overlay is better connected. This is evident if we look at the
+number of connected components. Strongly connected components have a
+directed path between every pair of nodes, while weakly connected
+components are connected through undirected edges. As seen in
+Table~\ref{tab:struct_metrics}, the Scribe overlay is more partitioned,
+as it includes a higher number of graph components, both strongly
+connected as well as weakly connected. The higher number of graph
+components in Scribe is likely due to the topics being organized into
+separate dissemination trees, where the paths between the rendezvous
+nodes are connected at the DHT layer.
 
 \begin{table}
     \centering
@@ -840,15 +871,15 @@ Table~\ref{tab:struct_metrics}.
         \hline
         & PolderCast & Scribe \\ \hline
         \hline
-        No.\ of Nodes & 771 & 771 \\ \hline
-        No.\ of Edges & 24152 & 2700 \\ \hline
-        Avg. Degree & 31.33 & 3.50 \\ \hline
+        Number of Nodes & 771 & 771 \\ \hline
+        Number of Edges & 24152 & 2700 \\ \hline
+        Average Degree & 31.33 & 3.50 \\ \hline
         Graph Diameter & 5 & 15 \\ \hline
-        Avg. Path Length & 2.43 & 5.26 \\ \hline
+        Average Path Length & 2.43 & 5.26 \\ \hline
         Graph Density & 0.041 & 0.005 \\ \hline
         Weakly Connected Components & 7 & 84 \\ \hline
         Strongly Connected Components & 20 & 307 \\ \hline
-        Avg. Clustering Coefficient & 0.249 & 0.035 \\ \hline
+        Average Clustering Coefficient & 0.249 & 0.035 \\ \hline
 
     \end{tabular}
     \caption{Metric values for PolderCast and Scribe, calculated using
@@ -858,10 +889,11 @@ Table~\ref{tab:struct_metrics}.
 
 \begin{figure*}[h!]
     \centering
-    \includegraphics[scale=0.4]{figures/struct_poldercast}
+    \includegraphics[scale=0.4]{figures/polder_struct}
     \caption{Overlay structure of PolderCast after 1000 reporter
         intervals and 1000 PeerNet cycles.}
-    \includegraphics[scale=0.4]{figures/struct_scribe}
+    \label{fig:struct_scribe}
+    \includegraphics[scale=0.4]{figures/scribe_struct}
     \caption{Overlay structure of Scribe after 1000 reporter
         intervals and 1000 PeerNet cycles.}
     \label{fig:struct_poldercast}
