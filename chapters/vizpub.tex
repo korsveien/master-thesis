@@ -811,7 +811,6 @@ an indication can be useful in order to guide researchers and developers
 towards potential issues or bugs. We believe \demo is a useful tool in
 this aspect.
 
-
 \begin{figure*}[h]
     \vspace{-100pt}
     \includegraphics[scale=0.6]{figures/diss_3}
@@ -825,15 +824,14 @@ this aspect.
 
 \subsection{Comparing Pub/Sub Systems Visually}
 
-In Figure~\ref{fig:struct_poldercast} and Figure~\ref{fig:struct_scribe}
-we visualize the structure of PolderCast and Scribe respectively. We run
-PeerNet experiments in simulation mode, consisting of 1000 nodes, 1000
-reporter intervals and 1000 PeerNet cycles. Subscriptions are modeled
-after the Twitter dataset found in~\cite{Kwak10www}. The resulting \gexf{} files
-are imported into Gephi in order to analyze the overlay structure both
-visually as well by calculating certain metrics using the
-\emph{Statistics Component}. The calculated values are described in
-Table~\ref{tab:struct_metrics}.
+In Figure~\ref{fig:struct} we visualize the structure of PolderCast and
+Scribe. We run PeerNet experiments in simulation mode, consisting of
+1000 nodes, 1000 reporter intervals and 1000 PeerNet cycles.
+Subscriptions are modeled after the Twitter dataset found
+in~\cite{Kwak10www}. The resulting \gexf{} files are imported into Gephi
+in order to analyze the overlay structure both visually as well by
+calculating certain metrics using the \emph{Statistics Component}. The
+calculated values are described in Table~\ref{tab:struct_metrics}.
 
 \begin{table}[h!]
     \centering
@@ -852,28 +850,28 @@ Table~\ref{tab:struct_metrics}.
         Average Clustering Coefficient & 0.249 & 0.035 \\ \hline
 
     \end{tabular}
-    \caption{Metric values for PolderCast and Scribe, calculated using
+    \caption{Calculated metric values for PolderCast and Scribe, calculated using
         the \emph{Statistics Component} in Gephi.}
     \label{tab:struct_metrics}
 \end{table}
 
 Inspecting the overlay structure visually enables us to derive certain
 information which can guide us in further investigations. For example,
-by comparing the overlays, we can observe that the overlay of PolderCast
-in Figure~\ref{fig:struct_poldercast} seem to include a lot more edges,
-as well as being more dense than the overlay in Scribe, seen in
-Figure~\ref{fig:struct_scribe}. Although both overlays consists of the
-same number of nodes, PolderCast has almost 10 times the number of edges. This should mean PolderCast also
-has a much higher average degree as well as a higher graph density.
-Running these metrics reveal that PolderCast indeed have a much higher
-degree, almost ten times higher than Scribe. The graph density is also much
-higher in PolderCast. Graph density is measured as how far away the graph is
-to being complete, where 1 is a complete graph. The low density of Scribe might
-be due several nodes being connected at the underlying DHT.\ These edges
-are not included in the visualization, but neither are the edges in the
-CYCLON or VICINITY modules of PolderCast. Therefore, it is unlikely
-that the differences we see in terms of number of edges or density would be much
-different if these were included.
+by comparing the overlays in Figure~\ref{fig:struct}, we can observe
+that the overlay of PolderCast seem to include a lot more edges, as well
+as being more dense than the overlay in Scribe. Although both overlays
+consists of the same number of nodes, PolderCast has almost 10 times the
+number of edges. This should mean PolderCast also has a much higher
+average degree as well as a higher graph density.  Running these metrics
+reveal that PolderCast indeed have a much higher degree, almost ten
+times higher than Scribe. The graph density is also much higher in
+PolderCast. Graph density is measured as how far away the graph is to
+being complete, where 1 is a complete graph. The low density of Scribe
+might be due several nodes being connected at the underlying DHT.\ These
+edges are not included in the visualization, but neither are the edges
+in the CYCLON or VICINITY modules of PolderCast. Therefore, it is
+unlikely that the differences we see in terms of number of edges or
+density would be much different if these were included.
 
 The fact that the number of edges in PolderCast is much higher, also
 means the overlay is better connected. This is evident if we look at the
@@ -891,11 +889,42 @@ churn.
 
 Using the capabilities of \demo{}, we are also able to look further into
 the issue of load balancing. Figure~\ref{fig:polder_in_degree} and
-Figure~\ref{fig:scribe_in_degree} visualize the degree of the nodes
-in the overlay by color. The deeper red the color of the node is, the
+Figure~\ref{fig:scribe_in_degree} visualize the degree of the nodes in
+the overlay by color. The deeper red the color of the node is, the
 higher its degree. This is useful for spotting potential bottlenecks in
-the system in system, as well as getting a general overview of the
-degree distribution.
+the system, as well as getting a general overview of the degree
+distribution. We can immediately observe that Scribe seems to have a
+more even distribution of color, which implies a better distribution of
+degree. But in order to determine the specific values, we need more than
+a colored graph. One option is to apply the degree value to each node as
+a text label. However, we skip this option as it is not suitable for
+print. But in a scenario where the researcher explores the graph on a
+computer screen, this is a useful way of quickly determining attribute
+values of nodes. Luckily, the \emph{Statistics Component} in Gephi
+includes the option of displaying scatter plots of degree distribution,
+as well as storing these plots to the hard drive as image files.
+Figure~\ref{fig:degree_distr} describes the distribution of both
+PolderCast and Scribe. Both distributions are skewed to the right.
+However, the range of values are more tightly bound in Scribe. We
+already know from~\ref{ch:design-challenges} that polderCast has a
+degree which is dependent on the number of nodes a topic have, which
+results in a larger range of values. In Scribe, however, the degree is
+bound by the logarithm of the number of nodes in the system, which is an
+advantage if their are many nodes in the system with a high number of
+subscriptions.
+
+\begin{figure}
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.35]{plots/polder_degree_distr}
+        \label{fig:polder_degree_distr}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.35]{plots/scribe_degree_distr}
+        \label{fig:scribe_degree_distr}
+    }
+    \caption{Degree distribution of PolderCast and Scribe, produced
+        by the \emph{Statistics Component} in Gephi.}
+\end{figure}
 
 \begin{figure}
     \vspace{-100pt}
