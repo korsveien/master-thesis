@@ -632,7 +632,8 @@ nodes.
 \subsection{Overlay Evolution During Churn}
 \label{sec:churn}
 
-\begin{figure*}[h]
+\afterpage{\clearpage}
+\begin{figure*}[H]
     \centering
     \includegraphics[scale=0.35]{figures/churn_0}
     \caption{Overlay structure of PolderCast at interval 0}
@@ -682,14 +683,6 @@ from them.
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
 
-\begin{figure}
-    \vspace{-100pt}
-    \includegraphics[scale=0.6]{figures/diss_1}
-    \includegraphics[scale=0.6]{figures/diss_2}
-    \caption{From top to bottom: visualization of publication message
-        dissemination in PolderCast after 1 and 4 hops.}
-    \label{fig:diss_1}
-\end{figure}
 
 In subsection~\ref{sec:churn} we illustrate one of the two types of
 visualizations it is possible to produce by leveraging \demo. Here we will describe the second:
@@ -739,6 +732,31 @@ this by drawing an edge to the node and then refrain from applying a
 numeric label. When we reach the point in the animation where this node
 receives a message for the first time, we apply the hop count of this
 message as a numeric node label.
+
+\afterpage{\clearpage}
+\begin{figure}[H]
+    \vspace{-100pt}
+    \subfigure[After 1 hop]{%
+    \includegraphics[scale=0.55]{figures/diss_1}
+}
+\subfigure[After 4 hops]{%
+    \includegraphics[scale=0.55]{figures/diss_2}
+}
+\caption{Visualization of publication message
+    dissemination in PolderCast.}
+\label{fig:diss_1}
+\end{figure}
+
+\begin{figure*}[h]
+    \vspace{-100pt}
+    \includegraphics[scale=0.6]{figures/diss_3}
+    \caption{Visualization of PolderCast after the end of dissemination}
+    \label{fig:diss_2}
+    \includegraphics[scale=0.6]{figures/diss_dup_msg}
+    \label{fig:dups}
+    \caption{Visualization of duplicate publication messages received by
+    each node in PolderCast}
+\end{figure*}
 
 When inspecting the dissemination algorithm of protocols visually,
 implementation details which could otherwise be overlooked become easily
@@ -811,17 +829,6 @@ an indication can be useful in order to guide researchers and developers
 towards potential issues or bugs. We believe \demo is a useful tool in
 this aspect.
 
-\begin{figure*}[h]
-    \vspace{-100pt}
-    \includegraphics[scale=0.6]{figures/diss_3}
-    \caption{Visualization of PolderCast after the end of dissemination}
-    \label{fig:diss_2}
-    \includegraphics[scale=0.6]{figures/diss_dup_msg}
-    \label{fig:dups}
-    \caption{Visualization of duplicate publication messages received by
-    each node in PolderCast}
-\end{figure*}
-
 \subsection{Comparing Pub/Sub Systems Visually}
 
 In Figure~\ref{fig:struct} we visualize the structure of PolderCast and
@@ -873,6 +880,16 @@ in the CYCLON or VICINITY modules of PolderCast. Therefore, it is
 unlikely that the differences we see in terms of number of edges or
 density would be much different if these were included.
 
+\afterpage{\clearpage}
+\begin{figure}
+    \vspace{-100pt}
+    \includegraphics[scale=0.45]{figures/polder_struct}
+    \includegraphics[scale=0.45]{figures/scribe_struct}
+    \caption{From top to bottom: Visualizaton of the \textbf{overlay
+            strucure} of PolderCast and Scribe}
+    \label{fig:struct}
+\end{figure}
+
 The fact that the number of edges in PolderCast is much higher, also
 means the overlay is better connected. This is evident if we look at the
 number of connected components. Strongly connected components have a
@@ -913,28 +930,21 @@ bound by the logarithm of the number of nodes in the system, which is an
 advantage if their are many nodes in the system with a high number of
 subscriptions.
 
-\begin{figure}
+
+\begin{figure}[h!]
     \subfigure[PolderCast]{%
-        \includegraphics[scale=0.35]{plots/polder_degree_distr}
+        \includegraphics[scale=0.7]{plots/polder_degree_distr}
         \label{fig:polder_degree_distr}
     }
     \subfigure[Scribe]{%
-        \includegraphics[scale=0.35]{plots/scribe_degree_distr}
+        \includegraphics[scale=0.7]{plots/scribe_degree_distr}
         \label{fig:scribe_degree_distr}
     }
     \caption{Degree distribution of PolderCast and Scribe, produced
         by the \emph{Statistics Component} in Gephi.}
 \end{figure}
 
-\begin{figure}
-    \vspace{-100pt}
-    \includegraphics[scale=0.45]{figures/polder_struct}
-    \includegraphics[scale=0.45]{figures/scribe_struct}
-    \caption{From top to bottom: Visualizaton of the \textbf{overlay
-            strucure} of PolderCast and Scribe}
-    \label{fig:struct}
-\end{figure}
-
+\afterpage{\clearpage}
 \begin{figure}
     \vspace{-100pt}
     \includegraphics[scale=0.5]{figures/polder_degree}
