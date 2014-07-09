@@ -634,14 +634,16 @@ nodes.
 
 \afterpage{\clearpage}
 \begin{figure*}[H]
+    \vspace{-100pt}
     \centering
-    \includegraphics[scale=0.35]{figures/churn_0}
+    \thisfloatpagestyle{empty}
+    \includegraphics[scale=0.5]{figures/churn_0}
     \caption{Overlay structure of PolderCast at interval 0}
     \label{fig:churn0}
-    \includegraphics[scale=0.85]{figures/churn_250}
+    \includegraphics[scale=1]{figures/churn_250}
     \caption{Overlay structure  of PolderCast at interval 250}
     \label{fig:churn250}
-    \includegraphics[scale=0.85]{figures/churn_500}
+    \includegraphics[scale=1]{figures/churn_500}
     \caption{Overlay structure of PolderCast at interval 500}
     \label{fig:churn500}
 \end{figure*}
@@ -736,23 +738,28 @@ message as a numeric node label.
 \afterpage{\clearpage}
 \begin{figure}[H]
     \vspace{-100pt}
+    \thisfloatpagestyle{empty}
+    \centering
+    \thisfloatpagestyle{empty}
     \subfigure[After 1 hop]{%
-    \includegraphics[scale=0.55]{figures/diss_1}
+    \includegraphics[scale=0.65]{figures/diss_1}
 }
 \subfigure[After 4 hops]{%
-    \includegraphics[scale=0.55]{figures/diss_2}
+    \includegraphics[scale=0.65]{figures/diss_2}
 }
 \caption{Visualization of publication message
     dissemination in PolderCast.}
 \label{fig:diss_1}
 \end{figure}
 
+\afterpage{\clearpage}
 \begin{figure*}[h]
     \vspace{-100pt}
-    \includegraphics[scale=0.6]{figures/diss_3}
+    \thisfloatpagestyle{empty}
+    \includegraphics[scale=0.65]{figures/diss_3}
     \caption{Visualization of PolderCast after the end of dissemination}
     \label{fig:diss_2}
-    \includegraphics[scale=0.6]{figures/diss_dup_msg}
+    \includegraphics[scale=0.65]{figures/diss_dup_msg}
     \label{fig:dups}
     \caption{Visualization of duplicate publication messages received by
     each node in PolderCast}
@@ -883,9 +890,14 @@ density would be much different if these were included.
 \afterpage{\clearpage}
 \begin{figure}
     \vspace{-100pt}
-    \includegraphics[scale=0.45]{figures/polder_struct}
-    \includegraphics[scale=0.45]{figures/scribe_struct}
-    \caption{From top to bottom: Visualizaton of the \textbf{overlay
+    \thisfloatpagestyle{empty}
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.44]{figures/polder_struct}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.44]{figures/scribe_struct}
+    }
+    \caption{Visualizaton of the \textbf{overlay
             strucure} of PolderCast and Scribe}
     \label{fig:struct}
 \end{figure}
@@ -923,7 +935,7 @@ as well as storing these plots to the hard drive as image files.
 Figure~\ref{fig:degree_distr} describes the distribution of both
 PolderCast and Scribe. Both distributions are skewed to the right.
 However, the range of values are more tightly bound in Scribe. We
-already know from~\ref{ch:design-challenges} that polderCast has a
+already know from~\ref{ch:design-challenges} that PolderCast has a
 degree which is dependent on the number of nodes a topic have, which
 results in a larger range of values. In Scribe, however, the degree is
 bound by the logarithm of the number of nodes in the system, which is an
@@ -931,7 +943,8 @@ advantage if their are many nodes in the system with a high number of
 subscriptions.
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
+    \thisfloatpagestyle{plain}
     \subfigure[PolderCast]{%
         \includegraphics[scale=0.7]{plots/polder_degree_distr}
         \label{fig:polder_degree_distr}
@@ -946,10 +959,16 @@ subscriptions.
 
 \afterpage{\clearpage}
 \begin{figure}
+    \centering
     \vspace{-100pt}
-    \includegraphics[scale=0.5]{figures/polder_degree}
-    \includegraphics[scale=0.5]{figures/scribe_degree}
-    \caption{From top to bottom: Visualization of \textbf{degree} in
+    \thisfloatpagestyle{empty}
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.49]{figures/polder_degree}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.49]{figures/scribe_degree}
+    }
+    \caption{Visualization of \textbf{degree} in
         PolderCast and Scribe}
     \label{fig:degree}
 \end{figure}
