@@ -4,10 +4,6 @@ As Gephi is still in the pre-1.0 stage, we encountered several
 limitations using the tool, some of which forced us to implement
 alternative or less than optimal approaches.
 
-\subsection{No auto apply in the Partition Component}
-No auto apply in the Partition Component. No Dynamic Collection data
-structure.
-
 \subsection{Playback issues in the Timeline component}
 
 We also encountered some issues related to the playback of dynamic
@@ -31,15 +27,8 @@ protocol, we were also able to visually confirm that the number of edges
 remain consistent for each cycle in the context pane on the top right
 side of the Gephi GUI\@.
 
-\subsection{Dynamic Data Structures}
-
-Gephi comes with its own set of data structures for representing
-dynamic attributes on
-
-Missing a DynamicCollection data structure Currently, only single value
-data structures are represented.
-
 \subsection{No Map Data Structure}
+
 It would be useful to be able to store a map data structure on each
 graph. If maps were supported, you could derive information such as how
 many duplicate messages a particular node received on a specific topic
@@ -47,12 +36,19 @@ or single dissemination session. Also, it would enable us to see how
 many publication messages a particular node sent or received for a
 specific topic.
 
-\subsection{No support for graph or workspace metadata}
-Would be helpful to be able to list all topics on the graph and sort
-then according to number of subscribers.
+\subsection{Implementing global attribute visualization}
 
-\subsection{Saving a Gephi session}
-filters are not preserved.
+Currently, it is not possible to visualize graph attributes in Gephi, or
+indeed list any global attribute in the graph. This would be a useful
+feature to implement as a plugin. For example, it would be helpful to be
+able to list all topics on the graph and sort then according to number
+of subscribers. Our workaround for this is to apply a node label to all
+nodes which describes a global attribute. Such global attributes include
+hit-ratio and average control messages sent and received. Visualizing
+these attributes on every node can be misleading, as it gives the
+impression that the values are unique to every node. It would be better
+to display these values in a separate panel, or perhaps even as a large
+floating text label in the Graph view.
 
 \section{Conclusion}
 \section{Future Work}
