@@ -674,13 +674,13 @@ while the simulation runs 2000 nodes. However, visualizations including
 such a high number of nodes is not appropriate for print due to space
 restrictions.
 
-\subsection{Visualizing Performance Metrics}
+% \subsection{Visualizing Performance Metrics}
 
-\demo{} supports visualizing a number of performance metrics. These
-metrics are applied as attributes both to nodes and to labels. Here we
-will take advantage of these capabilities and present a range of
-visualizations for PolderCast, in order to determine what we can learn
-from them.
+% \demo{} supports visualizing a number of performance metrics. These
+% metrics are applied as attributes both to nodes and to labels. Here we
+% will take advantage of these capabilities and present a range of
+% visualizations for PolderCast, in order to determine what we can learn
+% from them.
 
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
@@ -837,6 +837,7 @@ towards potential issues or bugs. We believe \demo is a useful tool in
 this aspect.
 
 \subsection{Comparing Pub/Sub Systems Visually}
+\label{sec:comparing}
 
 In Figure~\ref{fig:struct} we visualize the structure of PolderCast and
 Scribe. We run PeerNet experiments in simulation mode, consisting of
@@ -1088,8 +1089,11 @@ further investigations.
 \section{\demo as a Framework for Evaluating Pub/Sub Systems}
 \label{sec:viz_eval}
 
-In addition to outputting a \gexf file which can be used to produce
-visualizations in Gephi, The collector is also able to generate \csv
+Although the plots seen in Section~\ref{sec:comparing} are easy to
+produce in Gephi, they are not very flexible. It would be useful to be
+able to superimpose two plots on top of each other in order to
+effectively compare them. Therefore, in addition to outputting a \gexf file which can be used to produce
+visualizations and plots in Gephi, The collector is also able to generate \csv
 files which can be used to plot a time series of metrics such as degree,
 clustering coefficient and centralities. Each time point in the time
 series will represent a \emph{Reporter Interval}. Although the Data
