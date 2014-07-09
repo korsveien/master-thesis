@@ -4,9 +4,10 @@ As Gephi is still in the pre-1.0 stage, we encountered several
 limitations using the tool, some of which forced us to implement
 alternative or less than optimal approaches.
 
+
 \subsection{Playback issues in the Timeline component}
 
-We also encountered some issues related to the playback of dynamic
+We encountered some issues related to the playback of dynamic
 graphs in Gephi. The playback is based on time intervals, where the
 start and end bounds for the interval is encoded as a double. As you
 play back the graph evolution, these bounds suffer from rounding errors,
@@ -27,14 +28,23 @@ protocol, we were also able to visually confirm that the number of edges
 remain consistent for each cycle in the context pane on the top right
 side of the Gephi GUI\@.
 
-\subsection{No Map Data Structure}
+\section{Conclusion}
+
+\section{Future Work}
+
+\subsection{Including Associative Arrays in Gephi}
 
 It would be useful to be able to store a map data structure on each
-graph. If maps were supported, you could derive information such as how
-many duplicate messages a particular node received on a specific topic
-or single dissemination session. Also, it would enable us to see how
-many publication messages a particular node sent or received for a
-specific topic.
+graph, i.e.\ associative arrays. If associative arrays were supported,
+a user could derive information such as how many duplicate messages a
+particular node received on a specific topic or single dissemination
+session. Also, it would enable the user to see how many publication messages a
+particular node sent or received for a specific topic. Implementing such
+a structure will most likely involve modifying the source code of Gephi.
+This is fully possible, since Gephi is an open source product and hosted
+in a public repository.\footnote{\url{http://github.com/gephi/gephi}}
+This would require quite an effort however, as the code base is quite
+large and it would take time to gain the necessary insight into it.
 
 \subsection{Implementing global attribute visualization}
 
@@ -50,8 +60,6 @@ impression that the values are unique to every node. It would be better
 to display these values in a separate panel, or perhaps even as a large
 floating text label in the Graph view.
 
-\section{Conclusion}
-\section{Future Work}
 \subsection{Improving Report File Sizes}
 Include a table of \gexf{} file sizes here.
 
