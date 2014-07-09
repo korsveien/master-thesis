@@ -917,8 +917,8 @@ caused by subscribers not having any topic neighbors online due to
 churn.
 
 Using the capabilities of \demo{}, we are also able to look further into
-the issue of load balancing. Figure~\ref{fig:polder_in_degree} and
-Figure~\ref{fig:scribe_in_degree} visualize the degree of the nodes in
+the issue of load balancing. Figure~\ref{fig:polder_degree} and
+Figure~\ref{fig:scribe_degree} visualize the degree of the nodes in
 the overlay by color. The deeper red the color of the node is, the
 higher its degree. This is useful for spotting potential bottlenecks in
 the system, as well as getting a general overview of the degree
@@ -932,7 +932,8 @@ computer screen, this is a useful way of quickly determining attribute
 values of nodes. Luckily, the \emph{Statistics Component} in Gephi
 includes the option of displaying scatter plots of degree distribution,
 as well as storing these plots to the hard drive as image files.
-Figure~\ref{fig:degree_distr} describes the distribution of both
+Figure~\ref{fig:polder_degree_distr} and
+Figure~\ref{fig:scribe_degree_distr} describes the distribution of
 PolderCast and Scribe. Both distributions are skewed to the right.
 However, the range of values are more tightly bound in Scribe. We
 already know from~\ref{ch:design-challenges} that PolderCast has a
@@ -942,20 +943,76 @@ bound by the logarithm of the number of nodes in the system, which is an
 advantage if their are many nodes in the system with a high number of
 subscriptions.
 
+In addition to inspecting degree distribution, Gephi also provides us
+with the possibility of producing a degree time series, as seen in
+Figure~\ref{fig:polder_degree_ts} and Figure~\ref{fig:scribe_degree_ts}.
 
+\newgeometry{left=0cm, right=0cm}
 \begin{figure}[H]
     \thisfloatpagestyle{plain}
+    \centering
     \subfigure[PolderCast]{%
-        \includegraphics[scale=0.7]{plots/polder_degree_distr}
+        \includegraphics[scale=0.4]{plots/polder_degree_distr}
         \label{fig:polder_degree_distr}
     }
     \subfigure[Scribe]{%
-        \includegraphics[scale=0.7]{plots/scribe_degree_distr}
+        \includegraphics[scale=0.4]{plots/scribe_degree_distr}
         \label{fig:scribe_degree_distr}
+    }
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.4]{plots/polder_indegree_distr}
+        \label{fig:polder_indegree_distr}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.4]{plots/scribe_indegree_distr}
+        \label{fig:scribe_indegree_distr}
+    }
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.4]{plots/polder_outdegree_distr}
+        \label{fig:polder_outdegree_distr}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.4]{plots/scribe_outdegree_distr}
+        \label{fig:scribe_outdegree_distr}
     }
     \caption{Degree distribution of PolderCast and Scribe, produced
         by the \emph{Statistics Component} in Gephi.}
 \end{figure}
+\restoregeometry
+
+
+\newgeometry{left=0cm, right=0cm}
+\begin{figure}[H]
+    \thisfloatpagestyle{plain}
+    \centering
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.4]{plots/polder_edges_ts}
+        \label{fig:polder_edges_ts}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.4]{plots/scribe_edges_ts}
+        \label{fig:scribe_edges_ts}
+    }
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.4]{plots/polder_degree_ts}
+        \label{fig:polder_degree_ts}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.4]{plots/scribe_degree_ts}
+        \label{fig:scribe_degree_ts}
+    }
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.4]{plots/polder_cc_ts}
+        \label{fig:polder_cc_ts}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.4]{plots/scribe_cc_ts}
+        \label{fig:scribe_cc_ts}
+    }
+    \caption{Time series of PolderCast and Scribe, produced
+        by the \emph{Statistics Component} in Gephi.}
+\end{figure}
+\restoregeometry
 
 \afterpage{\clearpage}
 \begin{figure}
@@ -964,13 +1021,14 @@ subscriptions.
     \thisfloatpagestyle{empty}
     \subfigure[PolderCast]{%
         \includegraphics[scale=0.49]{figures/polder_degree}
+        \label{fig:polder_degree}
     }
     \subfigure[Scribe]{%
         \includegraphics[scale=0.49]{figures/scribe_degree}
+        \label{fig:scribe_degree}
     }
     \caption{Visualization of \textbf{degree} in
         PolderCast and Scribe}
-    \label{fig:degree}
 \end{figure}
 
 \section{\demo as a Framework for Evaluating Pub/Sub Systems}
