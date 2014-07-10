@@ -8,6 +8,33 @@ it can serve as a starting point for further improvements. In this
 section we will discuss some of these potential improvements to \demo{},
 as well as some of the issues and limitations we faced in our implementation work.
 
+\subsection{Improving Report File Sizes}
+
+Currently, the biggest issue with \demo{} is scalability in terms of
+file sizes. Both the Reporter and Collector stores temporary files
+which can be quite large depending on the scale of the system in terms
+of number of nodes, edges as well as number of topics and publication
+messages being posted on each topic. During our experiments we ran into
+several issues due to restrictions in disk quota on the machine cluster.
+In particular, a high number of edges cause issues, especially if any
+attributes are applied to them. But also the number of publication
+messages will bloat file sizes of the temporary logs considerably. This
+causes performance issues when the Collector collates these files into
+the final report. The final report also scales poorly in terms of file
+size due to the \gexf{} format being based on XML, which stores data in
+a declarative text based format. The file sizes of the final report can
+grow up to several gigabytes, which causes big performance issues when
+opening these files in Gephi. Due to these performance issues we had to
+restrict the scale of our experiments. This is unfortunate, and the
+issues with performance should be addressed quickly in order to increase
+the scalability of the system. Fortunately, there is a lot of
+low-hanging fruit in terms of increasing the performance of the system,
+as it is still in the prototype stage.
+
+\subsection{Gephi Performance Issues}
+
+\subsection{Reporter Performance Issues}
+
 \subsection{Visualizing with Custom Colors and Sizes}
 
 Most of the visualizations in this thesis use text labels and color in
@@ -25,8 +52,6 @@ would have to be applied by the Collector. However, due to a bug in the
 software library used to build the \gexf{} files, this was not possible
 to implement.
 
-\subsection{Improving Report File Sizes}
-Include a table of \gexf{} file sizes here.
 
 \subsection{Collector Scalability}
 
