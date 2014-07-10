@@ -31,6 +31,23 @@ side of the Gephi GUI\@.
 
 \section{Future Work}
 
+\subsection{Visualizing with Custom Colors and Sizes}
+
+Most of the visualizations in this thesis use text labels and color in
+order to convey information regarding the performance of the pub/sub
+system in question. However, it would also be interesting to visualize
+metrics using shapes, sizes and custom colors. For example, edges could
+be of different thickness, according to how many topic attributes were
+added to them. Also, special nodes such as the \emph{rendezvous} nodes
+in Scribe could have a custom color to them in order to identify them
+easily. Alternatively, the nodes could be of a different sizes than
+``regular'' nodes. This is different than the current way of applying
+colors through the \emph{Statistics Component} in Gephi, as it is
+dependent on the existence of a node attribute. Any custom color or size
+would have to be applied by the Collector. However, due to a bug in the
+software library used to build the \gexf{} files, this was not possible
+to implement.
+
 \subsection{Improving Report File Sizes}
 
 \subsection{Including Associative Arrays in Gephi}
