@@ -49,6 +49,7 @@ software library used to build the \gexf{} files, this was not possible
 to implement.
 
 \subsection{Improving Report File Sizes}
+Include a table of \gexf{} file sizes here.
 
 \subsection{Including Associative Arrays in Gephi}
 
@@ -78,6 +79,31 @@ impression that the values are unique to every node. It would be better
 to display these values in a separate panel, or perhaps even as a large
 floating text label in the Graph view.
 
-Include a table of \gexf{} file sizes here.
+\subsection{\demo{} as an Interactive Monitoring System}
 
-\subsection{Implementing a Pub/Sub Plugin for Gephi}
+As mentioned, the visualization of pub/sub systems are done offline,
+after the execution of the pub/sub system is finished. It is not
+intended to be a real-time system, where data is pulled and metrics are
+calculated during system execution. When inspecting the overlay using
+the \emph{Visualization Unit}, users may delete nodes in order to
+determine the effect it has on the overlay topology by recalculation
+such metrics using the \emph{Statistics Component} in Gephi. However, it will
+not affect any custom metrics which are calculated by the Collector such
+as control messages sent and received as these metrics are calculated
+after the execution of the pub/sub system. In order to affect such
+metrics, the architecture would have to be changed in order to
+accommodate for a two-way communication, where the Collector would be
+able to issue commands to the pub/sub nodes. Also, the Collector would
+have to collect data, calculate metrics and stream this information to
+Gephi in real-time. Gephi does indeed include an API for streaming data,
+so it is possible in theory, although in practice there are some issues
+with this API.\ This would be incredibly useful however, both as a
+monitoring system and as an environment for experimenting with protocols
+and their behavior. For example, imagine being able to right-click a
+node in Gephi, and ask this node leave the network. The Collector would
+then issue a leave command to the node in question, and the user could
+then potentially observe what happens in the Visualization Unit. The
+interactivity of such a feature would be incredibly engaging and useful
+both for developers and researchers, as well as students. Such
+a feature requires extensive re-engineering of \demo{}, but would be
+well worth the effort.
