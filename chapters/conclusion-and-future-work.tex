@@ -28,6 +28,20 @@ to implement.
 \subsection{Improving Report File Sizes}
 Include a table of \gexf{} file sizes here.
 
+\subsection{Collector Scalability}
+
+In the current implementation of \demo{}, the collector is run in a
+single JVM instance, where the pub/sub nodes connect to it via TCP.\
+There might be issues with the scalability in terms of number of
+connections, as we have not been able to test the system with more than
+30 connections. The Collector also serve as a single point of failure.
+Ideally, the Collector should itself be a distributed system, with
+built-in fault tolerance and a replication scheme. This is an important
+if \demo{} is ever to be considered \emph{production ready}, i.e.\ ever
+being used in real, deployed pub/sub systems. This is not a pressing
+concern however, as \demo{} is still a far way from being production
+ready, but hopefully it will be in the future.
+
 \subsection{Including Associative Arrays in Gephi}
 
 It would be useful to be able to store a map data structure on each
