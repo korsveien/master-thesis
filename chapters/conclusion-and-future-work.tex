@@ -46,6 +46,17 @@ the Graph, the more graphics capability is needed.
 
 \subsection{Reporter Performance Issues}
 
+The reporter has some performance issues due to allocating new Java
+objects each time the Collector pulls data. This causes the Java process to
+hang, as the garbage collector kicks in to clean up the heap. This is an
+issue which should be fixed by allocating memory statically and
+overwriting rather re-allocating. Also, this is a potential bottleneck
+in the system with regards to memory usage. If the reports are very large, the Java
+objects might occupy too much  memory, causing the Java process to
+fail. However, this should only be an issue when  running simulations at
+scale, where a process might include several simulated PeerNet nodes but only one
+reporter.
+
 \subsection{Visualizing with Custom Colors and Sizes}
 
 Most of the visualizations in this thesis use text labels and color in
