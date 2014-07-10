@@ -664,9 +664,9 @@ remaining 1868 are down due to churn. The snapshot in
 Figure~\ref{fig:churn250} depicts the overlay at interval 250, after a
 considerable number of nodes have joined the network. More specifically,
 interval 250 consists of 1028 nodes, which means 896 nodes joined in the
-interim. The edges are also evolving. While the first interval consisted
+interim. It is also possible to observe the edges evolve over time. While the first interval consisted
 of 108 edges, interval 250 consists of 1028 edges. It is interesting to
-see the edges evolve over time, as they provide can provide us with
+observe the edges evolve, as they provide can provide us with
 immediate visual feedback on properties such as clustering of nodes,
 graph density and node degree. Such properties can then be further
 analyzed using the Statistics component in Gephi.
@@ -692,7 +692,7 @@ restrictions.
     \includegraphics[scale=0.35]{figures/msg_rcv_avg}
 }
 \caption{Visualizations of average number of control messages sent and
-    received in PolderCast}
+    received per node in PolderCast}
 \label{fig:avg_ctrl}
 \end{figure}
 
@@ -709,6 +709,15 @@ discovering potential bottlenecks by highlighting overloaded nodes. This
 visualization can be produced using the same \gexf{} file as the one
 which is used for creating the visualizations in
 Section~\ref{sec:churn}.
+
+Both the node labels and color will update during playback of system
+execution. As the control message metrics are running totals, the user
+will observe the nodes getting a deeper color towards the end of the
+execution. Users can choose the stop the animation, as well as jump to
+any point in time, and then inspect the graph, run metrics using the
+\emph{Statistics Component} as well as inspect the overlay by using
+plots as seen in Section~\ref{sec:comparing} or export data to a \csv
+file using the \emph{Data Laboratory} as in Chapter~\ref{ch:evaluation}.
 
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
