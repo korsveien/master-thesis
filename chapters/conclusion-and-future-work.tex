@@ -1,35 +1,12 @@
-\section{Limitations in Gephi}
-
-As Gephi is still in the pre-1.0 stage, we encountered several
-limitations using the tool, some of which forced us to implement
-alternative or less than optimal approaches.
-
-\subsection{Playback issues in the Timeline component}
-
-We encountered some issues related to the playback of dynamic
-graphs in Gephi. The playback is based on time intervals, where the
-start and end bounds for the interval is encoded as a double. As you
-play back the graph evolution, these bounds suffer from rounding errors,
-which might lead to an interval that overlaps to simulation states.
-These intervals are effectively filter, stripping the graph of nodes and
-edges that do not belong in the defined interval. However, if the
-interval crosses the boundary of two different simulation states, the
-edges and nodes from both states will be included, which often leads to
-a sudden increase in number of edges during the animation, which
-abruptly disappear again. However, this issue is easily worked around by
-defining a sufficiently short interval. We usually set the interval
-bound to be of length 0.1, as this in our experience never leads to the
-issues with the time interval overlapping different states. We confirmed
-this by playing back the graph and controlling the start and end bounds
-output on the Filter component, as well as visually confirming the
-absence of any edge animation irregularities. Testing with the Cyclon
-protocol, we were also able to visually confirm that the number of edges
-remain consistent for each cycle in the context pane on the top right
-side of the Gephi GUI\@.
-
 \section{Conclusion}
 
 \section{Future Work}
+
+We believe there is a lot of potential for a tool such as \demo{}. What
+we present in this thesis is currently only a prototype, but hopefully
+it can serve as a starting point for further improvements. In this
+section we will discuss some of these potential improvements to \demo{},
+as well as some of the issues and limitations we faced in our implementation work.
 
 \subsection{Visualizing with Custom Colors and Sizes}
 
@@ -107,3 +84,26 @@ interactivity of such a feature would be incredibly engaging and useful
 both for developers and researchers, as well as students. Such
 a feature requires extensive re-engineering of \demo{}, but would be
 well worth the effort.
+
+\subsection{Playback issues in the Timeline component}
+
+We encountered some issues related to the playback of dynamic
+graphs in Gephi. The playback is based on time intervals, where the
+start and end bounds for the interval is encoded as a double. As you
+play back the graph evolution, these bounds suffer from rounding errors,
+which might lead to an interval that overlaps to simulation states.
+These intervals are effectively filter, stripping the graph of nodes and
+edges that do not belong in the defined interval. However, if the
+interval crosses the boundary of two different simulation states, the
+edges and nodes from both states will be included, which often leads to
+a sudden increase in number of edges during the animation, which
+abruptly disappear again. However, this issue is easily worked around by
+defining a sufficiently short interval. We usually set the interval
+bound to be of length 0.1, as this in our experience never leads to the
+issues with the time interval overlapping different states. We confirmed
+this by playing back the graph and controlling the start and end bounds
+output on the Filter component, as well as visually confirming the
+absence of any edge animation irregularities. Testing with the Cyclon
+protocol, we were also able to visually confirm that the number of edges
+remain consistent for each cycle in the context pane on the top right
+side of the Gephi GUI\@.
