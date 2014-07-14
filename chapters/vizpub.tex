@@ -713,27 +713,27 @@ included in it.
 \end{figure}
 
 
-\demo{} supports visualizing a number of performance metrics. These
-metrics are applied as attributes to both nodes and edges. The supported
-metrics are listed in Section~\ref{sec:collector}. We can visualize in
-Gephi these metrics by applying the corresponding attribute as a node
-label as well as use the \emph{Ranking Component} in order to apply
-color to the nodes. Such visualization can be seen in
+\demo{} supports visualizations of a number of performance metrics.
+These metrics are applied as attributes to both nodes and edges. The
+supported metrics are listed in Section~\ref{sec:collector}. In Gephi,
+we can visualize these metrics by applying the corresponding attribute
+as a node label as well as use the \emph{Ranking Component} in order to
+apply color to the nodes. Such visualization can be seen in
 Figure~\ref{fig:avg_ctrl} which shows the average number of control
-messages being sent and received in PolderCast. Using color helps in
-discovering potential bottlenecks by highlighting overloaded nodes. This
-visualization can be produced using the same \gexf{} file as the one
-which is used for creating the visualizations in
-Section~\ref{sec:churn}.
+messages being sent and received in PolderCast. This visualization can
+be produced using the same \gexf{} file as the one which is used for
+creating the visualization of churn in Section~\ref{sec:churn}.
 
-Both the node labels and color will update during playback of system
-execution. As the control message metrics are running totals, the user
-will observe the nodes getting a deeper color towards the end of the
-execution. Users can choose the stop the animation, as well as jump to
-any point in time, and then inspect the graph, run metrics using the
-\emph{Statistics Component} as well as inspect the overlay by using
-plots as seen in Section~\ref{sec:comparing} or export data to a \csv
-file using the \emph{Data Laboratory} as in Chapter~\ref{ch:evaluation}.
+Using color helps in discovering potential bottlenecks by highlighting
+overloaded nodes. Both the node labels and color will update during
+playback of system execution. As the control message metrics are running
+totals, the user will observe the nodes getting a deeper color towards
+the end of the playback. Users can choose the pause the animation any
+time they like, as well as jump to any point in time. The user is then
+able to inspect the overlay, run metrics using the \emph{Statistics
+    Component} as well as produce plots as seen in
+Section~\ref{sec:comparing}. The user may also export data to a \csv
+file using the \emph{Data Laboratory} for further statistical analysis.
 
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
