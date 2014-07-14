@@ -37,6 +37,16 @@ as it is still in the prototype stage.
 
 \subsection{Implementing Database Support}
 
+In stead of processing log files, it could be useful to take advantage a
+database for persistence. Graph databases would be an obvious fit for a
+tool such as \demo{}. There is already a Gephi plugin for importing and
+exporting data to such a database, but it is immature and does not
+support the latest version of the
+database.\footnote{https://marketplace.gephi.org/plugin/neo4j-graph-database-support/}.
+Regardless, implementing graph database support is most likely a more
+scalable approach to handling the large amount of data retrieved from
+the reporters.
+
 \subsection{Gephi Performance Issues}
 
 There are also performance issues with Gephi, as it is still in version
@@ -45,10 +55,11 @@ it uses for storing graphs. However, the authors have dealt with this
 issue in the current development version, where the memory usage has
 been significantly decreased. However, this version also breaks some
 features which prevents us from using it. Another important point to
-make regarding performance in Gephi is the use of OpenGL when rendering
-graphs. This means that in order to open large graphs in Gephi, it is
-necessary to use a computer with a dedicated graphics card. The bigger
-the Graph, the more graphics capability is needed.
+make regarding performance in Gephi is the use of the OpenGL graphics
+library when rendering graphs. This means that in order to open large
+graphs in Gephi, it is necessary to use a computer with a dedicated
+graphics card. The bigger the Graph, the more graphics capability is
+required.
 
 \subsection{Reporter Performance Issues}
 
@@ -56,7 +67,7 @@ The reporter has some performance issues due to allocating new Java
 objects each time the Collector pulls data. This causes the Java process to
 hang, as the garbage collector kicks in to clean up the heap. This is an
 issue which should be fixed by allocating memory statically and
-overwriting rather re-allocating. Also, this is a potential bottleneck
+overwriting memory rather re-allocating it. Also, this is a potential bottleneck
 in the system with regards to memory usage. If the reports are very large, the Java
 objects might occupy too much  memory, causing the Java process to
 fail. However, this should only be an issue when  running simulations at
@@ -72,7 +83,7 @@ metrics using shapes, sizes and custom colors. For example, edges could
 be of different thickness, according to how many topic attributes were
 added to them. Also, special nodes such as the \emph{rendezvous} nodes
 in Scribe could have a custom color to them in order to identify them
-easily. Alternatively, the nodes could be of a different sizes than
+easily. Alternatively, the ``special'' nodes could be of a different sizes than
 ``regular'' nodes. This is different than the current way of applying
 colors through the \emph{Statistics Component} in Gephi, as it is
 dependent on the existence of a node attribute. Any custom color or size
