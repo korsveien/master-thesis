@@ -738,39 +738,40 @@ file using the \emph{Data Laboratory} for further statistical analysis.
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
 
-
 In subsection~\ref{sec:churn} we illustrate one of the two types of
-visualizations it is possible to produce by leveraging \demo. Here we will describe the second:
-event dissemination visualizations.
+visualizations it is possible to produce by leveraging \demo, namely
+visualizations of overlay structure. Here we will describe the second:
+visualization of publication message dissemination.
 
 We run a PeerNet simulation in distributed mode with 100 nodes running
 the PolderCast protocol with a fanout set to $f=2$. In order to scale
 the experiment, the simulation includes 10 machines, where each machine
-is running 100 PeerNet nodes.  We publish a single message on the
+is running 10 PeerNet nodes. We publish a single message on the
 most popular topic which includes 63 subscribers. By analyzing copies of
 the publication message received on each node, the Collector is able to
 create a step-by-step visualization where directed edges are drawn as
-the message is disseminated through the overlay.  These edges depict the
+the message is disseminated through the overlay. These edges depict the
 path of the message being disseminated. The visualization includes 189
 edges in total, which indicates how many publication messages was sent
 by all nodes during the simulation.
 
 Figure~\ref{fig:diss_1} is a visualization of the dissemination in
 PolderCast after 1 and 4 hops, while~\ref{fig:diss_2} are snapshots of
-the dissemination visualization after the dissemination has finished.
-The nodes have been arranged in a ring using the Layout component in
-Gephi. Also they are ordered by node id, making it easier to see whether
-an edge represent a ring link or a random link. The labels indicate the
-hop number of the message received by that node. On the left side of the
-ring there is a node with the label ``0'', which indicates that this is
-the publishing node. A node with the label ``1'', means the node
-received a message at the first hop, a node with a label ``2'' that it
-received a message at the second hop, and so on. In addition to numeric
-labels, the nodes are color coded on a gradient. The deeper the color of
-the node, the higher the hop count, which means it is further away from
-the publisher. In figure~\ref{fig:diss_2} the node furthest away is
-easily spotted on the left by its deep red color. This is the last node
-to receive the publication.
+the visualization after the dissemination has finished.  The nodes have
+been arranged in a ring using the \emph{Layout Component} in Gephi. Also
+they are ordered by node id, making it easier to see whether an edge
+represent a ring link or a random link. The labels indicate the hop
+number of the message received by that node. On the left side of the
+ring in Figure~\ref{fig:diss_1} and Figure~\ref{fig:diss_2 } there is a
+node with the label ``0'', which indicates that this is the publishing
+node. A node with the label ``1'', means the node received a message at
+the first hop, a node with a label ``2'' that it received a message at
+the second hop, and so on. In addition to numeric labels, the nodes are
+color coded on a gradient. The deeper the color of the node, the higher
+the hop count, which also means it is further away from the publisher. In
+Figure~\ref{fig:diss_2} the node furthest away is easily spotted on the
+left by its deep red color. This is the last node to receive the
+publication.
 
 It might seem strange that the last node to receive the message is an
 immediate ring neighbor of a node who received the message on the first
@@ -778,11 +779,11 @@ hop. Observe that in Figure~\ref{fig:diss_1} this neighboring node who
 received a message on the first hop does indeed send a message to the
 node in question. However, in Figure~\ref{fig:diss_2}, which depict the
 dissemination after the message has been sent, no numeric label is
-applied to the node. This could bear the impression that this note did
-not receive any message, however this is not the case. The explanation
+applied to the node. This could give the impression that this node did
+not receive any message. However, this is not the case. The explanation
 behind this is latency. The latency between these two nodes is so high
 that by the time it received the message from its ring neighbor, the
-message was already received from somewhere else. We choose to visualize
+message was already received from another node. We choose to visualize
 this by drawing an edge to the node and then refrain from applying a
 numeric label. When we reach the point in the animation where this node
 receives a message for the first time, we apply the hop count of this
@@ -822,10 +823,10 @@ When inspecting the dissemination algorithm of protocols visually,
 implementation details which could otherwise be overlooked become easily
 detectable. For example, in Figure~\ref{fig:diss_1} it can be observed
 that the publisher node sends a message to four nodes, even though the
-fanout is set to $f=2$.  This fanout should indicate that the node
+fanout is set to $f=2$. This fanout indicate that the node
 should send the message to three neighbors, based on the description of
 the dissemination algorithm of PolderCast, summarized in
-Chapter~\ref{ch:background}.  However, there is an implementation detail
+Chapter~\ref{ch:background}. However, there is an implementation detail
 in PolderCast that is not mentioned in the original
 paper~\cite{Setty:2012}. In the implementation of the PolderCast
 protocol, publishers send messages to one additional random node in
@@ -834,7 +835,7 @@ implementation details is useful to both researchers and developers, and
 it is especially useful for students. We believe \demo can be very
 valuable as an educational tool, as its grant students with the
 capability of controlling the dissemination by using the Timeline
-component in Gephi. Students may pause the visualization at any point in
+Component in Gephi. Students may pause the visualization at any point in
 time or jump to any step of the visualization in order to fully
 understand the benefits and drawbacks of the particular dissemination
 scheme being studied.
@@ -844,27 +845,28 @@ issues or bugs with the dissemination algorithm. As observed in
 Figure~\ref{fig:diss_1}, the publisher disseminates to four nodes, where
 two of these should be random neighbors. However, the publisher
 seemingly sends the message to three of its closest ring neighbors.
-This means a neighbor close to it might have been chosen as a random
-neighbor. This might indicate a bug in the CYCLON module of PolderCast,
-which is responsible of providing the RINGS layer with uniform random
-neighbors.  However, the dissemination happens at an early point of the
-experiment, more specifically, after 50 PeerNet cycles. Due to
-experimental settings, this might not have been enough time for the
-different layers of overlay in PolderCast to converge. Also, it could be
-a special case, which resulted in the publisher being a bit unlucky when
-picking a random neighbor in this particular scenario. Regardless,
-visualizing dissemination leads to these interesting observations, which
+This means a neighbor close to it have been chosen as a random neighbor.
+This might indicate a bug in the CYCLON module of PolderCast, which is
+responsible of providing the RINGS layer with uniform random neighbors.
+However, the dissemination happens at an early point of the experiment,
+more specifically, after 50 PeerNet cycles. Due to experimental
+settings, this might not have been enough time for the different layers
+of overlays in PolderCast to converge. Also, it could be a special case,
+which resulted in the publisher being a bit ``unlucky'' when picking a
+random neighbor in this particular scenario. Regardless, visualizing
+dissemination leads to these types of interesting observations, which
 might lead to even more interesting findings with regards to protocol
-behaviour.  One such interesting observation is how a fanout of $f=2$
-leads to a special case when dissemination messages in PolderCast. More
-specifically, as mentioned in Chapter~\ref{ch:background}, a node
-running PolderCast will forward a message to both ring neighbors and
-$f-2$ random neighbors if it received a message through a random link.
-But if $f=2$, then $f-2 = 0$. However, PolderCast will always include a
-random link when it forwards a message, meaning that the number of
-random neighbors any node will forwards a message to is set to a minimum
-of one. This is yet another implementation detail which could be hard to
-catch without being able to inspect the dissemination protocol visually.
+behaviour. For example, one such interesting observation is how a fanout
+of $f=2$ leads to a special case when disseminating messages in
+PolderCast. More specifically, as mentioned in
+Chapter~\ref{ch:background}, a node running PolderCast will forward a
+message to both ring neighbors and $f-2$ random neighbors if it received
+a message through a random link.  But if $f=2$, then the number of
+random neighbors would be zero, since $f-2 = 0$. However, PolderCast
+will always include a minimum of one random link when it forwards a
+message. This is yet another implementation detail which could be hard
+to catch without being able to inspect the dissemination protocol
+visually.
 
 One of the trade-offs we mention in Chapter~\ref{ch:design-challenges}
 is the one between the number of duplicate messages received and the
@@ -878,16 +880,17 @@ many unnecessary messages being sent, scalability in terms of bandwidth
 suffers.
 
 Deriving the exact number of duplicate messages received by each node is
-trivial. As each directed edge represent  a message being sent, all we
+trivial. As each directed edge represent a message being sent, all we
 need to do is calculate the in-degree of each node using the Statistics
-component in Gephi. The result can be seen in Figure~\ref{fig:dups}.
+Component in Gephi. The result can be seen in Figure~\ref{fig:dups}.
 This visualization indicate that PolderCast does indeed introduce a
 rather high number of duplicate messages being received on each node.
 However, it is only an indication and nothing more as this visualization
-traces a single publication message on a single topic. However, such
-an indication can be useful in order to guide researchers and developers
-towards potential issues or bugs. We believe \demo is a useful tool in
-this aspect.
+traces a single publication message on a single topic. We should not use
+this observation to make any sweeping conclusions regarding the general
+case. However, such an indication can be useful in order to guide
+researchers and developers towards potential issues or bugs. We believe
+\demo is a useful tool in this aspect.
 
 \subsection{Comparing Pub/Sub Systems Visually}
 \label{sec:comparing}
