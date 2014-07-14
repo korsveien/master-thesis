@@ -1,10 +1,12 @@
 In this chapter we describe \demo~\cite{korsveien2014vizpub}, a tool we
 propose for visualizing the performance of overlay-based Pub/Sub
-Systems. In addition to describing the tool and its system
-architecture, we present several visualizations created by the tool. We
-also discuss the benefits of using visualizations when studying and
-analyzing pub/sub systems, where we share several experiences using the
-tool.
+Systems. In addition to describing the tool and its system architecture,
+we present several examples of visualizations created by the tool. Also,
+we use \demo{} in order to compare PolderCast and Scribe visually, both
+using visualizations as well as using the \emph{Statistics Component} in
+Gephi to produce certain plots.  We also discuss the benefits of using
+visualizations when studying and analyzing pub/sub systems, where we
+share several experiences using the tool.
 
 We presented a poster and held a live demonstration of \demo{} at the
 ACM International Conference of Distributed Event Based Systems (DEBS),
@@ -15,25 +17,23 @@ is available in a public repository~\footnote{\demo{} is open source and
 that our tool will be of benefit to the community, and aid in further
 development and research of distributed systems.
 
-\section{System Overview}
-\label{sec:overview}
-
 To the best of our knowledge, \demo~is the first tool of its kind. The
 tool is able to visualize the execution of any given distributed pub/sub
 system step by step with respect to a set of performance metrics. Each
 node in the system records records relevant data at selected
-\emph{reporter intervals} during system execution. Our tool is then able to pull this data to a
-single site, and compute various metrics at a system-wide scale. The
-collected data from each interval is then collated into a single
-\gexf{} file, which is interpreted by Gephi, which enable replay of system
-execution offline.
+\emph{reporter intervals} during system execution. Our tool is then able
+to pull this data to a single site, and compute various metrics at a
+system-wide scale. The collected data from each interval is then
+collated into a single \gexf{} file, which is interpreted by the
+\emph{Visualization Unit} which enable replay of system execution
+offline.
 
-Our tool supports two types of visualizations visualizations, the first is a
+Our tool supports two types of visualizations, the first is a
 visualization of the overlay structure, and how it evolves over time.
-The second type of animation is a hop-by-hop visualization of a single
+The second type of visualization is a hop-by-hop animation of
 publication message dissemination, where directed edges represent the
-message dissemination path. We provide examples of both types of
-visualizations later in this chapter.
+dissemination path. We provide examples of both types of visualizations
+later in this chapter.
 
 There are several benefits to using a tool such as \demo. It enables
 researchers and developers to gain a deeper insight into the overlay
@@ -41,19 +41,20 @@ structure as well as the publication process. It also has major benefits
 as an educational tool, as it provides students with an visual
 representation of both the structural evolution of the system, as well
 as step-by-step animations of publication message disseminations. This
-is useful in order to engage students, and facilitate deeper insight
+is useful in order to engage students, and to facilitate deeper insight
 into different pub/sub systems and their dissemination schemes. Such an
 insight is also useful in order to identify potential weaknesses or
 deployment anomalies of a given pub/sub systems. When developing the
-tool, we encountered many scenarios where \demo~demonstrated its
-usefulness. For example, when experimenting with PolderCast, we could
-immediately verify that tree nodes were disconnected at the RINGS layer,
-as seen in Figure~\ref{fig:pold_disc}.  Using our tool, we were able to
-verify that this was caused by an artefact in the input workload where
-the three nodes had no overlapping interest with any other node in the
-system. We were then able to verify that the nodes were connected at the
-CYCLON layer. We are not aware of any other tool or framework that would
-allow such easy detection and validation of system behaviour.
+tool, we encountered many scenarios where \demo{} demonstrated its
+usefulness. For example, when experimenting with visualizations of
+PolderCast, we could immediately verify that three nodes were
+disconnected at the RINGS layer, as seen in Figure~\ref{fig:pold_disc}.
+Using our tool, we were able to verify that this was caused by an
+artefact in the input workload where the three nodes had no overlapping
+interest with any other node in the overlay. We were then able to verify
+that the nodes were connected at the CYCLON layer. We are not aware of
+any other tool or framework that would allow such easy detection and
+validation of system behaviour.
 
 \begin{figure}[h]
 \includegraphics[width=\linewidth]{figures/disconnected-component-poldercast.pdf}
@@ -61,13 +62,13 @@ allow such easy detection and validation of system behaviour.
 \label{fig:pold_disc}
 \end{figure}
 
-Another interesting use case for our tool is comparing different pub/sub systems and
-protocols visually. Users may run the different systems using the same
-workload, e.g.\ subscriptions and publications, and system parameters in
-order to replay the execution and compare the different systems at
-selected points in time. We include such comparisons in this chapter,
-were we compare PolderCast and Scribe on a set of specific performance
-metrics.
+Another interesting use case for our tool is comparing different pub/sub
+systems and protocols visually. Users may run the different systems
+using the same system parameters as well as using the same workloads for
+subscriptions and publications in order to replay the
+execution and compare the different systems visually. We include such
+comparisons in this chapter, were we compare PolderCast and Scribe
+visually, in order to see what we can benefit from such visual analysis.
 
 \section{System Architecture}
 \label{sec:arch}
