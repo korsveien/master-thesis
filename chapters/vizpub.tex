@@ -28,9 +28,8 @@ collated into a single \gexf{} file, which is interpreted by the
 \emph{Visualization Unit} which enable replay of system execution
 offline.
 
-Our tool supports two types of visualizations, the first is a
-visualization of the overlay structure, and how it evolves over time.
-The second type of visualization is a hop-by-hop animation of
+Our tool supports two different types of visualizations: (1) visualization of the
+overlay structure and how it evolves over time and (2) visualization of
 publication message dissemination, where directed edges represent the
 dissemination path. We provide examples of both types of visualizations
 later in this chapter.
@@ -38,7 +37,7 @@ later in this chapter.
 There are several benefits to using a tool such as \demo. It enables
 researchers and developers to gain a deeper insight into the overlay
 structure as well as the publication process. It also has major benefits
-as an educational tool, as it provides students with an visual
+as an educational tool, as it provides students with a visual
 representation of both the structural evolution of the system, as well
 as step-by-step animations of publication message disseminations. This
 is useful in order to engage students, and to facilitate deeper insight
@@ -1325,3 +1324,25 @@ community, and hosting the code publicly is a key part in ensuring the
 future of the tool.
 
 \section{Chapter Summary}
+
+In this chapter we presented \demo{}~\cite{korsveien2014vizpub}, a tool we propose for visualizing
+the performance of overlay-based pub/sub systems. To the best of our
+knowledge, this is the first tool of its kind. It is designed to be a
+generic tool, intended to be used with any pub/sub system. We describe
+\demo{} and its system architecture, as well as demonstrate the usage of
+the tool through examples of visualizations. \demo{} is able to produce
+two different types of visualizations: (1) visualization of overlay
+structure, and (2)  visualization of publication message dissemination.
+We also describe our own experiences working with the tool, and how it
+aided us in debugging as well as in better understanding the
+characteristics of the different pub/sub protocols in question. We
+believe our tool is a useful contribution which has value both for
+researchers, developers as well as students of distributed systems. We
+share our implementation code by hosting it in a public
+repository~\footnote{\url{http://github.com/vizpub/vizpub}} in order to
+encourage its further development. We presented a poster and held a
+demonstration of \demo{} at DEBS 2014 where we were awarded with the
+price for best poster/demo. We are encouraged by the feedback received
+from the researchers who visited our demo at DEBS, and we hope our tool
+will serve as a lasting contribution to the research community.
+
