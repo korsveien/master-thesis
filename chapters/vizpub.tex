@@ -1204,15 +1204,16 @@ In section~\ref{sec:overview} we mention how we were able to observe a
 disconnected component in the RINGS layer of PolderCast, as seen in
 Figure~\ref{fig:pold_disc}, and later confirm this was an artefact of
 the workload being used. More specifically, we used the \emph{Node Query
-    Tool} in Gephi to ensure these nodes had zero overlapping interest
-with any other node in the overlay by inspecting the Topics-attribute of
-the visualized nodes. This was the first experience we had with the tool, were it
-usability was clearly demonstrated. It speaks to how visualizations are
-also able to provide information of the datasets being used. In the
-scenario we describe, we used a real-world trace from Twitter~\cite{Kwak10www},
-which included 1000 user accounts and their subscriptions. However, the
-PeerNet simulation only included 100 nodes for testing purposes. This
-leads a biased sample of the trace, which in this case lead to a
+    Tool} in Gephi to ensure these nodes had zero overlapping
+subscriptions with any other node in the overlay by inspecting the
+``Topics'' attribute of the visualized nodes. This was the first
+practical experience we had with the tool, were it usability was clearly
+demonstrated. It speaks to how visualizations are also able to provide
+information of the datasets being used. In the scenario we describe, we
+used a real-world trace from Twitter~\cite{Kwak10www}, which included
+1000 user accounts and their subscriptions. However, the PeerNet
+simulation only included 100 nodes for testing purposes. This lead to a
+biased sample of the trace, which in this case resulted in a
 disconnected component. Being able to run simulations with fixed
 parameters but different datasets, and then inspect the resulting
 overlay visually is another aspect of using \demo which should prove
@@ -1245,19 +1246,18 @@ using the Statistics component in Gephi, which enables calculation of
 the number of connected components in the graph.  The calculation
 revealed that the graph is a single strongly connected component, i.e.\
 from any node in the graph there is a directed path to any other node.
-This means that every node received the publication.  However, the
+This means that every node received the publication. However, the
 Collector still calculated the hit-ratio to 97\%. This indicates that
 the problem is not with the implementation of the protocol, but with the
 implementation of the hit-ratio calculation. And indeed, by inspecting
 the hit-ratio calculation in the Collector, we revealed a
 \emph{off-by-one} software bug, leading to incorrect hit-ratio result.
 
-Debugging is a major part of developing software, and arguably the most
+Debugging is a major part of developing software and arguably the most
 time consuming, and debugging distributed systems is especially hard.
-Any tool that aids in debugging is highly valuable to any developer. As
+Any tool that aids in debugging is highly valuable to any developer.
 \demo{} can aid in both discovering and resolving bugs, as it provides
 the developer with instant visual feedback of the protocol behaviour.
-
 
 \subsection{Using Test-Driven Development}
 
@@ -1279,8 +1279,7 @@ independent pieces of code, typically methods within a single
 module or component, while \emph{integration tests} aim to test
 code across such modules and components in order to determine
 how well they integrate with each other. In our work, we only
-took advantage of Unit Tests where suitable using the
-JUnit~\cite{junit} and Mockito~\cite{mockito} libraries.
+took advantage of Unit Tests where we found it to be suitable.
 We could also have benefited from a suite of integration tests,
 as our implementation is heavily dependent on interoperating
 components, as well as file and network IO\@. However, writing
