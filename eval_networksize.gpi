@@ -1,0 +1,8 @@
+set datafile separator ";"
+set term epslatex color
+set output "eval_networksize.tex"
+set ylabel "Network Size"
+set xlabel "Reporter Intervals"
+set key outside tmargin
+
+plot "~/Dropbox/master-reports/evaluation/networkSize.csv" title "Network Size" with lines;
