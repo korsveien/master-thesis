@@ -8,7 +8,7 @@ integration~\cite{goops}. Pub/sub systems have a large number of
 important performance metrics related to delivery latency, bandwidth
 consumption, communication overhead as well as computation overhead.
 Many of these aspects of pub/sub systems are known to be at stake with
-each other~\cite{}, forcing researchers to face difficult design
+each other~\cite{Kermarrec:2013, Setty:2012}, forcing researchers to face difficult design
 decisions when developing such systems in order to achieve a suitable
 balance in performance.
 
@@ -21,33 +21,35 @@ researchers and developers of pub/sub systems.
 
 In this thesis we present \demo{}, a tool we propose for visualizing the
 execution of any given pub/sub system step-by-step with respect to a set
-of performance metrics. The tool enables logging local information at
+of performance metrics. Our tool enables logging local information at
 every node in the system under analysis, which is then collected at a
 single site for analysis. When all data has been collected, the tool
-will calculate global metrics at a system-wide scale. The resulting
-data is stored to disk in a single file using the \gexf{}~\footnote{}
-file format. This file is then interpreted by the Gephi Open Graph Viz
-tool~\cite{} which enables the user to replay system execution as well as visualize
-overlay structure, dissemination paths of publications messages and
-numerous performance-critical metrics.
+will calculate global metrics at a system-wide scale. The resulting data
+is stored to disk in a single file using the
+\gexf{}~\footnote{GEXF (Graph Exchange XML Format) is a language for
+    describing complex networks: \url{http://gexf.net/format/}} file
+format. This file is then interpreted by the Gephi Open Graph Viz
+tool~\cite{ICWSM09154} which enables the user to replay system execution
+as well as visualize overlay structure, dissemination paths of
+publications messages and various performance-critical metrics.
 
-To the best of our knowledge, this is the first tool of its kind. And
+To the best of our knowledge, \demo{} is the first tool of its kind. And
 although our main focus lies in the performance of pub/sub
 systems, the tool is generic in design, and can be used in order to
-visualize other types of overlay-based systems such as~\ref{}.
+visualize other types of overlay-based systems such as~\cite{Loukos:2014}.
 
-The benefit of our tool lies in giving both researchers, developers as
+The major benefit of our tool lies in giving both researchers, developers as
 well as students the ability to gain a deeper understanding of the
 properties of overlay-based systems, both in terms of their structure
 and their dissemination schemes. The tool is capable of providing the
 user with two different types of visualizations: (1) visualization of
 overlay structure and (2) visualization of publication message
 dissemination. Both types of visualization provides the user with the
-abiity to playback execution as well as pausing and analyzing the overlay at
-different points in time. Such visualizations grants the user with an
+ability to replay the system execution as well as pausing and analyzing the overlay at
+different points in time. The visualizations mentioned above grants the user with an
 insight into the system which is helpful in order to determine protocol
 behaviour as well as potential weaknesses and anomalies of any given
-pub/sub protocol. We describe some of the practical experiences we had
+pub/sub protocol. In this thesis, we describe some of the practical experiences we had
 with the tool, which should serve as good examples of it utility.
 
 Other benefits include the possibility of comparing different pub/sub
@@ -75,12 +77,13 @@ structural overlay metrics. The advantage of using \demo{} for this
 purpose lies in the fact that the Gephi framework grants us with
 several algorithms for calculating certain metrics for ``free''. Also, adding
 support for metrics which are not included in Gephi can be done by
-developing plugins for Gephi which can be distribute via its online
-marketplace~\footnote{\url{}}. This encourages sharing code between
-researchers, avoiding having to implement algorithms from scratch, which
+developing plugins for Gephi which can be distributed via its online
+marketplace~\footnote{Plugins for Gephi are available at the official
+    Plugin Marketplace: \url{https://marketplace.gephi.org/}}. This encourages sharing code between
+researchers, avoiding the individual researcher having to implement algorithms from scratch, which
 we believe would be of great benefit to the research community.
 
-We presented poster and held a live demo of \demo{} at the ACM
+We presented a poster and held a live demo of \demo{} at the ACM
 International Conference of Distributed Event Based Systems (DEBS),
 hosted in Mumbai in May 2014. The positive feedback from the researchers and
 students attending the conference reassured us that there is a
@@ -91,7 +94,7 @@ demonstration. This reassures us that there is a need for such a tool
 and that \demo{} may serve as a lasting contribution to the research
 community at large. In order to encourage contributions and further
 development of \demo{}, we host our implementation code in a public
-repository~\footnote{\url{http://github.com/vizpub/vizpub}}.
+repository~\footnote{\demo{} is hosted in a public repository: \url{http://github.com/vizpub/vizpub}}.
 
 \section{Chapter Overview}
 
@@ -109,11 +112,10 @@ thesis:
 
     \item[Chapter~\ref{ch:design-challenges}] \hfill \\
 
-        We extend the mini-survey found in~\cite{Setty:2012} with a
-        where we analyze several other protocols than what is included
-        in~\cite{Setty:2012}. This chapter should be helpful in order to
-        understand the different challenges researchers face when
-        designing such systems. In particular it focuses on what
+        We extend the mini-survey found in~\cite{Setty:2012} with a set
+        of additional pub/sub protocols. This chapter should be helpful
+        in order to understand the different challenges researchers face
+        when designing such systems. In particular it focuses on what
         trade-offs must be considered, and what are the advantages and
         drawbacks of certain design decisions.
 
@@ -129,7 +131,7 @@ thesis:
     \item[Chapter~\ref{ch:evaluation}] \hfill \\
 
        We use \demo~in order to expand the evaluation performed
-       in~\cite{Setty:2012} on a particular set of topology metrics. Our
+       in~\cite{Setty:2012} on a set of particular topology metrics. Our
        tool enable us to easily add these metrics to the evaluation, as
        the algorithm for calculating these properties of the overlay are
        included in the Gephi framework.
