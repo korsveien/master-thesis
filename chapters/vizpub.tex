@@ -898,11 +898,12 @@ In Figure~\ref{fig:struct} we visualize the structure of PolderCast and
 Scribe. We run PeerNet experiments in simulation mode, consisting of
 1000 nodes, 1000 reporter intervals and 1000 PeerNet cycles.
 Subscriptions are modeled after the Facebook dataset found
-in~\cite{}. The resulting \gexf{} files are imported into Gephi
+in~\cite{facebook-eurosys09}. The resulting \gexf{} files are imported into Gephi
 in order to analyze the overlay structure both visually as well by
 calculating certain metrics using the \emph{Statistics Component}. The
-calculated values are described in Table~\ref{tab:struct_metrics}. These
-values are averages across the duration of the experiment.
+calculated values are described in Table~\ref{tab:struct_metrics}. The
+from \emph{Number of Nodes} and \emph{Number of Edges} which are totals,
+while the other values are averages across the duration of the experiment.
 
 \begin{table}[h!]
     \centering
@@ -928,24 +929,29 @@ values are averages across the duration of the experiment.
 
 Inspecting the overlay structure visually enables us to derive certain
 information which can guide us in further investigations. For example,
-by visually comparing the two overlays in Figure~\ref{fig:struct}, we can
-observe that the overlay of PolderCast seem to include a lot more edges,
-as well as being more dense than the overlay in Scribe. The edges in the
-PolderCast overlay are so numerous they almost seem like a mist of white
-noise. As observed in Table~\ref{tab:struct_metrics}, both overlays consists of the same number of nodes,
-but PolderCast has almost ten times the number of edges. This should mean
-PolderCast also has a much higher average degree as well as a higher
-graph density. Executing these metrics using the Statistics Component reveal that PolderCast indeed have
-a much higher degree, almost ten times higher than Scribe. The \emph{graph
-density} is also much higher in PolderCast. Graph density is measured as
-how far away the graph is to being complete, where 1 is a complete
-graph. The lower density of Scribe is a natural consequence of the lower
-number of edges. The difference in edge count is due to the average node
-degree having a lower upper bound in Scribe, as described in
-Chapter~\ref{ch:design-challenges}. More specifically, the average node
-degree in Scribe is bound by the logarithm of the number of nodes in the
-overlay $O(log |\mathcal V|)$, while in PolderCast it is in the order of the number
-of subscriptions $O(|\mathcal T_v|)$.
+by visually comparing the two overlays in Figure~\ref{fig:struct}, we
+can observe that the overlay of PolderCast seem to include a lot more
+edges, as well as being more dense than the overlay in Scribe. Both
+these visualization consists of 362 nodes, but the PolderCast overlay
+seen in Figure~\ref{fig:polder_struct} consists of 2307 edges, while the
+Scribe overlay, seen in Figure~\ref{fig:scribe_struct} consists of 193
+edges. The overlay in PolderCast has almost twenty times the number of
+edges. This is consistent with the total number of edges across the
+duration of the experiment seen in Table~\ref{tab:struct_metrics}. The
+higher number of edges should also mean PolderCast also has a much
+higher average degree as well as a higher graph density. Executing these
+metrics using the Statistics Component reveal that PolderCast indeed
+have a much higher degree, again almost twenty times that of Scribe. The
+\emph{graph density} is also much higher in PolderCast. Graph density is
+measured as how far away the graph is to being complete, where 1 is a
+complete graph. The lower density of Scribe is a natural consequence of
+the lower number of edges. The difference in edge count is due to the
+average node degree having a lower upper bound in Scribe, as described
+in Chapter~\ref{ch:design-challenges}. More specifically, the average
+node degree in Scribe is bound by the logarithm of the number of nodes
+in the overlay $O(log |\mathcal V|)$, while in PolderCast it is in the
+order of the number of subscriptions $O(|\mathcal T_v|)$. The
+visualization allows us to observe this difference for ourselves.
 
 \afterpage{\clearpage}
 \begin{figure}
