@@ -1000,9 +1000,9 @@ approaches to this question.
 Looking at the overlay structures in Figure~\ref{fig:struct} also
 indicate that some nodes are overloaded. The PolderCast overlay in
 particular seems to have a very overloaded node in terms of degree,
-visible in the upper middle of Figure~\ref{fig:polder_struct}. Using
-the capabilities of \demo{}, we are able to look further into the issue
-of load balancing. Figure~\ref{fig:polder_degree} and
+visible in the upper middle of Figure~\ref{fig:polder_struct}. Using the
+capabilities of \demo{}, we are able to look further into the issue of
+load balancing. Figure~\ref{fig:polder_degree} and
 Figure~\ref{fig:scribe_degree} visualize the degree of the nodes in the
 overlay by color. The deeper red the color of the node is, the higher
 its degree. This is useful for spotting potential bottlenecks in the
@@ -1019,37 +1019,48 @@ option of displaying scatter plots of degree distribution, as well as
 storing these plots to the hard drive as image files.
 Figure~\ref{fig:polder_degree_distr} and
 Figure~\ref{fig:scribe_degree_distr} describes the undirected degree
-distribution of PolderCast and Scribe. Both distributions are skewed to
-the right. However, the range of values are more tightly bound in
-Scribe, indicating a fixed degree. As mentioned, PolderCast has a average node degree proportional
-to the number of subscriptions, which results in a larger range of
-values than what is seen in Scribe. In fact, by using the \emph{Rank
-Table} in Gephi, we can quickly find the maximum node degree in the
-overlay. In PolderCast the maximum node degree is 648, while in Scribe
-it is 193. Both have a minimum of 0.
+distribution of PolderCast and Scribe. Note that these values are
+averages across the duration of the experiment, while the visualizations
+found in Figure~\ref{fig:struct} only represents the structure of the
+overlay at interval 1000. Looking at the distributions in
+Figure~\ref{fig:polder_degree_distr}
+and~\ref{fid:polder_degree_distr},we can see that both are skewed to the
+right. However, the range of values are more tightly bound in Scribe,
+indicating a fixed degree. As mentioned, PolderCast has a average node
+degree proportional to the number of subscriptions, which results in a
+larger range of values than what is seen in Scribe. In fact, by using
+the \emph{Rank Table} in Gephi, we can quickly find the maximum node
+degree in the overlay at interval 1000, which can server as an
+indication of the difference in node degree. Doing this, we find that in
+PolderCast the maximum node degree at interval 1000 is 648, while in
+Scribe it is 193.
 
-The high-degree node found in the PolderCast overlay might indicate that
-this node has a much higher number of subscriptions then the other nodes
-in the overlay. We can confirm this suspicion by using the \emph{Node
-    Query Tool}, which shows us that this node subscribes to 466 topics,
-which is is 418 topics more than the node which is ranked second in
-terms of subscription size. This is consistent with the way degree grows
-with the subscription size in PolderCast. Scribe might have an advantage
-in terms of node degree if there are many nodes in the system with a
-high number of subscriptions. The same node in Scribe, seen at the
-middle of the overlay in Figure~\ref{fig:scribe_struct}, has node degree
-of 20.
+The high-degree node found in the PolderCast overlay in
+Figure~\ref{fig:polder_struct} might indicate that this particular node
+has a much higher number of subscriptions then the other nodes in the
+overlay. We can confirm this suspicion by using the \emph{Node Query
+    Tool}, which shows us that this particular node subscribes to 466
+topics, which is is 418 topics more than the node which is ranked second
+in terms of subscription size. This is consistent with the way degree
+grows with the subscription size in PolderCast. Scribe might have an
+advantage in terms of node degree if there are many nodes in the system
+with a high number of subscriptions. The same node in Scribe, seen at
+the middle of the overlay in Figure~\ref{fig:scribe_struct}, has node
+degree of 20.
 
 Figure~\ref{fig:polder_indegree_distr},~\ref{fig:polder_outdegree_distr},~\ref{fig:scribe_outdegree_distr}
 and Figure~\ref{fig:scribe_outdegree_distr} describes the distribution
-of directed degree in PolderCast and Scribe. In PolderCast the in-degree
-distribution has a longer tail than the in-degree distribution, while in
-Scribe, the opposite is true. The higher in-degree values of PolderCast
-is most likely due to random links, where a node might have a high
-number of incoming links if it is selected as a random neighbor several
-times. In Scribe, the higher out-degree might be due to root nodes or
-nodes higher up in the tree structures, who will necessarily have a
-bigger children table than the nodes further down the tree.
+of average directed degree in PolderCast and Scribe. Both in PolderCast
+and Scribe the distribution of in-degree and out-degree seems to be
+quite balanced and both distributions seem to have a long tail. However,
+there seems to be an outlier in the PolderCast distributions, which
+would represent a node with a very high average node degree. If we look
+back at the undirected distribution found in
+Figure~\ref{fig:polder_degree_distr}, we can barely make out this
+outlier in the far right of the plot, although it is difficult to spot.
+Unfortunately, Gephi does not provide any options for configuring these
+plots, otherwise we could be able to increase the range of the x values
+in order to see this data point properly.
 
 \begin{figure}[Ht]
     \centering
