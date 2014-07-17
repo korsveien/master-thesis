@@ -976,6 +976,23 @@ visualization allows us to observe this difference for ourselves.
     \label{fig:struct}
 \end{figure}
 
+\afterpage{\clearpage}
+\begin{figure}
+    \centering
+    \vspace{-100pt}
+    \thisfloatpagestyle{empty}
+    \subfigure[PolderCast]{%
+        \includegraphics[scale=0.67]{figures/polder_degree}
+        \label{fig:polder_degree}
+    }
+    \subfigure[Scribe]{%
+        \includegraphics[scale=0.67]{figures/scribe_degree}
+        \label{fig:scribe_degree}
+    }
+    \caption{Visualization of \textbf{degree} in
+        PolderCast and Scribe after 1000 intervals}
+\end{figure}
+
 The fact that the number of edges in PolderCast is much higher, also
 means the overlay is better connected. This is evident if we look at the
 number of connected components. Strongly connected components have a
@@ -1087,8 +1104,7 @@ where the average node degree fluctuates less than in Scribe. This yet
 again indicates that Scribe is more vulnerable to churn. However, in
 both overlays the number of edges drop around interval 400, where a lot
 of nodes are down due to churn. Still the node degree in PolderCast
-remains stable. This might serve to illustrate the higher degree of
-robustness of the PolderCast overlay.
+remains stable. This might serve to illustrate the robustness of the PolderCast overlay.
 
 The robustness of the PolderCast overlay compared to Scribe also seems
 evident when plotting the time series for the clustering coefficient of
@@ -1175,22 +1191,6 @@ more thorough evaluation.
 \end{figure}
 \restoregeometry
 
-\afterpage{\clearpage}
-\begin{figure}
-    \centering
-    \vspace{-100pt}
-    \thisfloatpagestyle{empty}
-    \subfigure[PolderCast]{%
-        \includegraphics[scale=0.67]{figures/polder_degree}
-        \label{fig:polder_degree}
-    }
-    \subfigure[Scribe]{%
-        \includegraphics[scale=0.67]{figures/scribe_degree}
-        \label{fig:scribe_degree}
-    }
-    \caption{Visualization of \textbf{degree} in
-        PolderCast and Scribe}
-\end{figure}
 
 \section{\demo as a Framework for Evaluating Pub/Sub Systems}
 \label{sec:viz_eval}
