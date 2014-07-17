@@ -897,11 +897,12 @@ researchers and developers towards potential issues or bugs. We believe
 In Figure~\ref{fig:struct} we visualize the structure of PolderCast and
 Scribe. We run PeerNet experiments in simulation mode, consisting of
 1000 nodes, 1000 reporter intervals and 1000 PeerNet cycles.
-Subscriptions are modeled after the Twitter dataset found
-in~\cite{Kwak10www}. The resulting \gexf{} files are imported into Gephi
+Subscriptions are modeled after the Facebook dataset found
+in~\cite{}. The resulting \gexf{} files are imported into Gephi
 in order to analyze the overlay structure both visually as well by
 calculating certain metrics using the \emph{Statistics Component}. The
-calculated values are described in Table~\ref{tab:struct_metrics}.
+calculated values are described in Table~\ref{tab:struct_metrics}. These
+values are averages across the duration of the experiment.
 
 \begin{table}[h!]
     \centering
@@ -909,15 +910,15 @@ calculated values are described in Table~\ref{tab:struct_metrics}.
         \hline
         & PolderCast & Scribe \\ \hline
         \hline
-        Number of Nodes & 771 & 771 \\ \hline
-        Number of Edges & 24152 & 2700 \\ \hline
-        Average Degree & 31.33 & 3.50 \\ \hline
-        Graph Diameter & 5 & 15 \\ \hline
-        Average Path Length & 2.43 & 5.26 \\ \hline
-        Graph Density & 0.041 & 0.005 \\ \hline
-        Weakly Connected Components & 7 & 84 \\ \hline
-        Strongly Connected Components & 20 & 307 \\ \hline
-        Average Clustering Coefficient & 0.249 & 0.035 \\ \hline
+        Number of Nodes & 833 & 833 \\ \hline
+        Number of Edges & 18629 & 883 \\ \hline
+        Average Degree & 22.36 & 1.06 \\ \hline
+        Graph Diameter & 10 & 22 \\ \hline
+        Average Path Length & 2.96 & 8.9 \\ \hline
+        Graph Density & 0.027 & 0.001 \\ \hline
+        Weakly Connected Components & 63 & 280 \\ \hline
+        Strongly Connected Components & 83 & 623 \\ \hline
+        Average Clustering Coefficient & 0.369 & 0.003 \\ \hline
 
     \end{tabular}
     \caption{Calculated metric values for PolderCast and Scribe, calculated using
@@ -951,13 +952,21 @@ of subscriptions $O(|\mathcal T_v|)$.
     \vspace{-100pt}
     \thisfloatpagestyle{empty}
     \subfigure[PolderCast]{%
-        \includegraphics[scale=0.44]{figures/polder_struct}
+        \includegraphics[scale=0.67]{figures/polder_structure}
     }
     \subfigure[Scribe]{%
-        \includegraphics[scale=0.44]{figures/scribe_struct}
+        \includegraphics[scale=0.67]{figures/scribe_structure}
+        % Use vizpub as a tool for evaluating experiments. We update both
+        % poldercast and scribe, in order to expand the evaluation
+        % performed in the poldercast paper. Emphasize how the vizpub tool
+        % along with the gephi framework enable us to easily expand the
+        % evaluation on particular metrics, as these are inlcuded in
+        % gephi. These metrics include, in-degree, out-degree, clustering
+        % coefficient and centralities.
+
     }
     \caption{Visualizaton of the \textbf{overlay
-            strucure} of PolderCast and Scribe}
+            strucure} of PolderCast and Scribe after 1000 intervals}
     \label{fig:struct}
 \end{figure}
 
@@ -1137,11 +1146,11 @@ more thorough evaluation.
     \vspace{-100pt}
     \thisfloatpagestyle{empty}
     \subfigure[PolderCast]{%
-        \includegraphics[scale=0.49]{figures/polder_degree}
+        \includegraphics[scale=0.67]{figures/polder_degree}
         \label{fig:polder_degree}
     }
     \subfigure[Scribe]{%
-        \includegraphics[scale=0.49]{figures/scribe_degree}
+        \includegraphics[scale=0.67]{figures/scribe_degree}
         \label{fig:scribe_degree}
     }
     \caption{Visualization of \textbf{degree} in
