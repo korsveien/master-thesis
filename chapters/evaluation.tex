@@ -1,6 +1,33 @@
-\section{Setup}
-\section{Workloads}
-\section{Simulations}
+\section{Experimental Setup}
+
+We run PolderCast and Scribe in PeerNet using the simulation mode. The
+Simulations consists of 1000 PeerNet cycles as well as 1000 reporter
+intervals. We use workloads both from Facebook~\cite{} and
+Twitter~\cite{} in order to model subscriptions. As mentioned in
+Chapter~\ref{ch:vizpub}, the Facebook data trace include 3 million user
+profiles along with 28.3 million friend relations. The Twitter dataset
+consists of 41.7 million distinct users and 1.47 billion
+follow/followed relations.
+
+The social relations in Facebook are reciprocal, which leads us to model
+bidirectional subscriptions. More specifically, a Facebook user is
+modeled as a topic. The friends list of the particular user profile
+constitutes its subscription list. All of the entries in this list will
+include the original user in their own lists of subscriptions.
+Relationships in Twitter however, are unidirectional. When using the
+Twitter trace, users are also modeled as topics, but here the list of
+subscriptions are formed on the basis of the ``following'' list of the
+particular  user profile. The entries in this list are not required to
+follow back, therefore subscriptions are also unidirectional.
+
+Churn is based on the Skype super-peer trace from~\cite{}, tracing 4000
+nodes for 4 weeks, tracking their joining and leaving timestamps. We
+scale churn to include the first day of this trace in order to not
+introduce a churn rate which is unrealistically high. For latency
+between node pairs, we use the King dataset found in~cite{}.
+
+\section{Experimental Restrictions}
+
 \section{Results}
 
 % \begin{figure}

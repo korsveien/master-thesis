@@ -7,8 +7,6 @@ set ylabel "CC"
 set xlabel "Reporter Intervals"
 set key outside tmargin
 
-plot "~/Dropbox/master-reports/evaluation/polder_n1000_i3000_face/clusteringCoefficient.csv" title "PolderCast (Facebook)" with lines,\
-         "~/Dropbox/master-reports/evaluation/scribe_n1000_i3000_twitter/clusteringCoefficient.csv" title "Scribe (Twitter)" with lines,\
-         "~/Dropbox/master-reports/evaluation/scribe_n1000_i3000_face/clusteringCoefficient.csv" title "Scribe (Facebook)" with lines,\
-         "~/Dropbox/master-reports/evaluation/scribe_n1000_i3000_face/networkSize.csv" title "Network Size" with lines axes x1y2
+plot "~/Dropbox/master-reports/evaluation/polder_n2000_i1000_face/clusteringCoefficient.csv" title "PolderCast (Facebook)" with lines,\
+         "~/Dropbox/master-reports/evaluation/polder_n2000_i1000_face/networkSize.csv" title "Network Size" with lines axes x1y2
 
