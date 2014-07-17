@@ -911,12 +911,12 @@ while the other values are averages across the duration of the experiment.
         \hline
         & PolderCast & Scribe \\ \hline
         \hline
-        Number of Nodes & 833 & 833 \\ \hline
-        Number of Edges & 18629 & 883 \\ \hline
+        Total Number of Nodes & 833 & 833 \\ \hline
+        Total Number of Edges & 18629 & 883 \\ \hline
         Average Degree & 22.36 & 1.06 \\ \hline
-        Graph Diameter & 10 & 22 \\ \hline
+        Average Graph Diameter & 10 & 22 \\ \hline
         Average Path Length & 2.96 & 8.9 \\ \hline
-        Graph Density & 0.027 & 0.001 \\ \hline
+        Average Graph Density & 0.027 & 0.001 \\ \hline
         Weakly Connected Components & 63 & 280 \\ \hline
         Strongly Connected Components & 83 & 623 \\ \hline
         Average Clustering Coefficient & 0.369 & 0.003 \\ \hline
@@ -1013,6 +1013,12 @@ pub/sub systems face: how do you balance robustness of the overlay while
 maintaining a low node degree. The two visualizations in
 Figure~\ref{fig:struct} should serve as examples of two different
 approaches to this question.
+
+Note from Table~\ref{tab:struct_metrics} that both the average diameter
+as well as path length is shorter in PolderCast than in Scribe. This is
+a natural consequence of a higher number of edges. It indicates a better
+connectivity in PolderCast, which is beneficial in terms of message
+dissemination.
 
 Looking at the overlay structures in Figure~\ref{fig:struct} also
 indicate that some nodes are overloaded. The PolderCast overlay in
