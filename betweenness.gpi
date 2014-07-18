@@ -1,0 +1,20 @@
+set datafile separator ";"
+set term epslatex color
+set output "eval_betweenness.tex"
+set y2tics
+set y2label"Network Size"
+set ylabel "Betweenness Centrality"
+set xlabel "Reporter Intervals"
+set key outside tmargin
+set style line 1 lt 1 lw 4 pt 1 linecolor rgb "orange"
+set style line 2 lt 1 lw 4 pt 1 linecolor rgb "green"
+set style line 3 lt 1 lw 4 pt 2 linecolor rgb "blue"
+set style line 4 lt 1 lw 4 pt 2 linecolor rgb "cyan"
+set style line 5 lt 2 lw 1 pt 3 linecolor rgb "black"
+
+plot "~/Dropbox/master-reports/evaluation/polder_n2000_i1000_face/betweenness.csv" title "PolderCast (Facebook)" with lines ls 1,\
+     "~/Dropbox/master-reports/evaluation/polder_n2000_i1000_twitter/betweenness.csv" title "PolderCast (Twitter)" with lines ls 2,\
+     "~/Dropbox/master-reports/evaluation/scribe_n2000_i1000_face/betweenness.csv" title "Scribe (Facebook)" with lines ls  3,\
+     "~/Dropbox/master-reports/evaluation/scribe_n2000_i1000_twitter/betweenness.csv" title "Scribe (Twitter)" with lines ls 4,\
+     "~/Dropbox/master-reports/evaluation/polder_n2000_i1000_face/networkSize.csv" title "Network Size" with lines axes x1y2 ls 5
+
