@@ -1,8 +1,49 @@
-In this chapter, we utilize \demo{} in order to extend the evaluation of
-PolderCast and Scribe found in~\cite{Setty:2012} on a set of topology
-metrics. These metrics are afforded to us for ``free'' by the Gephi
-framework through the Statistics API included in the \emph{Gephi
-    Toolkit}.
+In this chapter, we test the capabilities of  \demo{} as a framewor for
+evalutating pub/sub systems. We extend the evaluation of PolderCast and
+Scribe found in~\cite{Setty:2012} on a set of topology metrics. These
+metrics are afforded to us for ``free'' by the Gephi framework through
+the Statistics API included in the \emph{Gephi Toolkit}.
+
+\section{\demo as a Framework for Evaluating Pub/Sub Systems}
+\label{sec:viz_eval}
+
+Although the plots seen in Chapter~\ref{ch:vizpub} are easy to produce
+in Gephi, they are not very flexible. For example, it would be useful to
+be able to superimpose two plots on top of each other in order to
+effectively compare them. Therefore, in addition to outputting a \gexf
+file which can be used to produce visualizations and plots in Gephi, The
+collector is also able to generate \csv files which can be used to plot
+a time series of metrics such as degree, clustering coefficient and
+centralities. Each time point in the time series will represent a
+\emph{Reporter Interval}. Although the Data Laboratory component in
+Gephi is able to output such \csv files, it is much more convenient to
+output them directly from the Collector, as opening the Gephi GUI-client
+for the sole purpose of producing such files manually is more time
+consuming, especially on older hardware, or machines without a dedicated
+graphics card. The Collector is able to do this trough the Gephi
+Toolkit, which provides an API for the major components of Gephi. Which
+overlay properties to output is configurable in the Collector.
+Currently, the supported metrics that can be exported to \csv files by
+the Collector include:
+
+\begin{itemize}
+    \item Undirected Degree
+    \item In-Degree
+    \item Out-Degree
+    \item Clustering Coefficient
+    \item Betweenness Centrality
+    \item Closeness Centrality
+    \item Eccentricity Centrality
+    \item Topic Diameter
+    \item Size of Network
+\end{itemize}
+
+This grants researchers and developers of pub/sub protocols who wish to evaluate
+the system in question immediate access to several metrics. They do not need to
+reimplement algorithms for the metric calculations themselves. All that is
+required is to implement the \emph{reporter interface}.
+
+\section{Experimental Restrictions}
 
 \section{Experimental Setup}
 
@@ -32,60 +73,65 @@ scale churn to include the first day of this trace in order to not
 introduce a churn rate which is unrealistically high. For latency
 between node pairs, we use the King dataset found in~cite{}.
 
-\section{Experimental Restrictions}
 
 \section{Results}
 
 \subsection{Degree}
 
-\begin{figure}[H]
-    \centering
-    \input{eval_degree.tex}
-    \caption{Avg. Undirected degree of PolderCast and Scribe}
-    \label{fig:eval_degree}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_degree.tex}
+%     \caption{Avg. Undirected degree of PolderCast and Scribe}
+%     \label{fig:eval_degree}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_indegree.tex}
+%     \caption{Avg. In-Degree of PolderCast and Scribe}
+%     \label{fig:eval_indegree}
+% \end{figure}
 
 \begin{figure}[H]
     \centering
-    \input{eval_indegree.tex}
-    \caption{Avg. In-Degree of PolderCast and Scribe}
-    \label{fig:eval_indegree}
+    \subfigure[Avg. In-Degree]{
+        \input{eval_indegree.tex}
+    }
+    \subfigure[Avg. Out-Degree]{
+        \input{eval_outdegree.tex}
+    }
+    \caption{Avg. Directed Degrees of PolderCast and Scribe}
+    \label{fig:eval_directedtdegree}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \input{eval_outdegree.tex}
-    \caption{Avg. Out-Degree of PolderCast and Scribe}
-    \label{fig:eval_outdegree}
-\end{figure}
-
-\subsection{Clustering Coefficient}
-\begin{figure}[H]
-    \centering
-    \input{eval_cc.tex}
-    \caption{Avg. Clustering Coefficient of PolderCast and Scribe}
-    \label{fig:eval_cc}
-\end{figure}
+% \subsection{Clustering Coefficient}
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_cc.tex}
+%     \caption{Avg. Clustering Coefficient of PolderCast and Scribe}
+%     \label{fig:eval_cc}
+% \end{figure}
 
 \subsection{Centralities}
 
-\begin{figure}[H]
-    \centering
-    \input{eval_betweenness.tex}
-    \caption{Avg. Betweenness Centrality of PolderCast and Scribe}
-    \label{fig:eval_betweenness}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_betweenness.tex}
+%     \caption{Avg. Betweenness Centrality of PolderCast and Scribe}
+%     \label{fig:eval_betweenness}
+% \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \input{eval_closeness.tex}
-    \caption{Avg. Closeness Centrality of PolderCast and Scribe}
-    \label{fig:eval_closeness}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_closeness.tex}
+%     \caption{Avg. Closeness Centrality of PolderCast and Scribe}
+%     \label{fig:eval_closeness}
+% \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \input{eval_eccentricity.tex}
-    \caption{Avg. Eccentricity Centrality of PolderCast and Scribe}
-    \label{fig:eval_eccentricity}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \input{eval_eccentricity.tex}
+%     \caption{Avg. Eccentricity Centrality of PolderCast and Scribe}
+%     \label{fig:eval_eccentricity}
+% \end{figure}
+

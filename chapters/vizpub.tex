@@ -1198,45 +1198,7 @@ more thorough evaluation.
 \restoregeometry
 
 
-\section{\demo as a Framework for Evaluating Pub/Sub Systems}
-\label{sec:viz_eval}
 
-Although the plots seen in Section~\ref{sec:comparing} are easy to
-produce in Gephi, they are not very flexible. It would be useful to be
-able to superimpose two plots on top of each other in order to
-effectively compare them. Therefore, in addition to outputting a \gexf file which can be used to produce
-visualizations and plots in Gephi, The collector is also able to generate \csv
-files which can be used to plot a time series of metrics such as degree,
-clustering coefficient and centralities. Each time point in the time
-series will represent a \emph{Reporter Interval}. Although the Data
-Laboratory component in Gephi is able to output such \csv files, it is
-much more convenient to output them directly from the Collector, as
-opening the Gephi GUI-client for the sole purpose of producing such
-files manually is more time consuming, especially on older hardware, or
-machines without a dedicated graphics card. The Collector is able to do
-this trough the Gephi Toolkit, which provides an API for the major
-components of Gephi. Which overlay properties to
-output is configurable in the Collector.  Currently, the supported
-metrics that can be exported to \csv files by the Collector include:
-
-\begin{itemize}
-    \item Undirected Degree
-    \item In-Degree
-    \item Out-Degree
-    \item Clustering Coefficient
-    \item Betweenness Centrality
-    \item Closeness Centrality
-    \item Eccentricity Centrality
-    \item Topic Diameter
-    \item Size of Network
-\end{itemize}
-
-This grants researchers and developers of pub/sub protocols who wish to evaluate
-the system in question immediate access to several metrics. They do not need to
-reimplement algorithms for the metric calculations themselves. All that is
-required is to implement the \emph{reporter interface} described in
-Section~\ref{sec:arch}. In Chapter~\ref{ch:evaluation} we use this capability of \demo in
-order to evaluate PolderCast and Scribe on a set of topology metrics.
 
 \section{Implementation Work}
 
