@@ -1,11 +1,14 @@
 set datafile separator ";"
-set term epslatex color
+set term epslatex color font ",9"
 set output "eval_indegree.tex"
 set y2tics
 set y2label"Network Size"
 set ylabel "In-degree"
 set xlabel "Reporter Intervals"
-set key outside tmargin
+set key right bottom
+set logscale y
+set style line 12 lc rgb'#808080' lt 0 lw 1
+set grid back ls 12
 
 set style line 1 lt 1 lw 4 pt 1 linecolor rgb "orange"
 set style line 2 lt 1 lw 4 pt 1 linecolor rgb "green"
