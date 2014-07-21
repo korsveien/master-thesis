@@ -959,9 +959,11 @@ visualization allows us to observe this difference for ourselves.
     \thisfloatpagestyle{empty}
     \subfigure[PolderCast]{%
         \includegraphics[scale=0.67]{figures/polder_structure}
+        \label{fig:scribe_struct}
     }
     \subfigure[Scribe]{%
         \includegraphics[scale=0.67]{figures/scribe_structure}
+        \label{fig:polder_struct}
         % Use vizpub as a tool for evaluating experiments. We update both
         % poldercast and scribe, in order to expand the evaluation
         % performed in the poldercast paper. Emphasize how the vizpub tool
@@ -1069,7 +1071,7 @@ grows with the subscription size in PolderCast. Scribe might have an
 advantage in terms of node degree if there are many nodes in the system
 with a high number of subscriptions. The same node in Scribe, seen at
 the middle of the overlay in Figure~\ref{fig:scribe_struct}, has node
-degree of 20.
+degree of 12.
 
 Figure~\ref{fig:polder_indegree_distr},~\ref{fig:polder_outdegree_distr},~\ref{fig:scribe_outdegree_distr}
 and Figure~\ref{fig:scribe_outdegree_distr} describes the distribution
