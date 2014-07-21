@@ -54,7 +54,30 @@ standard plot output of Gephi.
 
 \section{Experimental Restrictions}
 
-As our implementation of \demo{} still is an early prototype.
+As \demo{} is still is an early prototype state, there are restrictions
+in terms the total number of nodes we can run as well as the number of
+reporter intervals. This is due to the file sizes of temporary logs
+grows linearly with the number of nodes, intervals and perhaps more
+importantly: number of edges. This becomes problematic with pub/sub
+systems which generate a high number of edges, such as PolderCast. The
+Collector will also use a lot of memory when calculating custom metrics
+due to loading these files in memory. Also, the Gephi Toolkit suffers
+from performance issues due to an inefficient GEXF-parser. This means
+that currently, \demo{} need a high amount of memory and disk space in
+the order of several Gigabytes in order to operate properly.
+Unfortunately, although we had access to the needed amount of memory, we
+were restricted in terms of disk space. For this reason we restrict the
+number of nodes and reporter intervals in our experiments.
+
+The file sizes also grow linearly with the number of publication
+messages. As the number of publication messages per interval can be in
+the order of tens of thousands,  we evaluate only on topology metrics.
+
+We wish to improve the scalability of \demo{} in terms of file sizes in
+the future, otherwise its usefulness for deployed systems would be
+questionable at best. Luckily, there is a lot of low-hanging fruits with
+regards to improving the performance in \demo{}. We describe such future
+work in Chapter~\ref{ch:conclusion}.
 
 \section{Experimental Setup}
 
