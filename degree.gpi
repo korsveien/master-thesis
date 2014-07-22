@@ -1,5 +1,5 @@
 set datafile separator ";"
-set term epslatex color
+set term epslatex color font ",9"
 set output "eval_degree.tex"
 set y2tics
 set y2label"Network Size"

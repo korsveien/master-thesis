@@ -111,30 +111,43 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
-\subsection{Degree}
-
-% \begin{figure}[H]
-%     \centering
-%     \input{eval_degree.tex}
-%     \caption{Avg. Undirected degree of PolderCast and Scribe}
-%     \label{fig:eval_degree}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \input{eval_indegree.tex}
-%     \caption{Avg. In-Degree of PolderCast and Scribe}
-%     \label{fig:eval_indegree}
-% \end{figure}
+Figure~\ref{fig:eval_indegree} and Figure~\ref{fig:eval_outdegree} shows
+directed degree in PolderCast and Scribe. It confirms the much higher
+degree in PolderCast compared to Scribe. It also a difference in average
+degree when using different workloads. In particular, using the twitter
+workload seem to cause a higher degree in both PolderCast and Scribe.
+The difference is most noticeable in Scribe, as the degree is quite low.
+By using the \emph{Statistics Component} in Gephi, we produce plots
+describing the difference in number of edges in Scribe when using
+workloads from Facebook and Twitter, seen in~\ref{fig:scribe_edges_face}
+and Figure~\ref{fig:scribe_edges_twitter} respectively. It is clear that
+using the workload from Twitter induces a much higher number of edges.
+This might be indicative of a higher overlap in subscription interests,
+increasing the number of tree structures being constructed. Such an
+indication is also mentioned in~\cite{Setty:2012}. Furthermore, the
+average degree are stable with regards to node churn, which might
+indicate that the distribution of node degree does not diverge too much
+from the mean. More specifically, there are few nodes with a very high
+or a very low node degree. This decreases the likelihood of such a node
+to leave the network due to churn, which would have a large impact on
+the average value of node degree. Figure~\ref{fig:eval_indegree} and
+Figure~\ref{fig:eval_outdegree} also indicate that there is an even
+balance between in-degree and out-degree of nodes, as they both have
+similar values.
 
 \begin{figure}[H]
     \centering
     \thisfloatpagestyle{empty}
+    % \subfigure[Avg. Undirected Degree]{
+    %     \input{eval_degree.tex}
+    % }
     \subfigure[Avg. In-Degree]{
         \input{eval_indegree.tex}
+        \label{fig:eval_indegree}
     }
     \subfigure[Avg. Out-Degree]{
         \input{eval_outdegree.tex}
+        \label{fig:eval_outdegree}
     }
     \caption{Avg. Directed Degrees of PolderCast and Scribe}
     \label{fig:eval_directedtdegree}
@@ -144,24 +157,23 @@ between node pairs, we use the King dataset found in~\cite{king}.
     \centering
     \subfigure[Facebook] {
         \includegraphics[scale=0.3]{plots/scribe_edges_face}
+    \label{fig:scribe_edges_face}
     }
     \subfigure[Twitter] {
         \includegraphics[scale=0.3]{plots/scribe_edges_twitter}
+    \label{fig:scribe_edges_twitter}
     }
     \label{fig:scribe_edges}
     \caption{Plots describing the difference of number of edges in
         Scribe when using different subscription workloads.}
 \end{figure}
 
-\subsection{Clustering Coefficient}
 \begin{figure}[H]
     \centering
     \input{eval_cc.tex}
     \caption{Avg. Clustering Coefficient of PolderCast and Scribe}
     \label{fig:eval_cc}
 \end{figure}
-
-% \subsection{Centralities}
 
 \begin{figure}[H]
     \centering
