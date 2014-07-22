@@ -3,7 +3,7 @@ set term epslatex color font ",9"
 set output "eval_outdegree.tex"
 set y2tics
 set y2label"Network Size"
-set ylabel "Out-Degree"
+set ylabel "Avg. Out-Degree"
 set xlabel "Reporter Intervals"
 set key right bottom
 set logscale y

@@ -111,7 +111,7 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
-Figure~\ref{fig:eval_indegree} and Figure~\ref{fig:eval_outdegree} shows
+Figure~\ref{fig:eval_directeddegree} shows
 directed degree in PolderCast and Scribe. It confirms the much higher
 degree in PolderCast compared to Scribe. It also a difference in average
 degree when using different workloads. In particular, using the twitter
@@ -130,27 +130,20 @@ indicate that the distribution of node degree does not diverge too much
 from the mean. More specifically, there are few nodes with a very high
 or a very low node degree. This decreases the likelihood of such a node
 to leave the network due to churn, which would have a large impact on
-the average value of node degree. Figure~\ref{fig:eval_indegree} and
-Figure~\ref{fig:eval_outdegree} also indicate that there is an even
+the average value of node degree. The two plots seen in
+Figure~\ref{fig:eval_directeddegree} also indicate that there is an even
 balance between in-degree and out-degree of nodes, as they both have
 similar values.
 
 \begin{figure}[H]
     \centering
     \thisfloatpagestyle{empty}
-    % \subfigure[Avg. Undirected Degree]{
-    %     \input{eval_degree.tex}
-    % }
-    \subfigure[Avg. In-Degree]{
         \input{eval_indegree.tex}
         \label{fig:eval_indegree}
-    }
-    \subfigure[Avg. Out-Degree]{
         \input{eval_outdegree.tex}
         \label{fig:eval_outdegree}
-    }
     \caption{Avg. Directed Degrees of PolderCast and Scribe}
-    \label{fig:eval_directedtdegree}
+    \label{fig:eval_directeddegree}
 \end{figure}
 
 \begin{figure}
