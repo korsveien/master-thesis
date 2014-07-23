@@ -111,16 +111,16 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
-Figure~\ref{fig:eval_directeddegree} shows
-directed degree in PolderCast and Scribe. It confirms the much higher
-degree in PolderCast compared to Scribe. It also a difference in average
-degree when using different workloads. In particular, using the twitter
-workload seem to cause a higher degree in both PolderCast and Scribe.
-The difference is most noticeable in Scribe, as the degree is quite low.
-By using the \emph{Statistics Component} in Gephi, we produce plots
-describing the difference in number of edges in Scribe when using
-workloads from Facebook and Twitter, seen in~\ref{fig:scribe_edges_face}
-and Figure~\ref{fig:scribe_edges_twitter} respectively. It is clear that
+Figure~\ref{fig:eval_directeddegree} shows directed degree in PolderCast
+and Scribe. It confirms the much higher degree in PolderCast compared to
+Scribe. It also a difference in average degree when using different
+workloads. In particular, using the twitter workload seem to cause a
+higher degree in both PolderCast and Scribe.  The difference is most
+noticeable in Scribe, as the degree is quite low.  By using the
+\emph{Statistics Component} in Gephi, we produce plots describing the
+difference in number of edges in Scribe when using workloads from
+Facebook and Twitter, seen in~\ref{fig:scribe_edges_face} and
+Figure~\ref{fig:scribe_edges_twitter} respectively. It is clear that
 using the workload from Twitter induces a much higher number of edges.
 This might be indicative of a higher overlap in subscription interests,
 increasing the number of tree structures being constructed. Such an
@@ -146,7 +146,7 @@ similar values.
     \label{fig:eval_directeddegree}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \subfigure[Facebook] {
         \includegraphics[scale=0.3]{plots/scribe_edges_face}
@@ -161,6 +161,18 @@ similar values.
         Scribe when using different subscription workloads.}
 \end{figure}
 
+Average Clustering coefficient is described in Figure~\ref{fig:eval_cc}.
+The average is calculated by dividing the \emph{local clustering
+    coefficient} of each node, and divide it by the number of nodes in
+the overlay. As expected, PolderCast has a higher clustering
+coefficient. However, it is worth noting that the clustering coefficient
+of PolderCast seems relatively unaffected by using different workloads,
+while in Scribe the clustering coefficient goes up when using the
+Twitter~\cite{} dataset for subscriptions. Again, this is a natural
+consequence of the much higher number of edges in Scribe when running
+the Twitter workload.
+
+Scalability issue.
 \begin{figure}[H]
     \centering
     \input{eval_cc.tex}
