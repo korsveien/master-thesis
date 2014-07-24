@@ -111,6 +111,8 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
+\subsection{Degree}
+
 \begin{figure}[Ht]
     \centering
     \subfigure[Facebook] {
@@ -161,6 +163,8 @@ similar values.
 \end{figure}
 
 
+\subsection{Clustering Coefficient}
+
 Average Clustering coefficient is described in Figure~\ref{fig:eval_cc}.
 The average is calculated by dividing the \emph{local clustering
     coefficient} of each node, and divide it by the number of nodes in
@@ -168,7 +172,7 @@ the overlay. As expected, PolderCast has a higher clustering
 coefficient. However, it is worth noting that the clustering coefficient
 of PolderCast seems relatively unaffected by using different workloads,
 while in Scribe the clustering coefficient goes up when using the
-Twitter~\cite{} dataset for subscriptions. Again, this is a natural
+Twitter dataset for subscriptions. Again, this is a natural
 consequence of the much higher number of edges in Scribe when running
 the Twitter workload.
 
@@ -179,8 +183,10 @@ the Twitter workload.
     \label{fig:eval_cc}
 \end{figure}
 
+\subsection{Centralities}
+
 Results of calculating centrality metrics can be seen in
-Figure~\ref{fig:eval_betwenness}, Figure~\ref{fig:eval_closeness} and
+Figure~\ref{fig:eval_betweenness}, Figure~\ref{fig:eval_closeness} and
 Figure~\ref{fig:eval_eccentricity}. Again it can be observed in all
 plots, that the values of the metric calculations in Scribe diverge
 depending on the what workload is being used for subscriptions. No such
@@ -197,15 +203,23 @@ well in terms of betweenness as the number of edges increases. This
 could impact the performance of the pub/sub system when running certain
 workloads.
 
-Currently, the collector does not provide us any information regarding
-the \emph{variance} or \emph{standard deviation} of the data being
-collected. However, using Gephi we can produce plots describing the
-distribution of values for a particular interval. As averages remain
-stable after the initial network spike, this should tell us something
-about how precise these averages are. In Figure~\ref{fig:betw_distr} we
-see such plots for the betweenness centralities in PolderCast and Scribe
-at interval 1000, running both the Facebook and Twitter datasets.
+The average closeness centrality of nodes can be seen in
+Figure~\ref{fig:eval_closeness}. Here Scribe populate the top values as
+using both workloads, although the discrepancy of results depending on
+the data set used is still higher than in PolderCast. This is hardly
+surprising, as closeness is a measure between the distance of a node
+$n$ and any other nodes in the system. Seeing that the overlay in
+PolderCast is much more dense as well as having a shorter diameter, we
+expect PolderCast to have a lower closeness centrality as well.
 
+% Currently, the collector does not provide us any information regarding
+% the \emph{variance} or \emph{standard deviation} of the data being
+% collected. However, using Gephi we can produce plots describing the
+% distribution of values for a particular interval. As averages remain
+% stable after the initial network spike, this should tell us something
+% about how precise these averages are. In Figure~\ref{fig:betw_distr} we
+% see such plots for the betweenness centralities in PolderCast and Scribe
+% at interval 1000, running both the Facebook and Twitter datasets.
 
 \begin{figure}[H]
     \centering
@@ -215,25 +229,25 @@ at interval 1000, running both the Facebook and Twitter datasets.
     \label{fig:eval_betweenness}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \thisfloatpagestyle{empty}
-    \subfigure[PolderCast (Twitter)]{
-    \includegraphics[scale=0.3]{plots/polder_betw_distr_tw}
-}
-    \subfigure[Scribe (Twitter)]{
-    \includegraphics[scale=0.3]{plots/scribe_betw_distr_tw}
-}
-    \subfigure[PolderCast (Facebook)]{
-    \includegraphics[scale=0.3]{plots/polder_betw_distr_face}
-}
-    \subfigure[Scribe (Facebook)]{
-    \includegraphics[scale=0.3]{plots/scribe_betw_distr_face}
-}
-    \label{fig:betw_distr}
-    \caption{Plots showing distribution of betweenness in PolderCast and
-    Scribe at reporter interval 1000}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \thisfloatpagestyle{empty}
+%     \subfigure[PolderCast (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/polder_betw_distr_tw}
+% }
+%     \subfigure[Scribe (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/scribe_betw_distr_tw}
+% }
+%     \subfigure[PolderCast (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/polder_betw_distr_face}
+% }
+%     \subfigure[Scribe (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/scribe_betw_distr_face}
+% }
+%     \label{fig:betw_distr}
+%     \caption{Plots showing distribution of betweenness in PolderCast and
+%     Scribe at reporter interval 1000}
+% \end{figure}
 
 % \begin{figure}[H]
 %     \centering
