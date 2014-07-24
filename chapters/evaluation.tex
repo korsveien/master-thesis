@@ -172,12 +172,15 @@ the overlay. As expected, PolderCast has a higher clustering
 coefficient. However, it is worth noting that the clustering coefficient
 of PolderCast seems relatively unaffected by using different workloads,
 while in Scribe the clustering coefficient goes up when using the
-Twitter dataset for subscriptions. Again, this is a natural
-consequence of the much higher number of edges in Scribe when running
-the Twitter workload.
+Twitter dataset for subscriptions. Again, this is a natural consequence
+of the much higher number of edges in Scribe when running the Twitter
+workload. The fact that PolderCast has a higher clustering coefficient
+is hardly surprising, as the we know from Chapter~\ref{ch:vizpub} that
+the overlay in PolderCast is more dense.
 
 \begin{figure}[H]
     \centering
+    \thisfloatpagestyle{empty}
     \input{eval_cc.tex}
     \caption{Avg. Clustering Coefficient of PolderCast and Scribe}
     \label{fig:eval_cc}
@@ -228,10 +231,19 @@ experiment, as we could only run 2000 nodes for this thesis. With more
 time to spare, we would run further experiments at different scales in
 order to test the effects. However, much work is needed before this is
 possible, as \demo{} is still a young tool. We describe such future work
-in Chapter~\ref{ch:conclusion}.
+in Chapter~\ref{ch:conclusion} where we also address some of the
+limitations of \demo{}
 
-Young tool. new tool. many possibilities. not enough time to test them
-all.
+The low number of edges in Scribe, might also be caused by the amount of
+churn in the system, as the dissemination structure in Scribe are , in
+theory, brittle. Indeed, by running an experiment without churn, we were
+able to visually confirm that the overlay in scribe was fully connected
+by inspecting the graph in Gephi. This confirm in practice the
+brittleness of the overlay structures of Scribe, but this needs further
+investigation. This investigation should include adjusting the churn
+rate in order to see the effects of the overlays, and perhaps compare
+the density of the graph, looking at the number of edges formed as well
+as evaluating its connectivity.
 
 
 % Currently, the collector does not provide us any information regarding
@@ -239,9 +251,10 @@ all.
 % collected. However, using Gephi we can produce plots describing the
 % distribution of values for a particular interval. As averages remain
 % stable after the initial network spike, this should tell us something
-% about how precise these averages are. In Figure~\ref{fig:betw_distr} we
-% see such plots for the betweenness centralities in PolderCast and Scribe
-% at interval 1000, running both the Facebook and Twitter datasets.
+% about how precise these averages are. In Figure~\ref{fig:betw_distr}
+% we see such plots for the betweenness centralities in PolderCast and
+% Scribe at interval 1000, running both the Facebook and Twitter
+% datasets.
 
 \begin{figure}[H]
     \centering
@@ -252,6 +265,7 @@ all.
 \end{figure}
 
 % \begin{figure}[H]
+% \vspace{-60pt}
 %     \centering
 %     \thisfloatpagestyle{empty}
 %     \subfigure[PolderCast (Twitter)]{
