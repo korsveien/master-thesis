@@ -111,6 +111,21 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
+\begin{figure}[Ht]
+    \centering
+    \subfigure[Facebook] {
+        \includegraphics[scale=0.3]{plots/scribe_edges_face}
+    \label{fig:scribe_edges_face}
+    }
+    \subfigure[Twitter] {
+        \includegraphics[scale=0.3]{plots/scribe_edges_twitter}
+    \label{fig:scribe_edges_twitter}
+    }
+    \label{fig:scribe_edges}
+    \caption{Plots describing the difference of number of edges in
+        Scribe when using different subscription workloads.}
+\end{figure}
+
 Figure~\ref{fig:eval_directeddegree} shows directed degree in PolderCast
 and Scribe. It confirms the much higher degree in PolderCast compared to
 Scribe. It also a difference in average degree when using different
@@ -137,7 +152,6 @@ similar values.
 
 \begin{figure}[H]
     \centering
-    \thisfloatpagestyle{empty}
         \input{eval_indegree.tex}
         \label{fig:eval_indegree}
         \input{eval_outdegree.tex}
@@ -146,20 +160,6 @@ similar values.
     \label{fig:eval_directeddegree}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \subfigure[Facebook] {
-        \includegraphics[scale=0.3]{plots/scribe_edges_face}
-    \label{fig:scribe_edges_face}
-    }
-    \subfigure[Twitter] {
-        \includegraphics[scale=0.3]{plots/scribe_edges_twitter}
-    \label{fig:scribe_edges_twitter}
-    }
-    \label{fig:scribe_edges}
-    \caption{Plots describing the difference of number of edges in
-        Scribe when using different subscription workloads.}
-\end{figure}
 
 Average Clustering coefficient is described in Figure~\ref{fig:eval_cc}.
 The average is calculated by dividing the \emph{local clustering
@@ -172,7 +172,6 @@ Twitter~\cite{} dataset for subscriptions. Again, this is a natural
 consequence of the much higher number of edges in Scribe when running
 the Twitter workload.
 
-Scalability issue.
 \begin{figure}[H]
     \centering
     \input{eval_cc.tex}
@@ -180,12 +179,101 @@ Scalability issue.
     \label{fig:eval_cc}
 \end{figure}
 
+Results of calculating centrality metrics can be seen in
+Figure~\ref{fig:eval_betwenness}, Figure~\ref{fig:eval_closeness} and
+Figure~\ref{fig:eval_eccentricity}. Again it can be observed in all
+plots, that the values of the metric calculations in Scribe diverge
+depending on the what workload is being used for subscriptions. No such
+discrepancy can be seen in PolderCast.
+
+Figure~\ref{fig:eval_betweenness} describes the average betweenness
+centrality of nodes. Although PolderCast have a high betweenness, the
+values do not seem to fluctuate too much depending on the workload. In
+Scribe however, we see the mentioned discrepancy. Using the workload
+from Twitter causes much higher values. Indeed, nodes in the Scribe
+overlay have the highest average betweenness centralities when running
+this workload. This could be an indication that Scribe does not scale
+well in terms of betweenness as the number of edges increases. This
+could impact the performance of the pub/sub system when running certain
+workloads.
+
+Currently, the collector does not provide us any information regarding
+the \emph{variance} or \emph{standard deviation} of the data being
+collected. However, using Gephi we can produce plots describing the
+distribution of values for a particular interval. As averages remain
+stable after the initial network spike, this should tell us something
+about how precise these averages are. In Figure~\ref{fig:betw_distr} we
+see such plots for the betweenness centralities in PolderCast and Scribe
+at interval 1000, running both the Facebook and Twitter datasets.
+
+
 \begin{figure}[H]
     \centering
+    \thisfloatpagestyle{empty}
     \input{eval_betweenness.tex}
     \caption{Avg. Betweenness Centrality of PolderCast and Scribe}
     \label{fig:eval_betweenness}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \thisfloatpagestyle{empty}
+    \subfigure[PolderCast (Twitter)]{
+    \includegraphics[scale=0.3]{plots/polder_betw_distr_tw}
+}
+    \subfigure[Scribe (Twitter)]{
+    \includegraphics[scale=0.3]{plots/scribe_betw_distr_tw}
+}
+    \subfigure[PolderCast (Facebook)]{
+    \includegraphics[scale=0.3]{plots/polder_betw_distr_face}
+}
+    \subfigure[Scribe (Facebook)]{
+    \includegraphics[scale=0.3]{plots/scribe_betw_distr_face}
+}
+    \label{fig:betw_distr}
+    \caption{Plots showing distribution of betweenness in PolderCast and
+    Scribe at reporter interval 1000}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \thisfloatpagestyle{empty}
+%     \subfigure[PolderCast (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/polder_clos_distr_tw}
+% }
+%     \subfigure[Scribe (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/scribe_clos_distr_tw}
+% }
+%     \subfigure[PolderCast (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/polder_clos_distr_face}
+% }
+%     \subfigure[Scribe (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/scribe_clos_distr_face}
+% }
+%     \label{fig:betw_distr}
+%     \caption{Plots showing distribution of closeness in PolderCast and
+%     Scribe at reporter interval 1000}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \thisfloatpagestyle{empty}
+%     \subfigure[PolderCast (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/polder_ecc_distr_tw}
+% }
+%     \subfigure[Scribe (Twitter)]{
+%     \includegraphics[scale=0.3]{plots/scribe_ecc_distr_tw}
+% }
+%     \subfigure[PolderCast (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/polder_ecc_distr_face}
+% }
+%     \subfigure[Scribe (Facebook)]{
+%     \includegraphics[scale=0.3]{plots/scribe_ecc_distr_face}
+% }
+%     \label{fig:betw_distr}
+%     \caption{Plots showing distribution of eccentricity in PolderCast and
+%     Scribe at reporter interval 1000}
+% \end{figure}
 
 \begin{figure}[H]
     \centering

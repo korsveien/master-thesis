@@ -3,7 +3,7 @@ set term epslatex color
 set output "eval_betweenness.tex"
 set y2tics
 set y2label"Network Size"
-set ylabel "Betweenness Centrality"
+set ylabel "Avg. Betweenness Centrality"
 set xlabel "Reporter Intervals"
 set key right bottom
 set logscale y

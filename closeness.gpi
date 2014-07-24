@@ -3,7 +3,7 @@ set term epslatex color
 set output "eval_closeness.tex"
 set y2tics
 set y2label"Network Size"
-set ylabel "Closeness Centrality"
+set ylabel "Avg. Closeness Centrality"
 set xlabel "Reporter Intervals"
 set key right bottom
 #set logscale y

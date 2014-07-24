@@ -3,7 +3,7 @@ set term epslatex color
 set output "eval_cc.tex"
 set y2tics
 set y2label"Network Size"
-set ylabel "Clustering Coefficient"
+set ylabel "Avg. Clustering Coefficient"
 set xlabel "Reporter Intervals"
 set key right bottom
 set logscale y
