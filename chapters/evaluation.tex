@@ -111,7 +111,7 @@ between node pairs, we use the King dataset found in~\cite{king}.
 
 \section{Results}
 
-\subsection{Degree}
+% \subsection{Degree}
 
 \begin{figure}[Ht]
     \centering
@@ -163,7 +163,7 @@ similar values.
 \end{figure}
 
 
-\subsection{Clustering Coefficient}
+% \subsection{Clustering Coefficient}
 
 Average Clustering coefficient is described in Figure~\ref{fig:eval_cc}.
 The average is calculated by dividing the \emph{local clustering
@@ -183,7 +183,7 @@ the Twitter workload.
     \label{fig:eval_cc}
 \end{figure}
 
-\subsection{Centralities}
+%\subsection{Centralities}
 
 Results of calculating centrality metrics can be seen in
 Figure~\ref{fig:eval_betweenness}, Figure~\ref{fig:eval_closeness} and
@@ -220,12 +220,19 @@ Again, running Scribe has the highest eccentricity when running the
 Twitter workload. When running the Facebook workload however, Scribe
 actually has a lower average eccentricity than compared to PolderCast.
 
-\section{Discussion}
-
 The low number of edges and relative high number of
 disconnected nodes seen in Scribe when running the workload from
 Facebook might effect the results. It would be interesting to see what
-is the cause of this
+is the cause of this. One possible reason might be the scale of the
+experiment, as we could only run 2000 nodes for this thesis. With more
+time to spare, we would run further experiments at different scales in
+order to test the effects. However, much work is needed before this is
+possible, as \demo{} is still a young tool. We describe such future work
+in Chapter~\ref{ch:conclusion}.
+
+Young tool. new tool. many possibilities. not enough time to test them
+all.
+
 
 % Currently, the collector does not provide us any information regarding
 % the \emph{variance} or \emph{standard deviation} of the data being
