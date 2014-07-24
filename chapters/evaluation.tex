@@ -210,7 +210,22 @@ the data set used is still higher than in PolderCast. This is hardly
 surprising, as closeness is a measure between the distance of a node
 $n$ and any other nodes in the system. Seeing that the overlay in
 PolderCast is much more dense as well as having a shorter diameter, we
-expect PolderCast to have a lower closeness centrality as well.
+expect nodes in PolderCast to have a lower closeness centrality as
+well.
+
+Figure~\ref{fig:eval_eccentricity} describes the average eccentricity
+centrality of nodes. The result of running the eccentricity metric seems
+to be comparable with the results in Figure~\ref{fig:eval_closeness}.
+Again, running Scribe has the highest eccentricity when running the
+Twitter workload. When running the Facebook workload however, Scribe
+actually has a lower average eccentricity than compared to PolderCast.
+
+\section{Discussion}
+
+The low number of edges and relative high number of
+disconnected nodes seen in Scribe when running the workload from
+Facebook might effect the results. It would be interesting to see what
+is the cause of this
 
 % Currently, the collector does not provide us any information regarding
 % the \emph{variance} or \emph{standard deviation} of the data being
