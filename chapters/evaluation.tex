@@ -1,4 +1,4 @@
-In this chapter, we test the capabilities of  \demo{} as a framewor for
+In this chapter, we test the capabilities of  \demo{} as a framework for
 evalutating pub/sub systems. We extend the evaluation of PolderCast and
 Scribe found in~\cite{Setty:2012} on a set of topology metrics. These
 metrics are afforded to us for ``free'' by the Gephi framework through
@@ -153,6 +153,7 @@ balance between in-degree and out-degree of nodes, as they both have
 similar values.
 
 \begin{figure}[H]
+    \thisfloatpagestyle{empty}
     \centering
         \input{eval_indegree.tex}
         \label{fig:eval_indegree}
@@ -237,14 +238,30 @@ limitations of \demo{}
 The low number of edges in Scribe, might also be caused by the amount of
 churn in the system, as the dissemination structure in Scribe are , in
 theory, brittle. Indeed, by running an experiment without churn, we were
-able to visually confirm that the overlay in scribe was fully connected
-by inspecting the graph in Gephi. This confirm in practice the
-brittleness of the overlay structures of Scribe, but this needs further
-investigation. This investigation should include adjusting the churn
-rate in order to see the effects of the overlays, and perhaps compare
-the density of the graph, looking at the number of edges formed as well
-as evaluating its connectivity.
+able to visually confirm that the overlay in scribe was composed of only
+one connected component by quickly inspecting the graph in Gephi. This
+confirm in practice the brittleness of the overlay structures of Scribe,
+but this needs further investigation. This investigation should include
+adjusting the churn rate in order to see the effects of the overlays,
+and perhaps compare the density of the graph, looking at the number of
+edges formed as well as evaluating its connectivity.
 
+\section{Summary}
+
+It should be repeated that \demo{} is indeed a prototype, and there
+might still be software bugs which affect the results. But the intention
+of this chapter lies not only in producing results, but also test
+\demo{} as a platform for evaluation of pub/sub systems. Although there
+are many issues which still needs to be addressed, we believe the
+potential for such a tool should be explored.
+
+Our main concern when developing \demo{} was being able to visualize
+pub/sub systems, but with this chapter we believe we provide some
+examples to back up the claim that \demo{} can be used as a tool for
+evaluation as well as visualization. We believe such a tool would be of
+great benefit to the research community, and we hope the extendability
+of Gephi through its ecosystem of plugins can encourage researcher to share
+more code between them.
 
 % Currently, the collector does not provide us any information regarding
 % the \emph{variance} or \emph{standard deviation} of the data being
