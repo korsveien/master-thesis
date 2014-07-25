@@ -1,5 +1,40 @@
 \section{Conclusion}
 
+In this thesis, we describe and demonstrate \demo{}, a tool we propose
+for visualizing performance in overlay-based pub/sub systems. We
+presented a poster and held a live demonstration of \demo{} at the ACM
+International Conference of Distributed Event Based Systems (DEBS), held
+in Mumbai in May 2014, where it was awarded the price for best poster
+and demo.
+
+To the best of our knowledge, this is the first tool of its kind which
+enable easy and efficient visual inspection and analysis of pub/sub
+overlays. The thesis includes several example scenarios where \demo{}
+proved to be a useful tool for us in both analyzing as well as debugging
+pub/sub protocols.
+
+We demonstrate our tool further, by providing examples of
+visualizations. To summarize, \demo{} supports two different types of
+visualizations: (1) visualizations of overlay structure and (2)
+visualizations of publication message dissemination. The former provides
+a step-by-step visualization of disseminating events, by drawing
+directed edges which depicts the paths of messages. Also, numeric text
+labels are applied to nodes which represent the hop count of the
+publication messages received. We also show how users may also derive
+the message duplication count by calculating the in-degree of the
+visualization. We show an example of this type of visualization where we
+disseminate a single message on a single topic in PolderCast. The
+example shows the utility of these types of visualizations, both for
+researchers who wants to analyze the dissemination scheme of their
+protocol, of developers who want to debug the algorithms used for
+disseminating messages, as well as for students who wants a deep
+understanding of the particular dissemination process.
+
+We also provide several example of visualizations which describe the
+structure of the overlay, as well as proving examples on how to
+visualize certain metrics of pub/sub systems through color as well as
+text labels which are applied to nodes. Comparison.
+
 \section{Future Work}
 
 We believe there is a lot of potential for a tool such as \demo{}. What
