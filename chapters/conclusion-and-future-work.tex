@@ -1,6 +1,6 @@
 \section{Conclusion}
 
-In this thesis, we describe and demonstrate \demo{}, a tool we propose
+In this thesis, we described and demonstrated \demo{}, a tool we propose
 for visualizing performance in overlay-based pub/sub systems. We
 presented a poster and held a live demonstration of \demo{} at the ACM
 International Conference of Distributed Event Based Systems (DEBS), held
@@ -11,9 +11,14 @@ To the best of our knowledge, this is the first tool of its kind which
 enable easy and efficient visual inspection and analysis of pub/sub
 overlays. The thesis includes several example scenarios where \demo{}
 proved to be a useful tool for us in both analyzing as well as debugging
-pub/sub protocols.
+pub/sub protocols. Although our main focus is visualizing pub/sub
+systems, \demo{} is a generic tool, intended to support any overlay-
+based system. For this purpose, we define a generic interface, which is
+the only point of contact between any client code (i.e.\ overlay-based system)
+an our framework. The implementation of this interface is the only
+system specific part of our tool.
 
-We demonstrate our tool further, by providing examples of
+We demonstrated our tool further, by providing examples of
 visualizations. To summarize, \demo{} supports two different types of
 visualizations: (1) visualizations of overlay structure and (2)
 visualizations of publication message dissemination. The former provides
@@ -23,17 +28,68 @@ labels are applied to nodes which represent the hop count of the
 publication messages received. We also show how users may also derive
 the message duplication count by calculating the in-degree of the
 visualization. We show an example of this type of visualization where we
-disseminate a single message on a single topic in PolderCast. The
-example shows the utility of these types of visualizations, both for
-researchers who wants to analyze the dissemination scheme of their
-protocol, of developers who want to debug the algorithms used for
-disseminating messages, as well as for students who wants a deep
-understanding of the particular dissemination process.
+disseminate a single message on a single topic in
+PolderCast~\cite{Setty:2012}. The example shows the utility of
+visualizing publication messages disseminations, both for researchers
+who wants to analyze the dissemination scheme of their protocol, of
+developers who want to debug the algorithms used for disseminating
+messages, as well as for students who wants a deep understanding of the
+particular dissemination process.
 
-We also provide several example of visualizations which describe the
-structure of the overlay, as well as proving examples on how to
-visualize certain metrics of pub/sub systems through color as well as
-text labels which are applied to nodes. Comparison.
+We also provided several examples of visualizations which describe the
+structure of the overlay, as well as providing examples on how to
+visualize certain metrics of pub/sub systems through color and text
+labels. We used these capabilities in order to
+visually compare two different pub/sub systems, namely PolderCast and
+Scribe~\cite{Castro:2002}. We also used the capability of the Gephi Open
+Graph Viz tool~\cite{ICWSM09154} in order to produce plots describing
+the distribution of degree as well as time series of metrics such as
+number of edges, degree and clustering coefficient.
+
+Finally, we tested the capabilities of \demo{} as a framework for
+evaluating pub/sub systems on a set of particular topology metrics. The
+implementation code for running these metrics are provided by the Gephi
+framework ``for free'' through the API provided by the \emph{Gephi
+    Toolkit}. The evaluation revealed the overlay in Scribe changes
+drastically in terms of number of edges depending on the workload used
+to model subscriptions. It also seems to indicate that Scribe is more
+vulnerable to churn than PolderCast, as several nodes are disconnected.
+However, further evaluation is needed at larger scale in order to
+investigate these issues properly.
+
+In addition to describing and demonstrating \demo{}, we also provide a
+mini-survey, which compares several popular pub/sub protocols both on
+on the structure of their overlays as well as their dissemination
+properties. In this comparison we focus on the difficult design
+decisions researchers face when developing such systems.
+
+We hope our description of our proposed tool and the examples laid out
+in this thesis makes a convincing case for its utility as a tool for
+researchers, developers and students alike. The educational benefit of
+\demo{} is particularly exciting. Being able to study and experiment
+with graphs in such a visual and hands-on fashion should provide a very
+engaging experience for students who are entering the field of
+distributed systems. We also believe researchers can benefit from the
+tool, as it provides a deeper insight about the overlay structure as
+well as the dissemination process. For anyone developing an
+overlay-based system, whether it implements the pub/sub paradigm or not,
+\demo{} can act as a powerful tool for debugging. In this thesis, we
+provided several example scenarios where we experienced the usefulness
+of our tool first-hand.
+
+As mentioned, we are not aware of any other proposed tool which is quite
+comparable with what we propose. And although we imagine numerous
+possible use cases for \demo{}, the possibilities of such a tool is
+still relatively unknown. We hope  the research community or any party
+interested will look at our tool, test it, modify it, extend it and in
+general find uses for it. During the poster and demonstration of \demo{}
+we held at DEBS2014, we were approached by several participant who
+expressed their interest in using such a tool for their own research.
+This is why we choose to host our implementation code of
+\demo{} in a public
+repository.\footnote{\url{http://github.com/vizpub/vizpub}} We hope the
+tool will serve as a lasting contribution to the research community, as well
+as aid in recruiting more students to our field of research.
 
 \section{Future Work}
 
