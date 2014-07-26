@@ -12,19 +12,20 @@ in Gephi, they are not very flexible. For example, it would be useful to
 be able to superimpose two plots on top of each other in order to
 effectively compare them. Therefore, in addition to outputting a \gexf
 file which can be used to produce visualizations and plots in Gephi, The
-collector is also able to generate \csv files which can be used to plot
+Collector is also able to generate \csv files which can be used to plot
 a time series of metrics such as degree, clustering coefficient and
-centralities. Each time point in the time series will represent a
+centralities. Each time point in these time series represents a
 \emph{Reporter Interval}. Although the Data Laboratory component in
 Gephi is able to output such \csv files, it is much more convenient to
 output them directly from the Collector, as opening the Gephi GUI-client
-for the sole purpose of producing such files manually is more time
-consuming, especially on older hardware, or machines without a dedicated
-graphics card. The Collector is able to do this trough the Gephi
+for the sole purpose of producing such files manually is much more
+cumbersome and time consuming, especially on older hardware, or machines
+without a dedicated graphics card. The Collector is able to calculate
+various metrics and output them to file by taking advantage of the Gephi
 Toolkit, which provides an API for the major components of Gephi. Which
-overlay properties to output is configurable in the Collector.
-Currently, the supported metrics that can be exported to \csv files by
-the Collector include:
+metrics to output is configurable in the Collector. Currently, the
+supported metrics which can be exported to \csv files by the Collector
+include:
 
 \begin{itemize}
     \item Undirected Degree
@@ -38,17 +39,17 @@ the Collector include:
     \item Size of Network
 \end{itemize}
 
-This grants researchers and developers of pub/sub protocols who wish to evaluate
-the system in question immediate access to several metrics. They do not need to
-reimplement algorithms for the metric calculations themselves. All that is
-required is to implement the \emph{reporter interface}.
+This capability of \demo{} grants researchers who wish to evaluate
+any pub/sub system immediate access to several metrics. They do not need to
+reimplement algorithms for the metric calculations. All that is
+required of them is to implement the \emph{reporter interface}.
 
-The plots produced aim at resembling the plots produced by the
+The plots produced in this chapter aim at resembling the plots produced by the
 Statistics Component in Gephi. However, due to using an external tool
 for plotting, we can superimpose several plots on top of each other, as
 well as adjust the format and layout of the plots. Also, it should be
 noted that the output file format of the Gephi plots are non-vector
-image files, which is not suitable for printing. The ability choose the
+image files, which is not very suitable for printing. The ability to choose the
 image format of the plots is another benefit over using the
 standard plot output of Gephi.
 
