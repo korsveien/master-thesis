@@ -652,7 +652,7 @@ nodes.
 
 \afterpage{\clearpage}
 \begin{figure*}[H]
-    \vspace{-100pt}
+    \vspace{-80pt}
     \centering
     \thisfloatpagestyle{empty}
     \includegraphics[scale=0.5]{figures/churn_0}
@@ -698,20 +698,6 @@ included in it.
 \subsection{Visualizing Performance Metrics}
 \label{sec:viz_perf}
 
-\begin{figure}[Ht]
-    \centering
-    \subfigure[Average number of control messages \bf sent]{%
-    \includegraphics[scale=0.35]{figures/msg_sent_avg}
-}
-    \subfigure[Average number of control messages \bf received ]{%
-    \includegraphics[scale=0.35]{figures/msg_rcv_avg}
-}
-\caption{Visualizations of average number of control messages sent and
-    received per node in PolderCast}
-\label{fig:avg_ctrl}
-\end{figure}
-
-
 \demo{} supports visualizations of a number of performance metrics.
 These metrics are applied as attributes to both nodes and edges. The
 supported metrics are listed in Section~\ref{sec:collector}. In Gephi,
@@ -733,6 +719,19 @@ able to inspect the overlay, run metrics using the \emph{Statistics
     Component} as well as produce plots as seen in
 Section~\ref{sec:comparing}. The user may also export data to a \csv
 file using the \emph{Data Laboratory} for further statistical analysis.
+
+\begin{figure}[Ht]
+    \centering
+    \subfigure[Average number of control messages \bf sent]{%
+    \includegraphics[scale=0.35]{figures/msg_sent_avg}
+}
+    \subfigure[Average number of control messages \bf received ]{%
+    \includegraphics[scale=0.35]{figures/msg_rcv_avg}
+}
+\caption{Visualizations of average number of control messages sent and
+    received per node in PolderCast}
+\label{fig:avg_ctrl}
+\end{figure}
 
 \subsection{Publication Message Dissemination}
 \label{sec:dissviz}
@@ -964,14 +963,6 @@ visualization allows us to observe this difference for ourselves.
     \subfigure[Scribe]{%
         \includegraphics[scale=0.67]{figures/scribe_structure}
         \label{fig:polder_struct}
-        % Use vizpub as a tool for evaluating experiments. We update both
-        % poldercast and scribe, in order to expand the evaluation
-        % performed in the poldercast paper. Emphasize how the vizpub tool
-        % along with the gephi framework enable us to easily expand the
-        % evaluation on particular metrics, as these are inlcuded in
-        % gephi. These metrics include, in-degree, out-degree, clustering
-        % coefficient and centralities.
-
     }
     \caption{Visualizaton of the \textbf{overlay
             strucure} of PolderCast and Scribe after 1000 intervals}
