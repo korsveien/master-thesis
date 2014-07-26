@@ -44,37 +44,40 @@ any pub/sub system immediate access to several metrics. They do not need to
 reimplement algorithms for the metric calculations. All that is
 required of them is to implement the \emph{reporter interface}.
 
-The plots produced in this chapter aim at resembling the plots produced by the
-Statistics Component in Gephi. However, due to using an external tool
-for plotting, we can superimpose several plots on top of each other, as
-well as adjust the format and layout of the plots. Also, it should be
-noted that the output file format of the Gephi plots are non-vector
-image files, which is not very suitable for printing. The ability to choose the
-image format of the plots is another benefit over using the
-standard plot output of Gephi.
+The plots produced in this chapter aim at resembling the plots produced
+by the Statistics Component in Gephi. However, due to using an external
+tool for plotting, we can superimpose several plots on top of each
+other, as well as adjust the format and layout of the plots. Also, it
+should be noted that the output file format of the Gephi plots are
+non-vector image files, which is not very suitable for printing. The
+ability to choose the image format of the plots is another benefit over
+using the standard plot output of Gephi.
 
 \section{Experimental Restrictions}
 
-As \demo{} is still is an early prototype state, there are restrictions
+As \demo{} is still in an early prototype state, there are restrictions
 in terms the total number of nodes we can run as well as the number of
 reporter intervals. This is due to the file sizes of temporary logs
-grows linearly with the number of nodes, intervals and perhaps more
-importantly: number of edges. This becomes problematic with pub/sub
-systems which generate a high number of edges, such as PolderCast. The
-Collector will also use a lot of memory when calculating custom metrics
-due to loading these files in memory. Also, the Gephi Toolkit suffers
+growing linearly with the number of nodes, the number of intervals and perhaps more
+importantly: the number of edges. This becomes problematic with pub/sub
+systems such as PolderCast, which generate a high number of edges. The
+Collector will also consume a lot of memory when calculating custom metrics
+due to the files note being streamed, but loaded directly into
+memory. Also, the Gephi Toolkit suffers
 from performance issues due to an inefficient GEXF-parser. This means
 that currently, \demo{} need a high amount of memory and disk space in
 the order of several Gigabytes in order to operate properly.
 Unfortunately, although we had access to the needed amount of memory, we
 were restricted in terms of disk space. For this reason we restrict the
-number of nodes and reporter intervals in our experiments.
+number of nodes and reporter intervals in our experiments to 2000 nodes
+and 1000 reporter intervals.
 
-The file sizes also grow linearly with the number of publication
-messages. As the number of publication messages per interval can be in
-the order of tens of thousands,  we evaluate only on topology metrics.
-Also, due to time constraints we leave out the computational costly
-\emph{topic diameter} metric, and leave this to future work.
+Another issue is the file sizes growing linearly with the number of
+publication messages. As the number of publication messages per interval
+can be in the order of tens of thousands,  we evaluate the systems on
+topology metrics only. Also, due to time constraints we leave out the
+computational costly \emph{topic diameter} metric, and leave this to
+future work.
 
 We wish to improve the scalability of \demo{} in terms of file sizes in
 the future, otherwise its usefulness for real deployed pub/sub systems
