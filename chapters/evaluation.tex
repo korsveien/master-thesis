@@ -132,26 +132,33 @@ between node pairs, we use the King dataset found in~\cite{king}.
         Scribe when using different subscription workloads.}
 \end{figure}
 
-Figure~\ref{fig:eval_directeddegree} shows directed degree in PolderCast
-and Scribe. It confirms the much higher degree in PolderCast compared to
-Scribe. It also a difference in average degree when using different
-workloads. In particular, using the twitter workload seem to cause a
-higher degree in both PolderCast and Scribe.  The difference is most
-noticeable in Scribe, as the degree is quite low.  By using the
-\emph{Statistics Component} in Gephi, we produce plots describing the
-difference in number of edges in Scribe when using workloads from
-Facebook and Twitter, seen in~\ref{fig:scribe_edges_face} and
-Figure~\ref{fig:scribe_edges_twitter} respectively. It is clear that
-using the workload from Twitter induces a much higher number of edges.
-This might be indicative of a higher overlap in subscription interests,
-increasing the number of tree structures being constructed. Such an
-indication is also mentioned in~\cite{Setty:2012}. Furthermore, the
-average degree are stable with regards to node churn, which might
-indicate that the distribution of node degree does not diverge too much
-from the mean. More specifically, there are few nodes with a very high
-or a very low node degree. This decreases the likelihood of such a node
-to leave the network due to churn, which would have a large impact on
-the average value of node degree. The two plots seen in
+Figure~\ref{fig:eval_directeddegree} shows average directed degree in
+PolderCast and Scribe. Averages are calculated by dividing the local
+value of each node, and divide it by the number of nodes in the overlay
+for the interval in question, i.e.\ the average is the \emph{arithmetic
+    mean} for each reporter interval. This is the case for all metrics
+described in this chapter. Figure~\ref{fig:eval_directeddegree} confirms
+the much higher degree of PolderCast observed in
+Chapter~\ref{ch:vizpub}. It also reveals a difference in average degree
+when using different workloads. In particular, using the Twitter
+workload seem to cause a higher degree in both PolderCast and Scribe.
+The difference is most noticeable in Scribe, as the degree is quite low,
+and thus the discrepancy appears to be larger.
+By using the \emph{Statistics Component} in Gephi, we are able to
+produce plots describing the difference in number of edges in Scribe
+when using workloads from Facebook and Twitter, seen
+in Figure~\ref{fig:scribe_edges_face} and Figure~\ref{fig:scribe_edges_twitter}
+respectively. It is clear that using the workload from Twitter induces a
+much higher number of edges. This might be indicative of a higher
+overlap in subscription interests between nodes, increasing the number
+of tree structures being constructed. Such an indication of subscription
+overlap is also mentioned in~\cite{Setty:2012}. Furthermore, the average
+degree seems to be stable in spite of node churn, which might indicate
+that the distribution of node degree does not diverge too much from the
+mean. More specifically, there are few nodes with a very high or a very
+low node degree. This decreases the likelihood of such a node to leave
+the network due to churn, which would have a large impact on the average
+value of node degree. The two plots seen in
 Figure~\ref{fig:eval_directeddegree} also indicate that there is an even
 balance between in-degree and out-degree of nodes, as they both have
 similar values.
@@ -170,18 +177,16 @@ similar values.
 
 % \subsection{Clustering Coefficient}
 
-Average Clustering coefficient is described in Figure~\ref{fig:eval_cc}.
-The average is calculated by dividing the \emph{local clustering
-    coefficient} of each node, and divide it by the number of nodes in
-the overlay. As expected, PolderCast has a higher clustering
-coefficient. However, it is worth noting that the clustering coefficient
-of PolderCast seems relatively unaffected by using different workloads,
-while in Scribe the clustering coefficient goes up when using the
+Average clustering coefficient is described in Figure~\ref{fig:eval_cc}.
+As expected, PolderCast also has a higher average clustering
+coefficient. Also here we can observe that the clustering coefficient of
+PolderCast seems relatively unaffected by using different workloads,
+while in Scribe the clustering coefficient increases when using the
 Twitter dataset for subscriptions. Again, this is a natural consequence
 of the much higher number of edges in Scribe when running the Twitter
-workload. The fact that PolderCast has a higher clustering coefficient
-is hardly surprising, as the we know from Chapter~\ref{ch:vizpub} that
-the overlay in PolderCast is more dense.
+workload. Also, the fact that PolderCast has a higher clustering
+coefficient is hardly surprising, as the we know from
+Chapter~\ref{ch:vizpub} that the overlay in PolderCast is more dense.
 
 \begin{figure}[H]
     \centering
@@ -214,11 +219,11 @@ workloads.
 The average closeness centrality of nodes can be seen in
 Figure~\ref{fig:eval_closeness}. Here Scribe populate the top values as
 using both workloads, although the discrepancy of results depending on
-the data set used is still higher than in PolderCast. This is hardly
-surprising, as closeness is a measure between the distance of a node
+the data set used is still higher than in PolderCast. This is to be
+expected, as closeness is a measure between the distance of a node
 $n$ and any other nodes in the system. Seeing that the overlay in
 PolderCast is much more dense as well as having a shorter diameter, we
-expect nodes in PolderCast to have a lower closeness centrality as
+would expect nodes in PolderCast to have a lower closeness centrality as
 well.
 
 Figure~\ref{fig:eval_eccentricity} describes the average eccentricity
@@ -232,7 +237,7 @@ The low number of edges and relative high number of
 disconnected nodes seen in Scribe when running the workload from
 Facebook might effect the results. It would be interesting to see what
 is the cause of this. One possible reason might be the scale of the
-experiment, as we could only run 2000 nodes for this thesis. With more
+experiment, as we could only run 2000 nodes for the purpose of this thesis. With more
 time to spare, we would run further experiments at different scales in
 order to test the effects. However, much work is needed before this is
 possible, as \demo{} is still a young tool. We describe such future work
@@ -241,11 +246,11 @@ limitations of \demo{}
 
 The low number of edges in Scribe, might also be caused by the amount of
 churn in the system, as the dissemination structure in Scribe are , in
-theory, brittle. Indeed, by running an experiment without churn, we were
-able to visually confirm that the overlay in scribe was composed of only
-one connected component by quickly inspecting the graph in Gephi. This
-confirm in practice the brittleness of the overlay structures of Scribe,
-but this needs further investigation. This investigation should include
+theory, brittle. Indeed, by running a short experiment without churn, we were
+able to visually confirm that the overlay in Scribe was composed of only
+one connected component by visually inspecting the graph in Gephi. This
+might confirm in practice the brittleness of the overlay structures of Scribe,
+but this issue needs further investigation. This investigation should include
 adjusting the churn rate in order to see the effects of the overlays,
 and perhaps compare the density of the graph, looking at the number of
 edges formed as well as evaluating its connectivity.
@@ -264,8 +269,8 @@ pub/sub systems, but with this chapter we believe we provide some
 examples to back up the claim that \demo{} can be used as a tool for
 evaluation as well as visualization. We believe such a tool would be of
 great benefit to the research community, and we hope the extendability
-of Gephi through its ecosystem of plugins can encourage researcher to share
-more code between them.
+of Gephi through its ecosystem of plugins can encourage researchers to share
+more of their implementation code.
 
 % Currently, the collector does not provide us any information regarding
 % the \emph{variance} or \emph{standard deviation} of the data being
