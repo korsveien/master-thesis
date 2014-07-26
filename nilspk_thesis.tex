@@ -39,6 +39,37 @@
 \maketitle{}
 
 \chapter*{Abstract}
+
+The Publish/Subscribe (pub/sub) paradigm is receiving an increasing
+amount of attention both in research and in industry, as it provides a
+loosely coupled and scalable interaction scheme suitable for large-scale
+distributed systems. Designers of such system face many difficulties
+related to finding the correct balance of performance, as many desired
+properties of pub/sub systems are at stake with each other. Also, many
+considerations must be taken with regards to the overlays formed by
+these systems both in terms of maintenance of the overlay as well as
+structural properties such as clustering and connectivity. With these
+issues in mind, we propose \demo{}, a tool for visualizing the
+performance of overlay-based pub/sub systems. \demo{} is able to log
+local information from every node participating in the overlay, and
+collect this information to a single site. Then, our tool is able to
+calculate certain system-wide metrics and produce step-by-step
+visualizations of the overlay in question. To the best of our knowledge,
+\demo{} is the first tool of its kind. It is a generic tool intended to
+be used with any overlay-based system. We describe the system
+architecture and explore the capabilities of \demo{} by providing
+examples of visualizations and what information we may derive from them.
+Also, we test the potential of using our tool as a convenient framework
+for evaluating pub/sub system on a set of specific overlay topology
+metrics. We presented a poster and held a live demonstration of \demo{} at the
+ACM International Conference of Distributed Event Based Systems (DEBS),
+hosted in Mumbai in May 2014. Here, the value of our contribution was
+confirmed as we were voted best poster/demonstration by the participants
+attending the conference. Due to interest in our tool, we choose to make
+our implementation code open source and available in a public
+repository.\footnote{\url{htttp://github.com/vizpub/vizpub}} Hopefully,
+\demo{} may serve as a lasting contribution to the research community.
+
 \tableofcontents{}
 \listoffigures{}
 \listoftables{}
