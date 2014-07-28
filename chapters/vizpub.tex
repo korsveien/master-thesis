@@ -124,16 +124,16 @@ of system execution performed in the Visualisation Unit. For example, if
 running simulation using PeerNet, the user may determine whether or not
 the reporter intervals should encompass several simulation cycles. Or,
 in a real distributed pub/sub deployment scenario, the user can
-determine the time delay between every reporting interval.
+determine the time delay between every reporter interval.
 
 
 \subsection{Reporter}
 
 The Reporter is responsible of providing the relevant data necessary in
 order to calculate the desired performance metrics. In order to do so,
-we specify a \emph{reporter interface} which is implemented at each
+we specify a \emph{reporter interface} which must be implemented at each
 individual node participating in the pub/sub overlay. This interface
-enables each nodes to log certain system parameters using its local
+enables each node to log certain system parameters using its local
 knowledge at each reporting interval. This local information is then pulled
 by the Collector at the end of each interval by invoking the
 reporter interface. The available interface method calls and what data
@@ -142,37 +142,40 @@ they return is described in Table~\ref{table:interface}.
 % ../tables/interface.tex
 \input{tables/interface}
 
-It is simple to see how certain performance metrics
-can be derived from the methods listed in Table~\ref{table:interface}.
-The structural properties of the overlay such as \emph{degree},
-\emph{diameter} and \emph{clustering coefficient} can be derived by
-reconstructing the overlay topology. This reconstruction can be achieved
-through the two very first methods listed in
-Table~\ref{table:interface}, namely \texttt{reportId()} and \texttt{reportNeighborIds()}.
-For example, in our reporter interface
-implementation for the RINGS layer in PolderCast, each node returns its
-own id as well as the ids of both ring neighbors and random neighbors.
-After this information is pulled, the Collector is able to derive a
-graph structure where it first builds every node reported, and then draw
-directed edges between these nodes based on the reported neighbor id
-information. What topics each node subscribe to is also useful in order
-to derive and visualize metrics such as \emph{Topic Diameter} and \emph{Subscription
-    Size}. The Collector is able to pull information regarding topic
-subscriptions through the \texttt{reportTopics()} interface method call.
-Each node will return a set of topic ids, and the Collector is able to
-use this information to attribute topics to each node, as well as edges.
-In order to add topics to edges, the Collector simply iterates through
-the topic id list of each node, and looks for a neighbor who share a
-subscription to the same particular topic: a \emph{topic neighbor}. If a
-topic neighbor of a node is found, the topic id is added as an attribute
-to the edge connecting them. Applying topic attributes to nodes and
-edges, provides the Visualization Unit (i.e.\ Gephi) with the ability to strip away
-nodes and edges that does not belong to a particular topic, thereby
-enabling calculation of topic diameter.
+It is easy to see how certain performance metrics can be derived from
+the methods listed in Table~\ref{table:interface}.  The structural
+properties of the overlay such as \emph{degree}, \emph{diameter} and
+\emph{clustering coefficient} can all be derived by reconstructing the
+overlay topology and running the specific metric using the
+\emph{Statistics Component} in Gephi. The reconstruction of the overlay
+can be achieved  by collecting the information returned by the two first
+methods listed in Table~\ref{table:interface}, namely
+\texttt{reportId()} and \texttt{reportNeighborIds()}. For example, in
+our reporter interface implementation for the RINGS layer in PolderCast,
+each node returns its own id as well as the ids of both ring neighbors
+and random neighbors. After this information is pulled, the Collector is
+able to derive a graph structure where it first builds nodes based on
+the information returned by \texttt{reportId()} and then draw directed
+edges between these nodes based on the data returned from
+\texttt{reportNeighborIds()}. What topics each node subscribe to is
+also useful in order to derive and visualize metrics such as \emph{Topic
+    Diameter} and \emph{Subscription Size}. The Collector is able to
+pull information regarding topic subscriptions through the
+\texttt{reportTopics()} method call. Each node will return a
+set of topic ids, and the Collector is able to use this information to
+attribute topics to nodes as well as edges.  In order to add topics
+to edges, the Collector simply iterates through the topic id list of
+each node, and looks for a neighbor who share a subscription to the same
+particular topic: a \emph{topic neighbor}. If a topic neighbor of a node
+is found, the topic id is added as an attribute to the edge connecting
+them. Applying topic attributes to nodes and edges, provides the
+Visualization Unit (i.e.\ Gephi) with the ability to strip away nodes
+and edges that does not belong to a particular topic, thereby enabling
+calculation of topic diameter.
 
 The dissemination properties of a given pub/sub system such as
 \emph{hit ratio}, \emph{path lengths}, and \emph{number of duplicate publication
-messages received} can be derived by having each node provide a list of
+messages sent/received} can be derived by having each node provide a list of
 publication messages sent and received. In order to calculate these
 dissemination metrics, the publication needs to have a particular
 structure. This structure is described in Table~\ref{table:structure}.
@@ -187,12 +190,12 @@ message being published on a particular topic from a particular node may
 be calculated in a similar fashion, as different copies of a publication message reported from
 different nodes can be ordered based on their timestamp values.
 
-The number of duplicate publication messages received and sent by each
-node is available through the \texttt{reportControlMsgsReceived()}  and
+The number of duplicate publication messages sent and received by each
+node is available through the \texttt{reportControlMsgsSent()}  and
 \texttt{reportControlMsgsReceived()} respectively, while the communication
 overhead incurred by control messages in terms of bandwidth consumption can be
 derived by the \texttt{reportControlBytesSent()} and
-\texttt{reportControlBytesSent()} method calls.
+\texttt{reportControlBytesReceived()} method calls.
 
 % ../tables/pubmessage.tex
 \input{tables/pubmessage}
@@ -200,20 +203,21 @@ derived by the \texttt{reportControlBytesSent()} and
 The structure of the publication messages outlined in
 Table~\ref{table:structure} also allows for visualizing the paths of
 publication messages. As mentioned, this is one of the two types of
-visualizations the Collector can output as a \gexf{} file (where the
-other type is the overlay structure). In a visualization of message
-dissemination the Collector will look at the topic id of the message,
-and only include the nodes interested in the particular topic. The
-Collector will then iterate through the messages sent and received by
-each node.  By analyzing the messages further, the Collector is able to
-create directed edges between the nodes which represent the path of the
-publication message. The edges are dynamic, i.e.\ they include a ``Time
-Interval'' attribute, enabling a step-by-step animation, where edges
-appear as the animation is played back in the Visualization Unit. These
-edges trace the path of the publication hop-by-hop. This enables
-researchers, developers as well as students to analyze publication
-dissemination schemes visually, which enhances their ability to
-understand, study and debug dissemination algorithms.
+visualizations the \demo{} is able to produce (where the other type is
+the overlay structure). The Collector will output a separate \gexf{}
+file for this type of visualization. When creating such a visualization,
+the Collector will look at the topic id of the message, and only include
+the nodes interested in the particular topic. The Collector will then
+iterate through the messages sent and received by each node.  By
+analyzing the messages further, the Collector is able to create directed
+edges between the nodes which represent the path of the publication
+message. The edges are dynamic, i.e.\ they include a ``Time Interval''
+attribute, enabling a step-by-step animation, where edges appear as the
+animation is played back in Gephi. These edges trace
+the path of the publication hop-by-hop. This enables researchers,
+developers as well as students to analyze publication dissemination
+schemes visually, which enhances their ability to understand, study and
+debug dissemination algorithms.
 
 In addition to being able to configure the reporter intervals, users of
 \demo{} may choose to only report partial information. For example users
