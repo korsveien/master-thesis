@@ -20,13 +20,12 @@ development and study of overlay-based systems.
 To the best of our knowledge, \demo~is the first tool of its kind. The
 tool is able to visualize the execution of any given distributed pub/sub
 system step by step with respect to a set of performance metrics. Each
-node in the system records relevant data at selected
-\emph{reporter intervals} during system execution. Our tool is then able
-to pull this data to a single site, and compute various metrics at a
-system-wide scale. The collected data from each interval is then
-collated into a single \gexf{} file, which is interpreted by the
-\emph{Visualization Unit} which enable replay of system execution
-offline.
+node in the system records relevant data at selected intervals during
+system execution. Our tool is then able to pull this data to a single
+site, and compute various metrics at a system-wide scale. The collected
+data from each interval is then collated into a single \gexf{} file,
+which is interpreted by the \emph{Visualization Unit} which enable
+replay of system execution offline.
 
 Our tool supports two different types of visualizations: (1) visualization of the
 overlay structure and how it evolves over time and (2) visualization of
@@ -91,38 +90,39 @@ pulled at regular intervals to a central site by the ``Collector'',
 which stores the information as a single file in the \gexf{} format.
 This file is then interpreted by the ``Visualization Unit'', which
 consists of a single machine running the \emph{Gephi Open Graph Viz
-tool}~\cite{ICWSM09154}. The Collector is designed to perform the collection of
-data while in online mode, while the computation, aggregation and
-derivation of various metrics is performed in in offline mode. The
-Visualization Unit always operate in offline mode, as the
-final report needs to be collated into a \gexf{} format before it can be
-interpreted in Gephi for playback and visualization. This final report
-is created \emph{after} system execution.
+    tool}~\cite{ICWSM09154}. The Collector is designed to perform the
+collection of data while in online mode, while the computation,
+aggregation and derivation of various metrics is performed in offline
+mode. The Visualization Unit always operate in offline mode, as all the
+individual reports pulled from the different reporters needs to be
+collated into a single \gexf{} file before it can be interpreted in Gephi
+for playback and visualization. The processing of the individual reports
+into this final report happens \emph{after} system execution.
 
-The design of \demo~supports pub/sub systems that are deployed as
+\demo{} supports pub/sub systems that are deployed as
 real distributed systems, as well as systems that are deployed in
 simulation mode. This is due to the highly modular system architecture,
 with strict separation of concerns, where the operation of both the
-Collector and the Visualization Unit is separate from the reporting.
+Collector and the Visualization Unit is kept separate from the reporting.
 
-\demo~is designed to be a generic tool, where the only system specific
-part of the architecture is the \emph{reporter interface} outlined in
-Table~\ref{table:interface}. Any researcher or developer who wants to
-use our framework only needs to provide an implementation of this
-interface, which enables the Collector to retrieve the relevant data
-from each individual node at the specified time points by calling the
-methods of this interface. The time points for collection are
-configurable, and all the information collected from the Reporter can be
-thought of as a representation of the change of system state from the
-current time point to the previous time point with regards to the various performance metrics. More
-specifically: the change of system state that occurred in the
-\emph{interval} between two time points. Thus, we call these time points
-\emph{reporting intervals}. The length of the intervals are configurable,
-which provides the user with control over the granularity of data
-collection, and thus the granularity of the step-by-step replay of
-system execution performed in the Visualisation Unit. For example, if
+\demo~is also designed to be a generic tool, where the only system
+specific part of the architecture is the \emph{reporter interface}
+outlined in Table~\ref{table:interface}. Any researcher or developer who
+wants to use our framework only needs to provide an implementation of
+this interface, which enables the Collector to retrieve the relevant
+data from each individual node by calling the methods of this
+interface. The time points for collection are configurable, and all the
+information collected from the Reporter can be thought of as a
+representation of the change of system state from the current time point
+to the previous time point with regards to the various performance
+metrics. More specifically: the change of system state that occurred in
+the \emph{interval} between two time points. Thus, we call these time
+points \emph{reporter intervals}. The length of the intervals are
+configurable, which provides the user with control over the granularity
+of data collection, and thus the granularity of the step-by-step replay
+of system execution performed in the Visualisation Unit. For example, if
 running simulation using PeerNet, the user may determine whether or not
-the reporting intervals should encompass several simulation cycles. Or,
+the reporter intervals should encompass several simulation cycles. Or,
 in a real distributed pub/sub deployment scenario, the user can
 determine the time delay between every reporting interval.
 
