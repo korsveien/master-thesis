@@ -117,12 +117,12 @@ representation of the change of system state from the current time point
 to the previous time point with regards to the various performance
 metrics. More specifically: the change of system state that occurred in
 the \emph{interval} between two time points. Thus, we call these time
-points \emph{reporter intervals}. The length of the intervals are
+points \emph{reporting intervals}. The length of the intervals are
 configurable, which provides the user with control over the granularity
 of data collection, and thus the granularity of the step-by-step replay
 of system execution performed in the Visualisation Unit. For example, if
 running simulation using PeerNet, the user may determine whether or not
-the reporter intervals should encompass several simulation cycles. Or,
+the reporting intervals should encompass several simulation cycles. Or,
 in a real distributed pub/sub deployment scenario, the user can
 determine the time delay between every reporter interval.
 
@@ -219,7 +219,7 @@ developers as well as students to analyze publication dissemination
 schemes visually, which enhances their ability to understand, study and
 debug dissemination algorithms.
 
-In addition to being able to configure the reporter intervals, users of
+In addition to being able to configure the reporting intervals, users of
 \demo{} may choose to only report partial information. For example users
 may choose to only report structural information such as node ids and
 neighbor ids, or only dissemination specific data such as publication
