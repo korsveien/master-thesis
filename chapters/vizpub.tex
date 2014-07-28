@@ -762,21 +762,21 @@ by all nodes during the simulation.
 
 Figure~\ref{fig:diss_1} is a visualization of the dissemination in
 PolderCast after 1 and 4 hops, while~\ref{fig:diss_2} are snapshots of
-the visualization after the dissemination has finished.  The nodes have
+the visualization after the dissemination is finished.  The nodes have
 been arranged in a ring using the \emph{Layout Component} in Gephi. Also
 they are ordered by node id, making it easier to see whether an edge
-represent a ring link or a random link. The labels indicate the hop
-number of the message received by that node. On the left side of the
-ring in Figure~\ref{fig:diss_1} and Figure~\ref{fig:diss_2 } there is a
-node with the label ``0'', which indicates that this is the publishing
-node. A node with the label ``1'', means the node received a message at
-the first hop, a node with a label ``2'' that it received a message at
-the second hop, and so on. In addition to numeric labels, the nodes are
-color coded on a gradient. The deeper the color of the node, the higher
-the hop count, which also means it is further away from the publisher. In
-Figure~\ref{fig:diss_2} the node furthest away is easily spotted on the
-left by its deep red color. This is the last node to receive the
-publication.
+represent sending a message through a ring link or a random link. The
+labels indicate the hop number of the message received by that node. On
+the left side of the ring in Figure~\ref{fig:diss_1} and
+Figure~\ref{fig:diss_2} there is a node with the label ``0'', which
+indicates that this is the publishing node. A node with the label ``1'',
+means the node received a message at the first hop, a node with a label
+``2'' that it received a message at the second hop, and so on. In
+addition to numeric labels, the nodes are color coded on a gradient. The
+deeper the color of the node, the higher the hop count, which also means
+it is further away from the publishing node. In Figure~\ref{fig:diss_2} the
+node furthest away is easily spotted on the left by its deep red color.
+This is the last node to receive the publication.
 
 It might seem strange that the last node to receive the message is an
 immediate ring neighbor of a node who received the message on the first
@@ -787,12 +787,12 @@ dissemination after the message has been sent, no numeric label is
 applied to the node. This could give the impression that this node did
 not receive any message. However, this is not the case. The explanation
 behind this is latency. The latency between these two nodes is so high
-that by the time it received the message from its ring neighbor, the
-message was already received from another node. We choose to visualize
-this by drawing an edge to the node and then refrain from applying a
-numeric label. When we reach the point in the animation where this node
-receives a message for the first time, we apply the hop count of this
-message as a numeric node label.
+that by the time the recipient node received the message from its ring
+neighbor, the message was already received from another node. We choose
+to visualize this by drawing an edge to the node and then refrain from
+applying a numeric label. When we reach the point in the animation where
+this node receives a message for the first time, we apply the hop count
+of this message as a numeric node label.
 
 \afterpage{\clearpage}
 \begin{figure}[H]
@@ -860,8 +860,8 @@ of overlays in PolderCast to converge. Also, it could be a special case,
 which resulted in the publisher being a bit ``unlucky'' when picking a
 random neighbor in this particular scenario. Regardless, visualizing
 dissemination leads to these types of interesting observations, which
-might lead to even more interesting findings with regards to protocol
-behaviour. For example, one such interesting observation is how a fanout
+might lead to even more interesting findings with regards to system
+behaviour. For example, another interesting observation is how a fanout
 of $f=2$ leads to a special case when disseminating messages in
 PolderCast. More specifically, as mentioned in
 Chapter~\ref{ch:background}, a node running PolderCast will forward a
@@ -884,8 +884,9 @@ number of duplicate messages and reliable delivery. If there are too
 many unnecessary messages being sent, scalability in terms of bandwidth
 suffers.
 
-Deriving the exact number of duplicate messages received by each node is
-trivial. As each directed edge represent a message being sent, all we
+Deriving the exact number of duplicate messages received by each node in
+the visualization of publication message dissemination is
+simple. As each directed edge represent a message being sent, all we
 need to do is calculate the in-degree of each node using the Statistics
 Component in Gephi. The result can be seen in Figure~\ref{fig:dups}.
 This visualization indicate that PolderCast does indeed introduce a
