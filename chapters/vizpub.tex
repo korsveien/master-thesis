@@ -1206,9 +1206,6 @@ more thorough evaluation.
 \end{figure}
 \restoregeometry
 
-
-
-
 \section{Implementation Work}
 
 During our implementation work, we encountered several scenarios were
@@ -1227,7 +1224,7 @@ the workload being used. More specifically, we used the \emph{Node Query
     Tool} in Gephi to ensure these nodes had zero overlapping
 subscriptions with any other node in the overlay by inspecting the
 ``Topics'' attribute of the visualized nodes. This was the first
-practical experience we had with the tool, were it usability was clearly
+practical experience we had with the tool, were its usability was clearly
 demonstrated. It speaks to how visualizations are also able to provide
 information of the datasets being used. In the scenario we describe, we
 used a real-world trace from Twitter~\cite{Kwak10www}, which included
@@ -1299,7 +1296,7 @@ independent pieces of code, typically methods within a single
 module or component, while \emph{integration tests} aim to test
 code across such modules and components in order to determine
 how well they integrate with each other. In our work, we only
-took advantage of Unit Tests where we found it to be suitable.
+took advantage of unit tests where we found it to be suitable.
 We could also have benefited from a suite of integration tests,
 as our implementation is heavily dependent on interoperating
 components, as well as file and network IO\@. However, writing
@@ -1321,8 +1318,7 @@ In our experience this routine has been helpful when working
 with our implementation code, as it enables us as developer to
 refactor with confidence achieving more maintainable code and a
 more thoughtful software design. Since we share our
-implementation code with the research community by hosting it in
-a open repository, any tool or method that helps us improve the
+implementation code as open source, any tool or method that helps us improve the
 design and maintainability of our project is of great value to
 us. Using TDD forced us to think more deeply about what
 functionality to implement and how to structure and split the
@@ -1334,36 +1330,37 @@ technical debt in our project, a problem we find to be commonplace in academia.
 
 \subsection{Sharing Code with the Community}
 
-We believe sharing our code is to the benefit of both \demo{} and the
+We believe sharing our code is to the benefit of both \demo{} and to the
 community. During our presentation at DEBS 2014, the interest in our
 tool was high, and we received a fair amount of requests for our
 implementation code. Sharing our code by hosting it publicly will
 hopefully allow the tool to grow from a prototype into mature product by
 allowing anyone to contribute with improvements and bug fixes. It is our
 hope that \demo{} will be a lasting contribution to the research
-community, and hosting the code publicly is a key part in ensuring the
-future of the tool.
+community, and hosting the code in a public
+repo\footnote{\url{http://github.com/vizpub/vizpub}} is a key part in
+ensuring a future for our tool.
 
 \section{Chapter Summary}
 
-In this chapter we presented \demo{}~\cite{korsveien2014vizpub}, a tool we propose for visualizing
-the performance of overlay-based pub/sub systems. To the best of our
-knowledge, this is the first tool of its kind. It is designed to be a
-generic tool, intended to be used with any pub/sub system. We describe
-\demo{} and its system architecture, as well as demonstrate the usage of
-the tool through examples of visualizations. \demo{} is able to produce
-two different types of visualizations: (1) visualization of overlay
-structure, and (2)  visualization of publication message dissemination.
-We also describe our own experiences working with the tool, and how it
-aided us in debugging as well as in better understanding the
-characteristics of the different pub/sub protocols in question. We
-believe our tool is a useful contribution which has value both for
-researchers, developers as well as students of distributed systems. We
-share our implementation code by hosting it in a public
-repository~\footnote{\url{http://github.com/vizpub/vizpub}} in order to
-encourage its further development. We presented a poster and held a
-demonstration of \demo{} at DEBS 2014 where we were awarded with the
-price for best poster/demo. We are encouraged by the feedback received
-from the researchers who visited our demo at DEBS, and we hope our tool
-will serve as a lasting contribution to the research community.
+In this chapter we presented \demo{}~\cite{korsveien2014vizpub}, a tool
+we propose for visualizing the performance of overlay-based pub/sub
+systems. To the best of our knowledge, this is the first tool of its
+kind. It is designed to be a generic tool, intended to be used with any
+pub/sub system. We describe \demo{} and its system architecture, as well
+as demonstrate the usage of the tool by providing examples of
+visualizations. \demo{} is able to produce two different types of
+visualizations: (1) visualization of overlay structure, and (2)
+visualization of publication message dissemination.  We also describe
+our own experiences working with the tool, and how it aided us in
+debugging as well as in better understanding the characteristics of the
+different pub/sub protocols in question. We believe our tool is a useful
+contribution which has value both for researchers, developers as well as
+students of distributed systems. We share our implementation code by
+hosting it in a public repository in order to encourage its further
+development. We presented a poster and held a demonstration of \demo{}
+at DEBS 2014 where we were awarded with the price for best poster/demo.
+We are encouraged by the feedback received from the researchers who
+visited our demo at DEBS, and we hope our tool will serve as a lasting
+contribution to the research community.
 
