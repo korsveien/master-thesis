@@ -78,18 +78,18 @@ provided several example scenarios where we experienced the usefulness
 of our tool first-hand.
 
 As mentioned, we are not aware of any other proposed tool which is quite
-comparable with what we propose. And although we imagine numerous
-possible use cases for \demo{}, the possibilities of such a tool is
-still relatively unknown. We hope  the research community or any party
-interested will look at our tool, test it, modify it, extend it and in
-general find uses for it. During the poster and demonstration of \demo{}
-we held at DEBS2014, we were approached by several participant who
-expressed their interest in using such a tool for their own research.
-This is why we choose to host our implementation code of
-\demo{} in a public
-repository.\footnote{\url{http://github.com/vizpub/vizpub}} We hope the
-tool will serve as a lasting contribution to the research community, as well
-as aid in recruiting more students to our field of research.
+comparable in terms of enabling visual analysis of pub/sub systems. And
+although we imagine numerous possible use cases for \demo{}, the
+possibilities of such a tool is still relatively unknown. We hope  the
+research community or any party interested will look at our tool, test
+it, modify it, extend it and in general find uses for it. During the
+poster and demonstration of \demo{} we held at DEBS2014, we were
+approached by several participant who expressed their interest in using
+such a tool for their own research.  This is why we choose to host our
+implementation code of \demo{} in a public
+repository. We hope the
+tool will serve as a lasting contribution to the research community, as
+well as aid in recruiting more students to our field of research.
 
 \section{Future Work}
 
@@ -119,12 +119,12 @@ opening these files in Gephi. Due to these performance issues we had to
 restrict the scale of our experiments. This is unfortunate, and the
 issues with performance should be addressed quickly in order to increase
 the scalability of the system. Fortunately, there is a lot of
-low-hanging fruit in terms of increasing the performance of the system,
+potential in terms of increasing the performance of the system,
 as it is still in the prototype stage.
 
 \subsection{Implementing Database Support}
 
-In stead of processing log files, it could be useful to take advantage a
+Instead of processing log files, it could be useful to take advantage a
 database for persistence. Graph databases would be an obvious fit for a
 tool such as \demo{}. There is already a Gephi plugin for importing and
 exporting data to such a database, but it is immature and does not
@@ -141,12 +141,19 @@ There are also performance issues with Gephi, as it is still in version
 it uses for storing graphs. However, the authors have dealt with this
 issue in the current development version, where the memory usage has
 been significantly decreased. However, this version also breaks some
-features which prevents us from using it. Another important point to
-make regarding performance in Gephi is the use of the OpenGL graphics
-library when rendering graphs. This means that in order to open large
-graphs in Gephi, it is necessary to use a computer with a dedicated
-graphics card. The bigger the Graph, the more graphics capability is
-required.
+features which prevents us from using it. As the development version is
+still pre-1.0 and rather unstable, we rather choose to wait for it to
+reach a stable 1.0 version before making any major changes to our tools
+compatibility. Also, pre-1.0 software usually involves a lot of changes
+which breaks backwards compatibility. This means users of \demo{}
+currently need to use version the 0.8.7 of Gephi until a stable 1.0
+version is released.
+
+Another important point to make regarding performance in Gephi is the
+use of the OpenGL graphics library when rendering graphs. This means
+that in order to open large graphs in Gephi, it is necessary to use a
+computer with a dedicated graphics card. The bigger the Graph, the more
+graphics capability is required.
 
 \subsection{Reporter Performance Issues}
 
@@ -170,13 +177,14 @@ metrics using shapes, sizes and custom colors. For example, edges could
 be of different thickness, according to how many topic attributes were
 added to them. Also, special nodes such as the \emph{rendezvous} nodes
 in Scribe could have a custom color to them in order to identify them
-easily. Alternatively, the ``special'' nodes could be of a different sizes than
-``regular'' nodes. This is different than the current way of applying
-colors through the \emph{Statistics Component} in Gephi, as it is
-dependent on the existence of a node attribute. Any custom color or size
-would have to be applied by the Collector. However, due to a bug in the
-software library used to build the \gexf{} files, this was not possible
-to implement.
+easily. Alternatively, the ``special'' nodes could be of a different
+sizes than ``regular'' nodes. This is different than the current way of
+applying colors through the \emph{Statistics Component} in Gephi, as it
+is dependent on the existence of a node attribute. Any custom color or
+size would have to be applied by the Collector. However, due to a bug in
+the external software
+library\footnote{\url{http://https://github.com/francesco-ficarola/gexf4j}}
+used to build the \gexf{} files, this was not possible to implement.
 
 
 \subsection{Collector Scalability}
