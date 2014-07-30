@@ -330,7 +330,7 @@ The global attributes calculated by the Collector include:
     \item Hit-Ratio
     \item Average Number of Control Messages Sent
     \item Average Number of Control Messages Received
-    \item Average Number of Control Messages Received in kilobytes
+    \item Average Number of Control Messages Sent in kilobytes
     \item Average Number of Control Messages Received in kilobytes
 \end{itemize}
 
@@ -1097,6 +1097,8 @@ range of the x values in order to see this data point properly.
     \centering
     \includegraphics[scale=0.5]{plots/polder_nodes_ts}
     \label{fig:polder_node_ts}
+    \caption{Time series of number of nodes online during simulation
+        produced by the \emph{Statistics Component} in Gephi}
 \end{figure}
 
 In addition to inspecting degree distribution, Gephi also provides us
@@ -1129,9 +1131,9 @@ clustering coefficient in Scribe might be due to the construction of
 dissemination trees, as there is less likely to be edges between
 siblings.
 
-Note that the visual analysis performed in this section is not intended as a
-full blown comparison of PolderCast and Scribe, but it should serve as
-an indication of how useful and convenient it can be to perform such a
+Note that the visual analysis performed in this section is not intended
+as a comparison of PolderCast and Scribe, but it should serve as an
+indication of how useful and convenient it can be to perform such a
 visual comparison of two protocols. Using both the \emph{Statistics
     Component} in Gephi in order to produce plots, as well as producing
 visualizations of the overlays leads to several interesting observations
