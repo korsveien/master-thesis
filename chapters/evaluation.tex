@@ -86,12 +86,13 @@ performance of \demo{} in Chapter~\ref{ch:conclusion}.
 \section{Experimental Setup}
 
 We run PolderCast and Scribe using the simulation mode in PeerNet. The
-Simulations consists of 2000 nodes running 1000 PeerNet cycles as well as 1000 reporter
-intervals. We use workloads both from Facebook~\cite{facebook-eurosys09} and
-Twitter~\cite{Kwak10www} in order to model subscriptions. As mentioned in
-Chapter~\ref{ch:vizpub}, the Facebook data trace include 3 million user
-profiles along with 28.3 million friend relations. The Twitter dataset
-consists of 41.7 million distinct users and 1.47 billion
+Simulations consists of 2000 nodes running 1000 PeerNet cycles as well
+as 1000 reporter intervals. The resulting data points are averages after 5
+runs. We use workloads both from Facebook~\cite{facebook-eurosys09} and
+Twitter~\cite{Kwak10www} in order to model subscriptions. As mentioned
+in Chapter~\ref{ch:vizpub}, the Facebook data trace include 3 million
+user profiles along with 28.3 million friend relations. The Twitter
+dataset consists of 41.7 million distinct users and 1.47 billion
 follow/followed relations.
 
 The social relations in Facebook are reciprocal, which leads us to model
@@ -134,28 +135,30 @@ Figure~\ref{fig:eval_directeddegree} shows average directed degree in
 PolderCast and Scribe. Averages are calculated by dividing the local
 value of each node, and divide it by the number of nodes in the overlay
 for the interval in question, i.e.\ the average is the \emph{arithmetic
-    mean} for each reporter interval. This is the case for all metrics
-described in this chapter. Figure~\ref{fig:eval_directeddegree} confirms
-the much higher degree of PolderCast observed in
+    mean} for each reporter interval. The averages for each run is then
+added and divided by the number of runs. This is the case for all
+metrics described in this chapter. Figure~\ref{fig:eval_directeddegree}
+confirms the much higher degree of PolderCast observed in
 Chapter~\ref{ch:vizpub}. It also reveals a difference in average degree
 when using different workloads. In particular, using the Twitter
 workload seem to cause a higher degree in both PolderCast and Scribe.
 The difference is most noticeable in Scribe, as the degree is quite low,
-and thus the discrepancy appears to be larger.
-By using the \emph{Statistics Component} in Gephi, we are able to
-produce plots describing the difference in number of edges in Scribe
-when using workloads from Facebook and Twitter, seen
-in Figure~\ref{fig:scribe_edges_face} and Figure~\ref{fig:scribe_edges_twitter}
-respectively. It is clear that using the workload from Twitter induces a
-much higher number of edges. This might be indicative of a higher
-overlap in subscription interests between nodes, increasing the number
-of tree structures being constructed. Such an indication of subscription
-overlap is also mentioned in~\cite{Setty:2012}. Furthermore, the average
-degree seems to be stable in spite of node churn, which might indicate
-that the distribution of node degree does not diverge too much from the
-mean. More specifically, there are few nodes with a very high or a very
-low node degree. This decreases the likelihood of such a node to leave
-the network due to churn, which would have a large impact on the average
+and thus the discrepancy appears to be larger.  By using the
+\emph{Statistics Component} in Gephi, we are able to produce plots
+describing the difference in number of edges in Scribe when using
+workloads from Facebook and Twitter, seen in
+Figure~\ref{fig:scribe_edges_face} and
+Figure~\ref{fig:scribe_edges_twitter} respectively. It is clear that
+using the workload from Twitter induces a much higher number of edges.
+This might be indicative of a higher overlap in subscription interests
+between nodes, increasing the number of tree structures being
+constructed. Such an indication of subscription overlap is also
+mentioned in~\cite{Setty:2012}. Furthermore, the average degree seems to
+be stable in spite of node churn, which might indicate that the
+distribution of node degree does not diverge too much from the mean.
+More specifically, there are few nodes with a very high or a very low
+node degree. This decreases the likelihood of such a node to leave the
+network due to churn, which would have a large impact on the average
 value of node degree. The two plots seen in
 Figure~\ref{fig:eval_directeddegree} also indicate that there is an even
 balance between in-degree and out-degree of nodes, as they both have
